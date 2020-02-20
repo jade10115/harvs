@@ -1,0 +1,23 @@
+nav {
+	z-index: 101;
+}
+
+.alert-close {
+	font-size: 20px;
+}
+
+.alert p {
+	display: inline;
+}
+
+.bootstrap-select button {
+	border:1px solid #ced4da;
+}
+
+.profile {
+	height: 82%;
+}
+
+.alert-modal {
+	position:absolute;padding:5px;top:12px;left:35%;
+}
