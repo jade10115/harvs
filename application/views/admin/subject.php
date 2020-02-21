@@ -69,47 +69,26 @@
       </div>
       <div class="modal-body">
         <?=form_open('admin/addSubject', 'id="frm_subject_add"');?>
-          <div class="form-group">
-            <label>Building</label>
-            <select class="form-control selectpicker focus" data-live-search="true" name="building_id" id="building_id_add">
-              <option value="" disabled>Select Building</option>
-              <?php foreach ($buildings as $row) {?>
-              <option value="<?=$row['building_id']?>"><?=$row['building_name']?></option>
-              <?php } ?>
-            </select>
-          </div>
           <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
               <label>Subject Code</label>
               <input type="text" class="form-control" placeholder="Enter Subject Code" name="subject_code" required>
             </div>
-            <div class="form-group col-md-6">
-              <label>Year Level</label>
-              <select class="custom-select" name="year_level">
-                <option value="1st Year">1st Year</option>
-                <option value="2nd Year">2nd Year</option>
-                <option value="3rd Year">3rd Year</option>
-                <option value="4th Year">4th Year</option>
-                <option value="5th Year">5th Year</option>
-              </select>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Subject Description</label>
+              <textarea class="form-control" name="subject_description"></textarea>
             </div>
           </div>
-          <div class="form-group">
-            <label>Subject Description</label>
-            <input type="text" class="form-control" placeholder="Enter Subject Description" name="subject_description">
-          </div>          
           <div class="row">
             <div class="form-group col-md-4">
-              <label>No. of Sections</label>
+              <label>Subject Type</label>
               <input type="number" class="form-control" value="1" name="sections" min="1" required>
             </div>
             <div class="form-group col-md-4">
-              <label>No. of Sets</label>
+              <label>Unit</label>
               <input type="number" class="form-control" value="1" name="sections" min="1" max="5" required>
-            </div>
-            <div class="form-group col-md-4">
-              <label>Hours per Set</label>
-              <input type="number" class="form-control" value="1" name="sections" min="1" max="5" step="0.01" required>
             </div>
           </div>
         <?=form_close();?>

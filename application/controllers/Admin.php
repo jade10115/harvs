@@ -97,8 +97,6 @@ class Admin extends CI_Controller {
 
 	public function subject(){
 		$data['title'] = "Subjects";
-		$data['buildings'] = $this->main_model->getBuildings();
-		$data['faculties'] = $this->main_model->getFaculties();
 		$data['subjects'] = $this->main_model->getSubjects();
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/subject');
