@@ -8,7 +8,7 @@
       <div class="card shadow-sm">
 			  <h5 class="card-header d-flex justify-content-between align-items-center">
           <?=$title?>
-          <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#modal_building_add">Add Rank</a>  
+          <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#modal_rank_add">Add Rank</a>  
         </h5>
 			  <div class="card-body">
           <table class="table table-striped table-hover table-sm">
@@ -24,17 +24,14 @@
               <?php foreach ($ranks as $row) {?>
               <tr>
                 <td><?=$row['rank_type']?></td>
-                <td><?=$row['building_added']?></td>
-                <td><?=$row['building_updated']?></td>
+                <td><?=$row['rank_added']?></td>
+                <td><?=$row['rank_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Building">
-                      <span class="fa fa-eye"></span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateBuilding" id="<?=$row['building_id']?>//<?=$row['building_name']?>" data-toggle="modal" data-target="#modal_building_update" data-toggle="tooltip" data-placement="top" title="Update Building">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateRank" id="<?=$row['rank_id']?>//<?=$row['rank_type']?>" data-toggle="modal" data-target="#modal_rank_update" data-toggle="tooltip" data-placement="top" title="Update Rank">
                       <span class="fa fa-pencil"></span>
                     </a>
-                    <a href="#" id="<?=base_url('admin/delete/building/'.$row['building_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Building">
+                    <a href="#" id="<?=base_url('admin/delete/rank/'.$row['rank_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Rank">
                       <span class="fa fa-trash"></span>
                     </a>
                   </div>
@@ -50,7 +47,7 @@
 </div>
 
 <!-- Modal Add -->
-<div class="modal fade" id="modal_building_add" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modal_rank_add" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -60,7 +57,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <?=form_open('admin/addBuilding', 'id="frm_building_add"');?>
+        <?=form_open('admin/addRank', 'id="frm_rank_add"');?>
           <div class="form-group">
             <label>Rank Type</label>
             <input type="text" class="form-control focus" placeholder="Enter Rank Type" name="rank_type" required>
@@ -68,7 +65,7 @@
         <?=form_close();?>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-sm" form="frm_building_add">Save changes</button>
+        <button type="submit" class="btn btn-primary btn-sm" form="frm_rank_add">Save changes</button>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -76,18 +73,18 @@
 </div>
 
 <!-- Modal Update -->
-<div class="modal fade" id="modal_building_update" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modal_rank_update" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title">Update Building</h6>
+        <h6 class="modal-title">Update rank</h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <?=form_open('admin/updateBuilding', 'id="frm_building_update"');?>
-          <input type="hidden" name="building_id" id="building_id">
+        <?=form_open('admin/updateRank', 'id="frm_rank_update"');?>
+          <input type="hidden" name="rank_id" id="rank_id">
           <div class="form-group">
             <label>Rank Type</label>
             <input type="text" class="form-control focus" placeholder="Enter Rank Type" name="rank_type" id="rank_type" required>
@@ -95,7 +92,7 @@
         <?=form_close();?>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-sm" form="frm_building_update">Save changes</button>
+        <button type="submit" class="btn btn-primary btn-sm" form="frm_rank_update">Save changes</button>
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>

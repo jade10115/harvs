@@ -253,6 +253,66 @@ class Admin extends CI_Controller {
     header('location:'.base_url('admin/faculty'));
 	}
 
+	public function addRank(){
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('rank_type', 'Rank Type', 'trim|required|is_unique[tbl_rank.rank_type]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->addRank();	
+    	$this->session->set_flashdata('toast', 'New rank successfully added.');
+    }
+
+    header('location:'.base_url('admin/rank'));
+	}
+
+	public function addSemester(){
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('semester_type', 'Semester Type', 'trim|required|is_unique[tbl_semester.semester_type]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->addSemester();	
+    	$this->session->set_flashdata('toast', 'New semester successfully added.');
+    }
+
+    header('location:'.base_url('admin/semester'));
+	}
+
+	public function addUserType(){
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('user_type', 'User Type', 'trim|required|is_unique[tbl_user_type.user_type]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->addUserType();	
+    	$this->session->set_flashdata('toast', 'New user type successfully added.');
+    }
+
+    header('location:'.base_url('admin/user_type'));
+	}
+
+	public function addRoomType(){
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('room_type', 'Room Type', 'trim|required|is_unique[tbl_room_type.room_type]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->addRoomType();	
+    	$this->session->set_flashdata('toast', 'New room type successfully added.');
+    }
+
+    header('location:'.base_url('admin/room_type'));
+	}
+
 	// -------------------------------------- INSERT ------------------------------------- //
 
 	// ----------------------------------------------------------------------------------- //	
@@ -376,6 +436,66 @@ class Admin extends CI_Controller {
     }
 
     header('location:'.base_url('admin/faculty'));
+	}
+
+	public function updateRank(){
+		$this->load->library('form_validation');
+
+    $this->form_validation->set_rules('rank_type', 'Rank Type', 'trim|required|is_unique[tbl_rank.rank_type]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->updateRank();	
+    	$this->session->set_flashdata('toast', 'Rank successfully updated.');
+    }
+
+    header('location:'.base_url('admin/rank'));
+	}
+
+	public function updateSemester(){
+		$this->load->library('form_validation');
+
+    $this->form_validation->set_rules('semester_type', 'Semester Type', 'trim|required|is_unique[tbl_semester.semester_type]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->updateSemester();	
+    	$this->session->set_flashdata('toast', 'Semester successfully updated.');
+    }
+
+    header('location:'.base_url('admin/semester'));
+	}
+
+	public function updateUserType(){
+		$this->load->library('form_validation');
+
+    $this->form_validation->set_rules('user_type', 'User Type', 'trim|required|is_unique[tbl_user_type.user_type]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->updateUserType();	
+    	$this->session->set_flashdata('toast', 'User type successfully updated.');
+    }
+
+    header('location:'.base_url('admin/user_type'));
+	}
+
+	public function updateRoomType(){
+		$this->load->library('form_validation');
+
+    $this->form_validation->set_rules('room_type', 'Room Type', 'trim|required|is_unique[tbl_room_type.room_type]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->updateRoomType();	
+    	$this->session->set_flashdata('toast', 'Room type successfully updated.');
+    }
+
+    header('location:'.base_url('admin/room_type'));
 	}
 
 	// -------------------------------------- UPDATE ------------------------------------- //

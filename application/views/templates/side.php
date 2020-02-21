@@ -27,8 +27,8 @@
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Room Types')?'active':'';?>" href="<?=base_url('admin/room_type')?>">
-          <span data-feather="book"></span>
-          Room Types*
+          <span data-feather="check"></span>
+          Room Types
         </a>
       </li>
       <li class="nav-item">
@@ -45,7 +45,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Courses')?'active':'';?>" href="<?=base_url('admin/course')?>">
-          <span data-feather="x"></span>
+          <span data-feather="check"></span>
           Courses
         </a>
       </li>
@@ -63,20 +63,20 @@
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Ranks')?'active':'';?>" href="<?=base_url('admin/rank')?>">
-          <span data-feather="book"></span>
-          Ranks*
+          <span data-feather="check"></span>
+          Ranks
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Semesters')?'active':'';?>" href="<?=base_url('admin/semester')?>">
-          <span data-feather="book"></span>
-          Semesters*
+          <span data-feather="check"></span>
+          Semesters
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='User Types')?'active':'';?>" href="<?=base_url('admin/user_type')?>">
-          <span data-feather="book"></span>
-          User Types*
+          <span data-feather="check"></span>
+          User Types
         </a>
       </li>
     </ul>

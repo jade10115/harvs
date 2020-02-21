@@ -42,6 +42,22 @@ Class Main_model extends CI_Model{
 		$this->db->insert('tbl_department', $_POST);
 	}
 
+	public function addRank(){
+		$this->db->insert('tbl_rank', $_POST);
+	}
+
+	public function addSemester(){
+		$this->db->insert('tbl_semester', $_POST);
+	}
+
+	public function addUserType(){
+		$this->db->insert('tbl_user_type', $_POST);
+	}
+
+	public function addRoomType(){
+		$this->db->insert('tbl_room_type', $_POST);
+	}
+
 	// -------------------------------------- ADD FUNCTIONS ------------------------------------------------- //
 
 	// ------------------------------------------------------------------------------------------------------ //
@@ -101,22 +117,6 @@ Class Main_model extends CI_Model{
 		return $this->db->get('tbl_user_type')->result_array();
 	}
 
-	// public function getSubjects(){
-	// 	return $this->db->get('tbl_subject')->result_array();
-	// }
-
-	// public function getSubjects(){
-	// 	return $this->db->get('tbl_subject')->result_array();
-	// }
-
-	// public function getSubjects(){
-	// 	return $this->db->get('tbl_subject')->result_array();
-	// }
-
-	// public function getSubjects(){
-	// 	return $this->db->get('tbl_subject')->result_array();
-	// }
-
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
 
 	// ------------------------------------------------------------------------------------------------------ //
@@ -139,6 +139,22 @@ Class Main_model extends CI_Model{
 
 	public function updateCollege(){
 		$this->db->where('college_id', $_POST['college_id'])->update('tbl_college', array('college_name' => $_POST['college_name']));
+	}
+
+	public function updateRank(){
+		$this->db->where('rank_id', $_POST['rank_id'])->update('tbl_rank', array('rank_type' => $_POST['rank_type']));
+	}
+
+	public function updateSemester(){
+		$this->db->where('semester_id', $_POST['semester_id'])->update('tbl_semester', array('semester_type' => $_POST['semester_type']));
+	}
+
+	public function updateUserType(){
+		$this->db->where('user_type_id', $_POST['user_type_id'])->update('tbl_user_type', array('user_type' => $_POST['user_type']));
+	}
+
+	public function updateRoomType(){
+		$this->db->where('room_type_id', $_POST['room_type_id'])->update('tbl_room_type', array('room_type' => $_POST['room_type']));
 	}
 
 	public function updateCourse(){

@@ -99,6 +99,8 @@
 				$('#course_id').val(id[0]);
 				$('#course_name').val(id[1]);
 				$('#college_id').val(id[2]);
+				populateDepartments(id[2], id[3]);
+				console.log($('#department_id').val());
 			}); // $('.updateCourse').click()
 
 			$('.updateCollege').click(function(){
@@ -141,6 +143,34 @@
 				$('#instructor_name').val(id[1]);
 			}); // $('.updateInstructor').click()
 
+			$('.updateRank').click(function(){
+				id = this.id;
+				id = id.split('//');
+				$('#rank_id').val(id[0]);
+				$('#rank_type').val(id[1]);
+			}); // $('.updateRank').click()
+
+			$('.updateSemester').click(function(){
+				id = this.id;
+				id = id.split('//');
+				$('#semester_id').val(id[0]);
+				$('#semester_type').val(id[1]);
+			}); // $('.updateSemester').click()
+
+			$('.updateUserType').click(function(){
+				id = this.id;
+				id = id.split('//');
+				$('#user_type_id').val(id[0]);
+				$('#user_type').val(id[1]);
+			}); // $('.updateUserType').click()
+
+			$('.updateRoomType').click(function(){
+				id = this.id;
+				id = id.split('//');
+				$('#room_type_id').val(id[0]);
+				$('#room_type').val(id[1]);
+			}); // $('.updateRoomType').click()
+
 			$('.college_id').change(function(){
 				if($(this).val()==0){
 					option = '<option value="0">-- select college first --</option>';
@@ -160,9 +190,9 @@
 				} 
 			})
 
-			function populateDepartments(val){
+			function populateDepartments(college_id, department_id){
 				$.ajax({
-					url: base_url+'admin/getDepartmentsJSON/'+val,
+					url: base_url+'admin/getDepartmentsJSON/'+college_id,
 					success:function(result){
 						$('.department_id').empty();
 						result = $.parseJSON(result);
@@ -173,7 +203,8 @@
 							$.each(result, function(i,o){
 								option = '<option value="'+o.department_id+'">'+o.department_name+'</option>';
 								$('.department_id').append(option);
-							});	
+							});
+							$('#department_id').val(department_id);
 						}
 					}
 				});
