@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2020 at 01:47 AM
+-- Generation Time: Feb 22, 2020 at 01:57 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -27,10 +27,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_building` (
-  `BUILDING_ID` int(10) NOT NULL,
+  `building_id` int(10) NOT NULL,
   `building_name` varchar(255) NOT NULL,
-  `no_of_room` int(10) NOT NULL,
-  `no_of_floor` int(10) NOT NULL,
+  `no_of_rooms` int(10) NOT NULL,
+  `no_of_floors` int(10) NOT NULL,
   `building_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `building_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -39,8 +39,8 @@ CREATE TABLE `tbl_building` (
 -- Dumping data for table `tbl_building`
 --
 
-INSERT INTO `tbl_building` (`BUILDING_ID`, `building_name`, `no_of_room`, `no_of_floor`, `building_added`, `building_modified`) VALUES
-(1, 'qweqweqwe', 0, 0, '2020-02-20 10:28:23', '0000-00-00 00:00:00');
+INSERT INTO `tbl_building` (`building_id`, `building_name`, `no_of_rooms`, `no_of_floors`, `building_added`, `building_modified`) VALUES
+(2, 'Science Building', 10, 3, '2020-02-21 16:11:32', '2020-02-21 16:15:36');
 
 -- --------------------------------------------------------
 
@@ -144,19 +144,12 @@ INSERT INTO `tbl_department` (`department_id`, `college_id`, `department_name`, 
 --
 
 CREATE TABLE `tbl_designation` (
-  `designation_id` int(10) NOT NULL,
-  `designation_name` varchar(255) NOT NULL,
-  `regular_unit` tinyint(4) NOT NULL,
+  `designation_id` int(11) NOT NULL,
+  `designation_name` varchar(150) NOT NULL,
+  `regular_unit` int(11) NOT NULL,
   `designation_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `designation_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_designation`
---
-
-INSERT INTO `tbl_designation` (`designation_id`, `designation_name`, `regular_unit`, `designation_added`, `designation_modified`) VALUES
-(1, 'Head', 15, '2020-02-20 15:32:45', '2020-02-20 15:52:20');
 
 -- --------------------------------------------------------
 
@@ -190,18 +183,11 @@ CREATE TABLE `tbl_faculty` (
 --
 
 CREATE TABLE `tbl_rank` (
-  `rank_id` int(10) NOT NULL,
+  `rank_id` int(11) NOT NULL,
   `rank_type` varchar(50) NOT NULL,
-  `rank_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `rank_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+  `rank_added` datetime NOT NULL,
+  `rank_modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_rank`
---
-
-INSERT INTO `tbl_rank` (`rank_id`, `rank_type`, `rank_added`, `rank_modified`) VALUES
-(1, 'Instructor I', '2020-02-20 15:54:26', '2020-02-20 15:58:15');
 
 -- --------------------------------------------------------
 
@@ -219,6 +205,13 @@ CREATE TABLE `tbl_room` (
   `room_modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_room`
+--
+
+INSERT INTO `tbl_room` (`room_id`, `room_type_id`, `building_id`, `room_number`, `room_floor`, `room_added`, `room_modified`) VALUES
+(4, 3, 2, 4, 4, '2020-02-21 16:53:19', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -226,11 +219,11 @@ CREATE TABLE `tbl_room` (
 --
 
 CREATE TABLE `tbl_room_type` (
-  `room_type_id` int(10) NOT NULL,
+  `room_type_id` int(11) NOT NULL,
   `room_type` varchar(50) NOT NULL,
-  `room_description` varchar(255) NOT NULL,
-  `room_type_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `room_type_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+  `room_description` varchar(150) NOT NULL,
+  `room_type_added` datetime NOT NULL,
+  `room_type_modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -238,8 +231,8 @@ CREATE TABLE `tbl_room_type` (
 --
 
 INSERT INTO `tbl_room_type` (`room_type_id`, `room_type`, `room_description`, `room_type_added`, `room_type_modified`) VALUES
-(4, 'Lecture', '', '2020-02-20 16:35:47', '0000-00-00 00:00:00'),
-(5, 'Laboratory', '', '2020-02-20 16:35:52', '0000-00-00 00:00:00');
+(3, 'Laboratory', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Lecture', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -270,14 +263,21 @@ INSERT INTO `tbl_semester` (`semester_id`, `semester_type`, `semester_added`, `s
 --
 
 CREATE TABLE `tbl_subject` (
-  `SUBJECT_ID` int(10) NOT NULL,
+  `subject_id` int(11) NOT NULL,
   `subject_code` varchar(50) NOT NULL,
-  `subject_description` varchar(255) NOT NULL,
+  `subject_description` varchar(250) NOT NULL,
   `subject_type` varchar(50) NOT NULL,
-  `subject_unit` tinyint(4) NOT NULL,
+  `subject_unit` int(4) NOT NULL,
   `subject_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `subject_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_subject`
+--
+
+INSERT INTO `tbl_subject` (`subject_id`, `subject_code`, `subject_description`, `subject_type`, `subject_unit`, `subject_added`, `subject_modified`) VALUES
+(3, 'IT 363L', 'Lodi Programming I', 'Laboratory', 3, '2020-02-21 15:49:22', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -315,7 +315,7 @@ CREATE TABLE `tbl_user` (
 --
 
 CREATE TABLE `tbl_user_type` (
-  `user_type_id` int(10) NOT NULL,
+  `user_type_id` int(11) NOT NULL,
   `user_type` varchar(50) NOT NULL,
   `user_type_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_type_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
@@ -326,7 +326,8 @@ CREATE TABLE `tbl_user_type` (
 --
 
 INSERT INTO `tbl_user_type` (`user_type_id`, `user_type`, `user_type_added`, `user_type_modified`) VALUES
-(2, 'Dean', '2020-02-20 16:18:33', '0000-00-00 00:00:00');
+(3, 'Dean', '2020-02-21 15:38:49', '0000-00-00 00:00:00'),
+(4, 'Faculty', '2020-02-21 15:38:52', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -336,7 +337,7 @@ INSERT INTO `tbl_user_type` (`user_type_id`, `user_type`, `user_type_added`, `us
 -- Indexes for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  ADD PRIMARY KEY (`BUILDING_ID`);
+  ADD PRIMARY KEY (`building_id`);
 
 --
 -- Indexes for table `tbl_college`
@@ -410,7 +411,7 @@ ALTER TABLE `tbl_semester`
 -- Indexes for table `tbl_subject`
 --
 ALTER TABLE `tbl_subject`
-  ADD PRIMARY KEY (`SUBJECT_ID`);
+  ADD PRIMARY KEY (`subject_id`);
 
 --
 -- Indexes for table `tbl_sy`
@@ -440,12 +441,12 @@ ALTER TABLE `tbl_user_type`
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  MODIFY `BUILDING_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_college`
 --
 ALTER TABLE `tbl_college`
-  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tbl_colleges`
 --
@@ -455,17 +456,17 @@ ALTER TABLE `tbl_colleges`
 -- AUTO_INCREMENT for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  MODIFY `course_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `course_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
-  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_designation`
 --
 ALTER TABLE `tbl_designation`
-  MODIFY `designation_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_faculty`
 --
@@ -475,27 +476,27 @@ ALTER TABLE `tbl_faculty`
 -- AUTO_INCREMENT for table `tbl_rank`
 --
 ALTER TABLE `tbl_rank`
-  MODIFY `rank_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_room`
 --
 ALTER TABLE `tbl_room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_room_type`
 --
 ALTER TABLE `tbl_room_type`
-  MODIFY `room_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_semester`
 --
 ALTER TABLE `tbl_semester`
-  MODIFY `semester_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `semester_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_subject`
 --
 ALTER TABLE `tbl_subject`
-  MODIFY `SUBJECT_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_sy`
 --
@@ -510,7 +511,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_user_type`
 --
 ALTER TABLE `tbl_user_type`
-  MODIFY `user_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
@@ -536,13 +537,6 @@ ALTER TABLE `tbl_faculty`
 ALTER TABLE `tbl_room`
   ADD CONSTRAINT `FK_tbl_room_tbl_building` FOREIGN KEY (`building_id`) REFERENCES `tbl_building` (`BUILDING_ID`),
   ADD CONSTRAINT `FK_tbl_room_tbl_room_type` FOREIGN KEY (`room_type_id`) REFERENCES `tbl_room_type` (`ROOM_TYPE_ID`);
-
---
--- Constraints for table `tbl_user`
---
-ALTER TABLE `tbl_user`
-  ADD CONSTRAINT `FK_user_faculty` FOREIGN KEY (`FACULTY_ID`) REFERENCES `tbl_faculty` (`FACULTY_ID`),
-  ADD CONSTRAINT `FK_user_user_type` FOREIGN KEY (`USER_TYPE_ID`) REFERENCES `tbl_user_type` (`USER_TYPE_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
