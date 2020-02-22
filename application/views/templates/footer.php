@@ -19,16 +19,6 @@
 			$('.modal').on('shown.bs.modal', function () {
 			    $('.focus').focus();
 			})
-			
-
-			// SESSION STORAGE 
-			if('building_id' in sessionStorage){
-				$('#building_id_add').selectpicker('val', sessionStorage.getItem('building_id'));
-			}
-
-			if('instructor_id' in sessionStorage){
-				$('#instructor_id_add').selectpicker('val', sessionStorage.getItem('instructor_id'));
-			}
 
 		  $('.alert').alert();
 		  $('[data-toggle="tooltip"]').tooltip();
@@ -70,27 +60,13 @@
 				});
 			}); // $('.delete').click()
 
-			$('#frm_room_add').submit(function(event){
-				event.preventDefault();
-				building_id = $('#building_id_add').val();
-				sessionStorage.setItem('building_id', building_id);
-				$(this).unbind('submit').submit();
-			}); // $('#frm_room_add').submit()
-
-			$('#frm_subject_add').submit(function(event){
-				event.preventDefault();
-				building_id = $('#building_id_add').val();
-				instructor_id = $('#instructor_id_add').val();
-				sessionStorage.setItem('building_id', building_id);
-				sessionStorage.setItem('instructor_id', instructor_id);
-				$(this).unbind('submit').submit();
-			}); // $('#frm_subject_add').submit()
-
 			$('.updateBuilding').click(function(){
 				id = this.id;
 				id = id.split('//');
 				$('#building_id').val(id[0]);
 				$('#building_name').val(id[1]);
+				$('#no_of_rooms').val(id[2]);
+				$('#no_of_floors').val(id[3]);
 			}); // $('.updateBuilding').click()
 
 			$('.updateCourse').click(function(){
@@ -130,10 +106,10 @@
 				id = this.id;
 				id = id.split('//');
 				$('#room_id').val(id[0]);
-			  $('#building_id').selectpicker('val', id[1]);
-				$('#room_floor').val(id[2]);
+			  $('#building_id').val(id[1]);			  
+				$('#room_type_id').val(id[2]);
 				$('#room_number').val(id[3]);
-				$('#room_type').val(id[4]);
+				$('#room_floor').val(id[4]);
 			}); // $('.updateRoom').click()
 
 			$('.updateInstructor').click(function(){
@@ -170,6 +146,16 @@
 				$('#room_type_id').val(id[0]);
 				$('#room_type').val(id[1]);
 			}); // $('.updateRoomType').click()
+
+			$('.updateSubject').click(function(){
+				id = this.id;
+				id = id.split('//');
+				$('#subject_id').val(id[0]);
+				$('#subject_code').val(id[1]);
+				$('#subject_description').val(id[2]);
+				$('#subject_type').val(id[3]);
+				$('#subject_unit').val(id[4]);
+			}); // $('.updateSubject').click()			
 
 			$('.college_id').change(function(){
 				if($(this).val()==0){

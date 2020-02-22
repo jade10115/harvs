@@ -16,6 +16,7 @@
               <tr>
                 <th>Building Name</th>
                 <th>No. of Rooms</th>
+                <th>No. of Floors</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
                 <th>Action</th>
@@ -25,15 +26,13 @@
               <?php foreach ($buildings as $row) {?>
               <tr>
                 <td><?=$row['building_name']?></td>
-                <td><?=$row['count(tbl_room.room_id)']?></td>
+                <td><?=$row['no_of_rooms']?></td>
+                <td><?=$row['no_of_floors']?></td>
                 <td><?=$row['building_added']?></td>
-                <td><?=$row['building_updated']?></td>
+                <td><?=$row['building_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Building">
-                      <span class="fa fa-eye"></span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateBuilding" id="<?=$row['building_id']?>//<?=$row['building_name']?>" data-toggle="modal" data-target="#modal_building_update" data-toggle="tooltip" data-placement="top" title="Update Building">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateBuilding" id="<?=$row['building_id']?>//<?=$row['building_name']?>//<?=$row['no_of_rooms']?>//<?=$row['no_of_floors']?>" data-toggle="modal" data-target="#modal_building_update" data-toggle="tooltip" data-placement="top" title="Update Building">
                       <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/building/'.$row['building_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Building">
@@ -70,14 +69,14 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Number of Room</label>
-                <input type="number" class="form-control focus" placeholder="Enter Number of Room" name="no_of_room" required>
+                <label>Number of Rooms</label>
+                <input type="number" class="form-control" placeholder="Enter Number of Rooms" name="no_of_rooms" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label>Number of Floor</label>
-                <input type="number" class="form-control focus" placeholder="Enter Number of Floor" name="no_of_floor" required>
+                <label>Number of Floors</label>
+                <input type="number" class="form-control" placeholder="Enter Number of Floors" name="no_of_floors" required>
               </div>
             </div>
           </div>
@@ -111,14 +110,14 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Number of Room</label>
-                <input type="number" class="form-control focus" placeholder="Enter Number of Room" name="no_of_room" required>
+                <label>Number of Rooms</label>
+                <input type="number" class="form-control" placeholder="Enter Number of Rooms" name="no_of_rooms" id="no_of_rooms" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label>Number of Floor</label>
-                <input type="number" class="form-control focus" placeholder="Enter Number of Floor" name="no_of_floor" required>
+                <label>Number of Floors</label>
+                <input type="number" class="form-control" placeholder="Enter Number of Floors" name="no_of_floors" id="no_of_floors" required>
               </div>
             </div>
           </div>

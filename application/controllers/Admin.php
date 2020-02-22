@@ -74,6 +74,7 @@ class Admin extends CI_Controller {
 		$data['title'] = "Rooms";
 		$data['buildings'] = $this->main_model->getBuildings();
 		$data['rooms'] = $this->main_model->getRooms();
+		$data['room_types'] = $this->main_model->getRoomTypes();
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/room');
 		$this->load->view('templates/footer');
@@ -98,6 +99,7 @@ class Admin extends CI_Controller {
 	public function subject(){
 		$data['title'] = "Subjects";
 		$data['subjects'] = $this->main_model->getSubjects();
+		$data['room_types'] = $this->main_model->getRoomTypes();
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/subject');
 		$this->load->view('templates/footer');
@@ -223,9 +225,9 @@ class Admin extends CI_Controller {
 		$this->load->library('form_validation');
 
     $this->form_validation->set_rules('building_id', 'Building Name', 'trim|required');
+    $this->form_validation->set_rules('room_type_id', 'Room Type', 'trim|required');
     $this->form_validation->set_rules('room_number', 'Floor Number', 'trim|required');
     $this->form_validation->set_rules('room_floor', 'Room Number', 'trim|required');
-    $this->form_validation->set_rules('room_type', 'Room Type', 'trim|required');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -309,6 +311,21 @@ class Admin extends CI_Controller {
     }
 
     header('location:'.base_url('admin/room_type'));
+	}
+
+	public function addSubject(){
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('subject_code', 'Subject Code', 'trim|required|is_unique[tbl_subject.subject_code]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->addSubject();	
+    	$this->session->set_flashdata('toast', 'New subject successfully added.');
+    }
+
+    header('location:'.base_url('admin/subject'));
 	}
 
 	// -------------------------------------- INSERT ------------------------------------- //
@@ -408,9 +425,9 @@ class Admin extends CI_Controller {
 		$this->load->library('form_validation');
 
     $this->form_validation->set_rules('building_id', 'Building Name', 'trim|required');
+    $this->form_validation->set_rules('room_type_id', 'Room Type', 'trim|required');
     $this->form_validation->set_rules('room_number', 'Floor Number', 'trim|required');
     $this->form_validation->set_rules('room_floor', 'Room Number', 'trim|required');
-    $this->form_validation->set_rules('room_type', 'Room Type', 'trim|required');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -494,6 +511,21 @@ class Admin extends CI_Controller {
     }
 
     header('location:'.base_url('admin/room_type'));
+	}
+
+	public function updateSubject(){
+		$this->load->library('form_validation');
+
+    $this->form_validation->set_rules('subject_code', 'Subject Code', 'trim|required');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->updateSubject();	
+    	$this->session->set_flashdata('toast', 'Subject successfully updated.');
+    }
+
+    header('location:'.base_url('admin/subject'));
 	}
 
 	// -------------------------------------- UPDATE ------------------------------------- //

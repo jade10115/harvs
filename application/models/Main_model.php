@@ -58,6 +58,10 @@ Class Main_model extends CI_Model{
 		$this->db->insert('tbl_room_type', $_POST);
 	}
 
+	public function addSubject(){
+		$this->db->insert('tbl_subject', $_POST);
+	}
+
 	// -------------------------------------- ADD FUNCTIONS ------------------------------------------------- //
 
 	// ------------------------------------------------------------------------------------------------------ //
@@ -65,11 +69,11 @@ Class Main_model extends CI_Model{
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
 
 	public function getBuildings(){
-		return $this->db->select('tbl_building.building_id, tbl_building.building_name, tbl_building.building_added, tbl_building.building_modified, count(tbl_room.room_id)')->from('tbl_building')->join('tbl_room', 'tbl_building.building_id = tbl_room.building_id', 'left')->group_by('tbl_building.building_id')->get()->result_array();	
+		return $this->db->get('tbl_building')->result_array();
 	}
 
 	public function getRooms(){
-		return $this->db->join('tbl_building', 'tbl_building.building_id = tbl_room.building_id')->get('tbl_room')->result_array();
+		return $this->db->join('tbl_building', 'tbl_building.building_id = tbl_room.building_id')->join('tbl_room_type', 'tbl_room_type.room_type_id = tbl_room.room_type_id')->get('tbl_room')->result_array();
 	}
 
 	public function getFaculties(){
@@ -134,7 +138,12 @@ Class Main_model extends CI_Model{
 	// -------------------------------------- UPDATE FUNCTIONS ---------------------------------------------- // 
 
 	public function updateBuilding(){
-		$this->db->where('building_id', $_POST['building_id'])->update('tbl_building', array('building_name' => $_POST['building_name']));
+		$data = array(
+			'building_name' => $_POST['building_name'],
+			'no_of_rooms' => $_POST['no_of_rooms'],
+			'no_of_floors' => $_POST['no_of_floors']
+		);
+		$this->db->where('building_id', $_POST['building_id'])->update('tbl_building', $data);
 	}
 
 	public function updateCollege(){
@@ -178,7 +187,7 @@ Class Main_model extends CI_Model{
 	public function updateRoom(){
 		$data = array(
 			'building_id' => $_POST['building_id'],
-			'room_type' => $_POST['room_type'],
+			'room_type_id' => $_POST['room_type_id'],
 			'room_number' => $_POST['room_number'],
 			'room_floor' => $_POST['room_floor']
 		);
@@ -191,6 +200,16 @@ Class Main_model extends CI_Model{
 			'department_name' => $_POST['department_name']
 		);
 		$this->db->where('department_id', $_POST['department_id'])->update('tbl_department', $data);
+	}
+
+	public function updateSubject(){
+		$data = array(
+			'subject_code' => $_POST['subject_code'],
+			'subject_description' => $_POST['subject_description'],
+			'subject_type' => $_POST['subject_type'],
+			'subject_unit' => $_POST['subject_unit']
+		);
+		$this->db->where('subject_id', $_POST['subject_id'])->update('tbl_subject', $data);
 	}
 
 	// public function updateInstructor(){

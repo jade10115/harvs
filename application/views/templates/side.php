@@ -15,14 +15,14 @@
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Buildings')?'active':'';?>" href="<?=base_url('admin/building')?>">
-          <span data-feather="home"></span>
-          Buildings*
+          <span data-feather="check"></span>
+          Buildings
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Rooms')?'active':'';?>" href="<?=base_url('admin/room')?>">
-          <span data-feather="layout"></span>
-          Rooms*
+          <span data-feather="check"></span>
+          Rooms
         </a>
       </li>
       <li class="nav-item">
@@ -33,8 +33,8 @@
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Subjects')?'active':'';?>" href="<?=base_url('admin/subject')?>">
-          <span data-feather="book"></span>
-          Subjects*
+          <span data-feather="check"></span>
+          Subjects
         </a>
       </li>
       <li class="nav-item">

@@ -14,10 +14,10 @@
           <table class="table table-striped table-hover table-sm">
             <thead>
               <tr>
-                <th>Building</th>
-                <th>Floor #</th>
+                <th>Building</th>                
                 <th>Room Type</th>
                 <th>Room #</th>
+                <th>Floor #</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
                 <th>Action</th>
@@ -27,17 +27,14 @@
               <?php foreach ($rooms as $row) {?>
               <tr>
                 <td><?=$row['building_name']?></td>
-                <td><?=$row['room_floor']?></td>
                 <td><?=$row['room_type']?></td>
                 <td><?=$row['room_number']?></td>
+                <td><?=$row['room_floor']?></td>
                 <td><?=$row['room_added']?></td>
-                <td><?=$row['room_updated']?></td>
+                <td><?=$row['room_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Room">
-                      <span class="fa fa-eye"></span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateRoom" id="<?=$row['room_id']?>//<?=$row['building_id']?>//<?=$row['room_floor']?>//<?=$row['room_number']?>//<?=$row['room_type']?>" data-toggle="modal" data-target="#modal_room_update" data-toggle="tooltip" data-placement="top" title="Update Room">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateRoom" id="<?=$row['room_id']?>//<?=$row['building_id']?>//<?=$row['room_type_id']?>//<?=$row['room_number']?>//<?=$row['room_floor']?>//<?=$row['room_type']?>" data-toggle="modal" data-target="#modal_room_update" data-toggle="tooltip" data-placement="top" title="Update Room">
                       <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/room/'.$row['room_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Room">
@@ -60,7 +57,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title">Add Rooms</h6>
+        <h6 class="modal-title">Add Room</h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -69,26 +66,31 @@
         <?=form_open('admin/addRoom', 'id="frm_room_add"');?>
           <div class="form-group">
             <label>Building</label>
-            <select class="form-control selectpicker focus" data-live-search="true" name="building_id" id="building_id_add">
+            <select class="custom-select focus" name="building_id">
               <?php foreach ($buildings as $row) {?>
               <option value="<?=$row['building_id']?>"><?=$row['building_name']?></option>
               <?php } ?>
             </select>
           </div>
           <div class="form-group">
-            <label>Floor Number</label>
-            <input type="number" class="form-control" placeholder="Enter Floor Number" name="room_floor" min="0" required>
-          </div>
-          <div class="form-group">
             <label>Room Type</label>
-            <select class="custom-select" name="room_type">
-              <option value="Laboratory">Laboratory</option>
-              <option value="Lecture">Lecture</option>
+            <select class="custom-select" name="room_type_id">
+              <?php foreach ($room_types as $row) {?>
+              <option value="<?=$row['room_type_id']?>"><?=$row['room_type']?></option>
+              <?php } ?>
             </select>
           </div>
           <div class="form-group">
-            <label>Room Number</label>
-            <input type="number" class="form-control" placeholder="Enter Room Number" name="room_number" min="0" required>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Room Number</label>
+                <input type="number" class="form-control" placeholder="Enter Room Number" name="room_number" min="0" required>
+              </div>
+              <div class="col-md-6">
+                <label>Floor Number</label>
+                <input type="number" class="form-control" placeholder="Enter Floor Number" name="room_floor" min="0" required>
+              </div>
+            </div>
           </div>
         <?=form_close();?>
       </div>
@@ -105,7 +107,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title">Update Rooms</h6>
+        <h6 class="modal-title">Add Room</h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -115,26 +117,31 @@
           <input type="hidden" name="room_id" id="room_id">
           <div class="form-group">
             <label>Building</label>
-            <select class="form-control selectpicker focus" data-live-search="true" name="building_id" id="building_id">
+            <select class="custom-select focus" name="building_id" id="building_id">
               <?php foreach ($buildings as $row) {?>
               <option value="<?=$row['building_id']?>"><?=$row['building_name']?></option>
               <?php } ?>
             </select>
           </div>
           <div class="form-group">
-            <label>Floor Number</label>
-            <input type="number" class="form-control" placeholder="Enter Floor Number" name="room_floor" min="0" required id="room_floor">
-          </div>
-          <div class="form-group">
             <label>Room Type</label>
-            <select class="custom-select" name="room_type" id="room_type">
-              <option value="Laboratory">Laboratory</option>
-              <option value="Lecture">Lecture</option>
+            <select class="custom-select" name="room_type_id" id="room_type_id">
+              <?php foreach ($room_types as $row) {?>
+              <option value="<?=$row['room_type_id']?>"><?=$row['room_type']?></option>
+              <?php } ?>
             </select>
           </div>
           <div class="form-group">
-            <label>Room Number</label>
-            <input type="number" class="form-control" placeholder="Enter Room Number" name="room_number" min="0" required id="room_number">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Room Number</label>
+                <input type="number" class="form-control" placeholder="Enter Room Number" name="room_number" id="room_number" min="0" required>
+              </div>
+              <div class="col-md-6">
+                <label>Floor Number</label>
+                <input type="number" class="form-control" placeholder="Enter Floor Number" name="room_floor" id="room_floor" min="0" required>
+              </div>
+            </div>
           </div>
         <?=form_close();?>
       </div>
