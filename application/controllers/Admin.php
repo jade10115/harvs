@@ -62,6 +62,16 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function faculty_add(){
+		$data['title'] = "Add Faculty";
+		$data['departments'] = $this->main_model->getDepartments();
+		$data['ranks'] = $this->main_model->getRanks();
+		$data['designations'] = $this->main_model->getDesignations();
+		$this->load->view('templates/header', $data);
+		$this->load->view('admin/faculty_add');
+		$this->load->view('templates/footer');
+	}
+
 	public function rank(){
 		$data['title'] = "Ranks";
 		$data['ranks'] = $this->main_model->getRanks();

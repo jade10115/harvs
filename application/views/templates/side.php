@@ -23,8 +23,9 @@
         <a class="nav-link <?=($title=='Rooms')?'active':'';?>" href="<?=base_url('admin/room')?>">
           <span data-feather="check"></span>
           Rooms
-        </a>
+        </a> 
       </li>
+        </a>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Room Types')?'active':'';?>" href="<?=base_url('admin/room_type')?>">
           <span data-feather="check"></span>
