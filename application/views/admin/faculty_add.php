@@ -7,9 +7,9 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-4 px-4 mb-3">
       <div class="card shadow-sm">
 			  <h5 class="card-header d-flex justify-content-between align-items-center">
-          <?=$title?>
+          <?=$title2?>
           <div class="btn-group">
-            <a href="#" class="btn btn-outline-dark btn-sm">Back</a>
+            <a href="<?=base_url('admin/faculty')?>" class="btn btn-outline-dark btn-sm">Back</a>
             <button class="btn btn-outline-dark btn-sm" form="frm_faculty_add">Add Faculty</button>
           </div>
         </h5>
@@ -30,7 +30,7 @@
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>Middle Name*</label>
+                    <label>Middle Name <small>(optional)</small></label>
                     <input type="text" class="form-control focus" placeholder="Enter Middle Name" name="m_name" required>
                   </div>
                 </div>
@@ -47,13 +47,13 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>Suffix Name*</label>
+                    <label>Suffix Name <small>(optional)</small></label>
                     <input type="text" class="form-control focus" placeholder="Enter Suffix Name" name="suffix_name">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>Extension Name*</label>
+                    <label>Extension Name <small>(optional)</small></label>
                     <input type="text" class="form-control focus" placeholder="Enter Extension Name" name="ext_name">
                   </div>
                 </div>
@@ -71,14 +71,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Email </label>
+                    <label>Email*</label>
                     <input type="text" class="form-control focus" placeholder="Enter Last Name" name="email" required>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Contact Number</label>
+                    <label>Contact Number*</label>
                     <input type="text" class="form-control focus" placeholder="Enter Contact Number" name="contact_no" required>
                   </div>
                 </div>
@@ -88,7 +88,7 @@
 
             <!--faculty picture-->
             <div class="col-md-4">
-               <label>Faculty Picture</label>
+               <label>Faculty Picture <small>(optional)</small></label>
                <div class="card profile">
                  <img src="" class="rounded">
                </div>
@@ -99,8 +99,8 @@
           <!--row start-->
           <div class="row">
             <div class="form-group col-md-12">
-              <label>Address*</label>
-              <textarea class="form-control focus" placeholder="Enter Faculty Address" name="address" required></textarea>
+              <label>Address <small>(optional)</small></label>
+              <textarea class="form-control focus" placeholder="Enter Faculty Address" name="address"></textarea>
             </div>
           </div>
 
@@ -133,7 +133,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Designation</label>
-                <select class="custom-select" name="designation">
+                <select class="custom-select" name="designation_id">
                   <option value="">-- select designation --</option>
                   <?php foreach ($designations as $row) { ?>
                   <option value="<?=$row['designation_id']?>"><?=$row['designation_name']?></option>

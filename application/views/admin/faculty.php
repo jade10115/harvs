@@ -15,7 +15,9 @@
             <thead>
               <tr>
                 <th>Faculty Name</th>
-                <th>Weekly Teaching Hours</th>
+                <th>Department</th>
+                <th>Rank</th>
+                <th>Designation</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
                 <th>Action</th>
@@ -24,18 +26,16 @@
             <tbody>
               <?php foreach ($faculties as $row) {?>
               <tr>
-                <td><?=$row['faculty_name']?></td>
-                <!-- <td><?=$row['count(tbl_subject.subject_id)']?></td> -->
-                <td></td>
+                <td><?=$row['l_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></td>
+                <td><?=$row['department_name']?></td>
+                <td><?=$row['rank_type']?></td>
+                <td><?=$row['designation_name']?></td>
                 <td><?=$row['faculty_added']?></td>
-                <td><?=$row['faculty_updated']?></td>
+                <td><?=$row['faculty_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
                     <a href="#" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Faculty">
                       <span class="fa fa-eye"></span>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updatefaculty" id="<?=$row['faculty_id']?>//<?=$row['faculty_name']?>" data-toggle="modal" data-target="#modal_faculty_update" data-toggle="tooltip" data-placement="top" title="Update Faculty">
-                      <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/faculty/'.$row['faculty_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Faculty">
                       <span class="fa fa-trash"></span>

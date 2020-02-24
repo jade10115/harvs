@@ -78,7 +78,8 @@ Class Main_model extends CI_Model{
 
 	public function getFaculties(){
 		// return $this->db->select('tbl_instructor.instructor_id, tbl_instructor.instructor_name, tbl_instructor.instructor_added, tbl_instructor.instructor_updated, count(tbl_subject.subject_id)')->from('tbl_instructor')->join('tbl_subject', 'tbl_instructor.instructor_id = tbl_subject.instructor_id', 'left')->group_by('tbl_instructor.instructor_id')->get()->result_array();	
-		return $this->db->get('tbl_faculty')->result_array();
+		// return $this->db->get('tbl_faculty')->result_array();
+		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')->get('tbl_faculty')->result_array();
 	}
 
 	public function getSubjects(){

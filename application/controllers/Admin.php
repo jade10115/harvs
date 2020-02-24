@@ -63,7 +63,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function faculty_add(){
-		$data['title'] = "Add Faculty";
+		$data['title'] = "Faculties";
+		$data['title2'] = "Add Faculty";
 		$data['departments'] = $this->main_model->getDepartments();
 		$data['ranks'] = $this->main_model->getRanks();
 		$data['designations'] = $this->main_model->getDesignations();
@@ -251,7 +252,7 @@ class Admin extends CI_Controller {
 	public function addFaculty(){
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|is_unique[tbl_faculty.l_name]');
+    $this->form_validation->set_rules('l_name', 'Last Name', 'trim|required|is_unique[tbl_faculty.l_name]');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -260,7 +261,7 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', 'New faculty successfully added.');
     }
 
-    header('location:'.base_url('admin/faculty'));
+    header('location:'.base_url('admin/faculty_add'));
 	}
 
 	public function addRank(){
