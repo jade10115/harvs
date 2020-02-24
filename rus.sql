@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2020 at 11:31 PM
+-- Generation Time: Feb 25, 2020 at 12:10 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -182,6 +182,13 @@ CREATE TABLE `tbl_faculty` (
   `faculty_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `faculty_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_faculty`
+--
+
+INSERT INTO `tbl_faculty` (`faculty_id`, `f_name`, `m_name`, `l_name`, `suffix_name`, `ext_name`, `contact_no`, `email`, `birth_date`, `address`, `image_src`, `department_id`, `rank_id`, `designation_id`, `faculty_added`, `faculty_modified`) VALUES
+(1, 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Marasbaras, Tacloban City, Leyte 6500', '', 1, 1, 1, '2020-02-24 15:01:15', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -486,7 +493,7 @@ ALTER TABLE `tbl_designation`
 -- AUTO_INCREMENT for table `tbl_faculty`
 --
 ALTER TABLE `tbl_faculty`
-  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_rank`
 --
@@ -501,7 +508,7 @@ ALTER TABLE `tbl_room`
 -- AUTO_INCREMENT for table `tbl_room_type`
 --
 ALTER TABLE `tbl_room_type`
-  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_semester`
 --
