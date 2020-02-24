@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2020 at 01:57 AM
+-- Generation Time: Feb 24, 2020 at 11:31 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -151,6 +151,13 @@ CREATE TABLE `tbl_designation` (
   `designation_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_designation`
+--
+
+INSERT INTO `tbl_designation` (`designation_id`, `designation_name`, `regular_unit`, `designation_added`, `designation_modified`) VALUES
+(1, 'Department Head', 15, '2020-02-24 14:23:52', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -158,7 +165,7 @@ CREATE TABLE `tbl_designation` (
 --
 
 CREATE TABLE `tbl_faculty` (
-  `FACULTY_ID` int(10) NOT NULL,
+  `faculty_id` int(10) NOT NULL,
   `f_name` varchar(50) NOT NULL,
   `m_name` varchar(50) NOT NULL,
   `l_name` varchar(50) NOT NULL,
@@ -169,9 +176,9 @@ CREATE TABLE `tbl_faculty` (
   `birth_date` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
   `image_src` varchar(255) NOT NULL,
-  `DEPARTMENT_ID` int(11) NOT NULL,
-  `RANK_ID` int(11) NOT NULL,
-  `DESIIGNATION_ID` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
+  `rank_id` int(11) NOT NULL,
+  `designation_id` int(11) NOT NULL,
   `faculty_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `faculty_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -188,6 +195,14 @@ CREATE TABLE `tbl_rank` (
   `rank_added` datetime NOT NULL,
   `rank_modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_rank`
+--
+
+INSERT INTO `tbl_rank` (`rank_id`, `rank_type`, `rank_added`, `rank_modified`) VALUES
+(1, 'Instructor I', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Instructor II', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -376,10 +391,10 @@ ALTER TABLE `tbl_designation`
 -- Indexes for table `tbl_faculty`
 --
 ALTER TABLE `tbl_faculty`
-  ADD PRIMARY KEY (`FACULTY_ID`),
-  ADD KEY `FK_faculty_department` (`DEPARTMENT_ID`),
-  ADD KEY `FK_faculty_rank` (`RANK_ID`),
-  ADD KEY `FK_faculty_designation` (`DESIIGNATION_ID`);
+  ADD PRIMARY KEY (`faculty_id`),
+  ADD KEY `FK_faculty_department` (`department_id`),
+  ADD KEY `FK_faculty_rank` (`rank_id`),
+  ADD KEY `FK_faculty_designation` (`designation_id`);
 
 --
 -- Indexes for table `tbl_rank`
@@ -441,12 +456,12 @@ ALTER TABLE `tbl_user_type`
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbl_college`
 --
 ALTER TABLE `tbl_college`
-  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_colleges`
 --
@@ -456,27 +471,27 @@ ALTER TABLE `tbl_colleges`
 -- AUTO_INCREMENT for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  MODIFY `course_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `course_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
-  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_designation`
 --
 ALTER TABLE `tbl_designation`
-  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_faculty`
 --
 ALTER TABLE `tbl_faculty`
-  MODIFY `FACULTY_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbl_rank`
 --
 ALTER TABLE `tbl_rank`
-  MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_room`
 --
@@ -491,12 +506,12 @@ ALTER TABLE `tbl_room_type`
 -- AUTO_INCREMENT for table `tbl_semester`
 --
 ALTER TABLE `tbl_semester`
-  MODIFY `semester_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `semester_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_subject`
 --
 ALTER TABLE `tbl_subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_sy`
 --
@@ -528,7 +543,7 @@ ALTER TABLE `tbl_course`
 --
 ALTER TABLE `tbl_faculty`
   ADD CONSTRAINT `FK_faculty_department` FOREIGN KEY (`DEPARTMENT_ID`) REFERENCES `tbl_department` (`DEPARTMENT_ID`),
-  ADD CONSTRAINT `FK_faculty_designation` FOREIGN KEY (`DESIIGNATION_ID`) REFERENCES `tbl_designation` (`DESIGNATION_ID`),
+  ADD CONSTRAINT `FK_faculty_designation` FOREIGN KEY (`designation_id`) REFERENCES `tbl_designation` (`DESIGNATION_ID`),
   ADD CONSTRAINT `FK_faculty_rank` FOREIGN KEY (`RANK_ID`) REFERENCES `tbl_rank` (`RANK_ID`);
 
 --
