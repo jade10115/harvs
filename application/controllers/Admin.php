@@ -65,12 +65,29 @@ class Admin extends CI_Controller {
 	public function faculty_add(){
 		$data['title'] = "Faculties";
 		$data['title2'] = "Add Faculty";
+		$data['user_types'] = $this->main_model->getUserTypes();
 		$data['departments'] = $this->main_model->getDepartments();
 		$data['ranks'] = $this->main_model->getRanks();
 		$data['designations'] = $this->main_model->getDesignations();
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/faculty_add');
 		$this->load->view('templates/footer');
+	}
+
+	public function faculty_view($id){
+		$data['title'] = "Faculties";
+		$data['faculty'] = $this->main_model->getFaculty($id);
+		if($data['faculty']){
+			$data['title2'] = $data['faculty'][0]['f_name'] . ' '. $data['faculty'][0]['m_name'] . ' ' . $data['faculty'][0]['l_name'];
+			$data['departments'] = $this->main_model->getDepartments();
+			$data['ranks'] = $this->main_model->getRanks();
+			$data['designations'] = $this->main_model->getDesignations();
+			$this->load->view('templates/header', $data);
+			$this->load->view('admin/faculty_view');
+			$this->load->view('templates/footer');
+		} else {
+			echo '404 Faculty not found';
+		}
 	}
 
 	public function rank(){
@@ -252,16 +269,29 @@ class Admin extends CI_Controller {
 	public function addFaculty(){
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('l_name', 'Last Name', 'trim|required|is_unique[tbl_faculty.l_name]');
+    $this->form_validation->set_rules('identification', 'Identification', 'trim|required|is_unique[tbl_faculty.identification]|callback_id_check');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
-    	$this->main_model->addFaculty();	
+    	$this->main_model->addFaculty();
     	$this->session->set_flashdata('toast', 'New faculty successfully added.');
     }
 
     header('location:'.base_url('admin/faculty_add'));
+	}
+
+	public function id_check($str){
+		$birth_date = explode('-', $_POST['birth_date']);
+  	$birth_date = implode('', $birth_date);
+  	$identification = substr($_POST['l_name'],0,1).substr($_POST['f_name'],0,1).$birth_date;
+
+  	if($str==$identification){
+  		return true;
+  	} else {
+  		$this->form_validation->set_message('id_check', 'Invalid faculty identification number.');
+      return false;
+  	}
 	}
 
 	public function addRank(){
@@ -449,21 +479,6 @@ class Admin extends CI_Controller {
     header('location:'.base_url('admin/room'));
 	}
 
-	public function updateFaculty(){
-		$this->load->library('form_validation');
-
-    $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|is_unique[tbl_faculty.l_name]');
-
-    if ($this->form_validation->run() == FALSE){
-    	$this->session->set_flashdata('toast', validation_errors());
-    } else {
-    	$this->main_model->updateFaculty();	
-    	$this->session->set_flashdata('toast', 'Faculty successfully updated.');
-    }
-
-    header('location:'.base_url('admin/faculty'));
-	}
-
 	public function updateRank(){
 		$this->load->library('form_validation');
 
@@ -537,6 +552,21 @@ class Admin extends CI_Controller {
     }
 
     header('location:'.base_url('admin/subject'));
+	}
+
+	public function updateFaculty(){
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('l_name', 'Last Name', 'trim|required');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->updateFaculty();	
+    	$this->session->set_flashdata('toast', 'Faculty successfully updated.');
+    }
+
+    header('location:'.base_url('admin/faculty_view/'.$_POST['faculty_id']));
 	}
 
 	// -------------------------------------- UPDATE ------------------------------------- //

@@ -10,44 +10,14 @@
           <?=$title2?>
           <div class="btn-group">
             <a href="<?=base_url('admin/faculty')?>" class="btn btn-outline-dark btn-sm">Back</a>
-            <button class="btn btn-outline-dark btn-sm" form="frm_faculty_add">Add Faculty</button>
+            <button class="btn btn-outline-dark btn-sm" id="btnEditFaculty" value="edit">Edit Faculty</button>
+            <button class="btn btn-outline-dark btn-sm formEdit" form="frm_faculty_update" disabled>Save</button>
           </div>
         </h5>
 			  <div class="card-body">
-          <?=form_open('admin/addFaculty', 'id="frm_faculty_add"');?>
+          <?=form_open('admin/updateFaculty', 'id="frm_faculty_update"');?>
+          <input type="hidden" name="faculty_id" value="<?=$faculty[0]['faculty_id']?>">
           <!--row start-->
-
-          <div class="row">
-            <div class="col-md-2">
-              <div class="form-group">
-                <label>Faculty ID</label>
-                <input type="text" class="form-control" name="identification" id="identification" required readonly>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Username*</label>
-                <input type="text" class="form-control" placeholder="Enter Username" name="username" required autofocus>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Password*</label>
-                <input type="text" class="form-control" placeholder="Enter Password" name="password" required>
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="form-group">
-                <label>Usertype</label>
-                <select class="custom-select" name="user_type_id">
-                  <?php foreach ($user_types as $row) {?>
-                  <option value="<?=$row['user_type_id']?>"><?=$row['user_type']?></option>
-                  <?php } ?>
-                </select>
-              </div>
-            </div>
-          </div>
-          <hr>
           <div class="row">
 
             <div class="col-md-8">
@@ -56,21 +26,21 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>First Name*</label>
-                    <input type="text" class="form-control identification" id="f_name" placeholder="Enter First Name" name="f_name" required>
+                    <input type="text" class="form-control focus formEdit" placeholder="Enter First Name" name="f_name" required value="<?=$faculty[0]['f_name']?>">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Middle Name <small>(optional)</small></label>
-                    <input type="text" class="form-control" placeholder="Enter Middle Name" name="m_name">
+                    <input type="text" class="form-control formEdit" placeholder="Enter Middle Name" name="m_name" value="<?=$faculty[0]['m_name']?>">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Last Name*</label>
-                    <input type="text" class="form-control identification" id="l_name" placeholder="Enter Last Name" name="l_name" required>
+                    <input type="text" class="form-control formEdit" placeholder="Enter Last Name" name="l_name" required value="<?=$faculty[0]['l_name']?>">
                   </div>
                 </div>
               </div>
@@ -80,20 +50,20 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Suffix Name <small>(optional)</small></label>
-                    <input type="text" class="form-control" placeholder="Enter Suffix Name" name="suffix_name">
+                    <input type="text" class="form-control formEdit" placeholder="Enter Suffix Name" name="suffix_name" value="<?=$faculty[0]['suffix_name']?>">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Extension Name <small>(optional)</small></label>
-                    <input type="text" class="form-control" placeholder="Enter Extension Name" name="ext_name">
+                    <input type="text" class="form-control formEdit" placeholder="Enter Extension Name" name="ext_name" value="<?=$faculty[0]['ext_name']?>">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
                     <label>Birthdate*</label>
-                    <input type="date" class="form-control identification" id="birth_date" placeholder="Enter Suffix Name" name="birth_date" required>
+                    <input type="date" class="form-control formEdit" name="birth_date" required value="<?=$faculty[0]['birth_date']?>">
                   </div>
                 </div>
               </div>
@@ -104,14 +74,14 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Email*</label>
-                    <input type="text" class="form-control" placeholder="Enter Last Name" name="email" required>
+                    <input type="text" class="form-control formEdit" placeholder="Enter Last Name" name="email" required value="<?=$faculty[0]['email']?>">
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Contact Number*</label>
-                    <input type="text" class="form-control" placeholder="Enter Contact Number" name="contact_no" required>
+                    <input type="text" class="form-control formEdit" placeholder="Enter Contact Number" name="contact_no" required value="<?=$faculty[0]['contact_no']?>">
                   </div>
                 </div>
               </div>
@@ -132,7 +102,7 @@
           <div class="row">
             <div class="form-group col-md-12">
               <label>Address <small>(optional)</small></label>
-              <textarea class="form-control" placeholder="Enter Faculty Address" name="address"></textarea>
+              <textarea class="form-control formEdit" placeholder="Enter Faculty Address" name="address"><?=$faculty[0]['address']?></textarea>
             </div>
           </div>
 
@@ -141,10 +111,10 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Department</label>
-                <select class="custom-select" name="department_id" required>
+                <select class="custom-select formEdit" name="department_id">
                   <option value="">-- select department --</option>
                   <?php foreach ($departments as $row) { ?>
-                  <option value="<?=$row['department_id']?>"><?=$row['department_name']?></option>
+                  <option value="<?=$row['department_id']?>" <?=($row['department_id']==$faculty[0]['department_id'])?'selected':'';?>><?=$row['department_name']?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -153,10 +123,10 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Rank</label>
-                <select class="custom-select" name="rank_id" required>
+                <select class="custom-select formEdit" name="rank_id">
                   <option value="">-- select rank --</option>
                   <?php foreach ($ranks as $row) { ?>
-                  <option value="<?=$row['rank_id']?>"><?=$row['rank_type']?></option>
+                  <option value="<?=$row['rank_id']?>" <?=($row['rank_id']==$faculty[0]['rank_id'])?'selected':'';?>><?=$row['rank_type']?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -165,10 +135,10 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Designation</label>
-                <select class="custom-select" name="designation_id" required>
+                <select class="custom-select formEdit" name="designation_id">
                   <option value="">-- select designation --</option>
                   <?php foreach ($designations as $row) { ?>
-                  <option value="<?=$row['designation_id']?>"><?=$row['designation_name']?></option>
+                  <option value="<?=$row['designation_id']?>" <?=($row['designation_id']==$faculty[0]['designation_id'])?'selected':'';?>><?=$row['designation_name']?></option>
                   <?php } ?>
                 </select>
               </div>

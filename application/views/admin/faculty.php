@@ -34,7 +34,7 @@
                 <td><?=$row['faculty_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Faculty">
+                    <a href="<?=base_url('admin/faculty_view/'.$row['faculty_id']) ?>" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Faculty">
                       <span class="fa fa-eye"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/faculty/'.$row['faculty_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Faculty">

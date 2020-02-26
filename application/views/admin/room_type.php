@@ -15,7 +15,6 @@
             <thead>
               <tr>
                 <th>Room Type</th>
-                <th>Description</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
                 <th>Action</th>
@@ -25,12 +24,11 @@
               <?php foreach ($room_types as $row) {?>
               <tr>
                 <td><?=$row['room_type']?></td>
-                <td><?=$row['room_description']?></td>
                 <td><?=$row['room_type_added']?></td>
                 <td><?=$row['room_type_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateRoomType" id="<?=$row['room_type_id']?>//<?=$row['room_type']?>//<?=$row['room_description']?>" data-toggle="modal" data-target="#modal_room_type_update" data-toggle="tooltip" data-placement="top" title="Update Room Type">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateRoomType" id="<?=$row['room_type_id']?>//<?=$row['room_type']?>" data-toggle="modal" data-target="#modal_room_type_update" data-toggle="tooltip" data-placement="top" title="Update Room Type">
                       <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/room_type/'.$row['room_type_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Room Type">
@@ -64,10 +62,6 @@
             <label>Room Type</label>
             <input type="text" class="form-control focus" placeholder="Enter Room Type Name" name="room_type" required>
           </div>
-          <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" name="room_description" required></textarea>
-          </div>
         <?=form_close();?>
       </div>
       <div class="modal-footer">
@@ -94,10 +88,6 @@
           <div class="form-group">
             <label>Room Type</label>
             <input type="text" class="form-control focus" placeholder="Enter Room Type" name="room_type" id="room_type" required>
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" name="room_description" required id="room_description"></textarea>
           </div>
         <?=form_close();?>
       </div>

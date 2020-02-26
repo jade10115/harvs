@@ -6,7 +6,10 @@ Class Main_model extends CI_Model{
 
 	// -------------------------------------- MISC FUNCTIONS ------------------------------------------------ //
 
-	
+	public function getLastId($id, $table){
+		$last_id = $this->db->order_by($id, 'DESC')->limit(1)->get($table)->result_array();
+		return $last_id[0][$id];
+	}
 
 	// -------------------------------------- MISC FUNCTIONS ------------------------------------------------ //
 
@@ -31,7 +34,33 @@ Class Main_model extends CI_Model{
 	}
 
 	public function addFaculty(){
-		$this->db->insert('tbl_faculty', $_POST);
+		$faculty = array(
+			'identification' => $_POST['identification'],
+			'f_name' => $_POST['f_name'],
+			'l_name' => $_POST['l_name'],
+			'm_name' => $_POST['m_name'],
+			'suffix_name' => $_POST['suffix_name'],
+			'ext_name' => $_POST['ext_name'],
+			'contact_no' => $_POST['contact_no'],
+			'email' => $_POST['email'],
+			'birth_date' => $_POST['birth_date'],
+			'address' => $_POST['address'],	
+			'department_id' => $_POST['department_id'],
+			'rank_id' => $_POST['rank_id'],
+			'designation_id' => $_POST['designation_id']
+		);
+		$this->db->insert('tbl_faculty', $faculty);
+
+		$faculty_id = $this->getLastId('faculty_id', 'tbl_faculty');
+
+		$user = array(
+			'username' => $_POST['username'],
+			'password' => $_POST['password'],
+			'faculty_id' => $faculty_id,
+			'user_type_id' => $_POST['user_type_id'],
+		);
+
+		$this->db->insert('tbl_user', $user);
 	}
 
 	public function addDesignation(){
@@ -80,6 +109,10 @@ Class Main_model extends CI_Model{
 		// return $this->db->select('tbl_instructor.instructor_id, tbl_instructor.instructor_name, tbl_instructor.instructor_added, tbl_instructor.instructor_updated, count(tbl_subject.subject_id)')->from('tbl_instructor')->join('tbl_subject', 'tbl_instructor.instructor_id = tbl_subject.instructor_id', 'left')->group_by('tbl_instructor.instructor_id')->get()->result_array();	
 		// return $this->db->get('tbl_faculty')->result_array();
 		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')->get('tbl_faculty')->result_array();
+	}
+
+	public function getFaculty($id){
+		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')->where('tbl_faculty.faculty_id', $id)->get('tbl_faculty')->result_array();
 	}
 
 	public function getSubjects(){
@@ -213,9 +246,23 @@ Class Main_model extends CI_Model{
 		$this->db->where('subject_id', $_POST['subject_id'])->update('tbl_subject', $data);
 	}
 
-	// public function updateInstructor(){
-	// 	$this->db->where('instructor_id', $_POST['instructor_id'])->update('tbl_instructor', array('instructor_name' => $_POST['instructor_name']));
-	// }
+	public function updateFaculty(){
+		$data = array(
+			'f_name' => $_POST['f_name'],
+			'l_name' => $_POST['l_name'],
+			'm_name' => $_POST['m_name'],
+			'suffix_name' => $_POST['suffix_name'],
+			'ext_name' => $_POST['ext_name'],
+			'contact_no' => $_POST['contact_no'],
+			'email' => $_POST['email'],
+			'birth_date' => $_POST['birth_date'],
+			'address' => $_POST['address'],	
+			'department_id' => $_POST['department_id'],
+			'rank_id' => $_POST['rank_id'],
+			'designation_id' => $_POST['designation_id']
+		);
+		$this->db->where('faculty_id', $_POST['faculty_id'])->update('tbl_faculty', $data);
+	}
 
 	// -------------------------------------- UPDATE FUNCTIONS ---------------------------------------------- // 
 

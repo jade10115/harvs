@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2020 at 12:10 AM
+-- Generation Time: Feb 25, 2020 at 08:35 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -166,6 +166,7 @@ INSERT INTO `tbl_designation` (`designation_id`, `designation_name`, `regular_un
 
 CREATE TABLE `tbl_faculty` (
   `faculty_id` int(10) NOT NULL,
+  `identification` varchar(20) NOT NULL,
   `f_name` varchar(50) NOT NULL,
   `m_name` varchar(50) NOT NULL,
   `l_name` varchar(50) NOT NULL,
@@ -187,8 +188,14 @@ CREATE TABLE `tbl_faculty` (
 -- Dumping data for table `tbl_faculty`
 --
 
-INSERT INTO `tbl_faculty` (`faculty_id`, `f_name`, `m_name`, `l_name`, `suffix_name`, `ext_name`, `contact_no`, `email`, `birth_date`, `address`, `image_src`, `department_id`, `rank_id`, `designation_id`, `faculty_added`, `faculty_modified`) VALUES
-(1, 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Marasbaras, Tacloban City, Leyte 6500', '', 1, 1, 1, '2020-02-24 15:01:15', '0000-00-00 00:00:00');
+INSERT INTO `tbl_faculty` (`faculty_id`, `identification`, `f_name`, `m_name`, `l_name`, `suffix_name`, `ext_name`, `contact_no`, `email`, `birth_date`, `address`, `image_src`, `department_id`, `rank_id`, `designation_id`, `faculty_added`, `faculty_modified`) VALUES
+(1, '', 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Tacloban City', '', 1, 1, 1, '2020-02-24 15:01:15', '2020-02-26 00:32:04'),
+(6, '', '3', '3', '3', '3', '3', '3', '3', '0003-03-31', '3', '', 2, 2, 1, '2020-02-26 01:06:14', '0000-00-00 00:00:00'),
+(7, '', '1', '1', '1', '1', '1', '1', '1', '0001-01-01', '1', '', 2, 1, 1, '2020-02-26 01:06:56', '0000-00-00 00:00:00'),
+(8, '', '4', '4', '4', '4', '4', '4', '4', '0044-04-04', '4', '', 3, 2, 1, '2020-02-26 02:41:34', '0000-00-00 00:00:00'),
+(9, '22', '2', '2', '2', '2', '2', '2', '22', '0002-02-02', '2', '', 2, 2, 1, '2020-02-26 02:42:17', '0000-00-00 00:00:00'),
+(10, 'zq20200226', 'qwe', 'asd', 'zxc', 'qwe', 'asd', '232', '23', '2020-02-26', '32', '', 3, 2, 1, '2020-02-26 02:44:39', '0000-00-00 00:00:00'),
+(11, 'gg20200226', 'ggg', '111', 'gg', '', '', 'g', 'gg', '2020-02-26', '', '', 0, 0, 0, '2020-02-26 03:25:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -321,14 +328,25 @@ CREATE TABLE `tbl_sy` (
 --
 
 CREATE TABLE `tbl_user` (
-  `USER_ID` int(10) NOT NULL,
-  `user_name` varchar(50) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `user_type_id` int(11) NOT NULL,
+  `faculty_id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `FACULTY_ID` int(11) NOT NULL,
-  `USER_TYPE_ID` int(11) NOT NULL,
   `user_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_user`
+--
+
+INSERT INTO `tbl_user` (`user_id`, `user_type_id`, `faculty_id`, `username`, `password`, `user_added`, `user_modified`) VALUES
+(1, 3, 7, '1', '1', '2020-02-26 01:06:56', '0000-00-00 00:00:00'),
+(2, 3, 8, '4', '4', '2020-02-26 02:41:34', '0000-00-00 00:00:00'),
+(3, 3, 9, '2', '2', '2020-02-26 02:42:17', '0000-00-00 00:00:00'),
+(4, 4, 10, 'fasd', 'asd', '2020-02-26 02:44:39', '0000-00-00 00:00:00'),
+(5, 3, 11, '4', '4', '2020-02-26 03:25:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -445,9 +463,9 @@ ALTER TABLE `tbl_sy`
 -- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  ADD PRIMARY KEY (`USER_ID`),
-  ADD KEY `FK_user_faculty` (`FACULTY_ID`),
-  ADD KEY `FK_user_user_type` (`USER_TYPE_ID`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `FK_user_faculty` (`faculty_id`),
+  ADD KEY `FK_user_user_type` (`user_type_id`);
 
 --
 -- Indexes for table `tbl_user_type`
@@ -463,7 +481,7 @@ ALTER TABLE `tbl_user_type`
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_college`
 --
@@ -493,7 +511,7 @@ ALTER TABLE `tbl_designation`
 -- AUTO_INCREMENT for table `tbl_faculty`
 --
 ALTER TABLE `tbl_faculty`
-  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_rank`
 --
@@ -528,7 +546,7 @@ ALTER TABLE `tbl_sy`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `USER_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_user_type`
 --
@@ -542,23 +560,15 @@ ALTER TABLE `tbl_user_type`
 -- Constraints for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  ADD CONSTRAINT `FK_tbl_course_tbl_college` FOREIGN KEY (`college_id`) REFERENCES `tbl_college` (`COLLEGE_ID`),
+  ADD CONSTRAINT `FK_tbl_course_tbl_college` FOREIGN KEY (`college_id`) REFERENCES `tbl_college` (`college_id`),
   ADD CONSTRAINT `FK_tbl_course_tbl_department` FOREIGN KEY (`department_id`) REFERENCES `tbl_department` (`department_id`);
-
---
--- Constraints for table `tbl_faculty`
---
-ALTER TABLE `tbl_faculty`
-  ADD CONSTRAINT `FK_faculty_department` FOREIGN KEY (`DEPARTMENT_ID`) REFERENCES `tbl_department` (`DEPARTMENT_ID`),
-  ADD CONSTRAINT `FK_faculty_designation` FOREIGN KEY (`designation_id`) REFERENCES `tbl_designation` (`DESIGNATION_ID`),
-  ADD CONSTRAINT `FK_faculty_rank` FOREIGN KEY (`RANK_ID`) REFERENCES `tbl_rank` (`RANK_ID`);
 
 --
 -- Constraints for table `tbl_room`
 --
 ALTER TABLE `tbl_room`
-  ADD CONSTRAINT `FK_tbl_room_tbl_building` FOREIGN KEY (`building_id`) REFERENCES `tbl_building` (`BUILDING_ID`),
-  ADD CONSTRAINT `FK_tbl_room_tbl_room_type` FOREIGN KEY (`room_type_id`) REFERENCES `tbl_room_type` (`ROOM_TYPE_ID`);
+  ADD CONSTRAINT `FK_tbl_room_tbl_building` FOREIGN KEY (`building_id`) REFERENCES `tbl_building` (`building_id`),
+  ADD CONSTRAINT `FK_tbl_room_tbl_room_type` FOREIGN KEY (`room_type_id`) REFERENCES `tbl_room_type` (`room_type_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

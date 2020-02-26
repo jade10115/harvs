@@ -56,9 +56,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h6 class="modal-title">Add Course</h6>
-        <div class="alert alert-danger alert-modal invisible" role="alert">
-          Please complete the form.
-        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -67,8 +64,8 @@
         <?=form_open('admin/addCourse', 'id="frm_course_add"');?>
           <div class="form-group">
             <label>College</label>
-            <select class="custom-select college_id" name="college_id" id="college_id_add">
-              <option value="0">-- select college --</option>
+            <select class="custom-select college_id" name="college_id" id="college_id_add" required>
+              <option value="">-- select college --</option>
               <?php foreach ($colleges as $row) {?>
                 <option value="<?=$row['college_id']?>"><?=$row['college_name']?></option>
               <?php } ?>
@@ -76,8 +73,8 @@
           </div>
           <div class="form-group">
             <label>Department</label>
-            <select class="custom-select department_id" name="department_id" id="department_id_add">
-              <option value="0">-- select college first --</option>
+            <select class="custom-select department_id" name="department_id" id="department_id_add" required>
+              <option>-- select college first --</option>
             </select>
           </div>
           <div class="form-group">

@@ -15,6 +15,47 @@
 		$(document).ready(function(){
 			base_url = '<?=base_url()?>';
 
+			$('.formEdit').attr('disabled', true);
+
+			$('#btnEditFaculty').click(function(){
+				if($(this).val()=='edit'){
+					$(this).val('cancel');
+					$(this).text('Cancel');
+					$('.formEdit').attr('disabled', false);	
+					$('.focus').select();
+				} else {
+					$(this).val('edit');
+					$(this).text('Edit Faculty');
+					$('.formEdit').attr('disabled', true);
+				}
+			});
+
+			$('.identification').on('input', function(){
+				a = $('#f_name').val();
+				b = $('#l_name').val();
+				c = $('#birth_date').val();
+				c = c.split('-');
+				c = c[0]+c[1]+c[2];
+				d = '';
+
+				if(a==''&&b=='') {
+					d = c;
+				} else if(a==''&&c=='undefinedundefined') {
+					d = b.charAt(0);
+				} else if(b==''&&c=='undefinedundefined') {
+					d = a.charAt(0);
+				} else if(a==''){
+					d = b.charAt(0)+c;
+				} else if(b==''){
+					d = a.charAt(0)+c;
+				} else if(c=='undefinedundefined') {
+					d = a.charAt(0)+b.charAt(0);
+				} else {
+					d = a.charAt(0)+b.charAt(0)+c;
+				}
+				
+				$('#identification').val(d);
+			});
 
 			$('.modal').on('shown.bs.modal', function () {
 			    $('.focus').focus();
@@ -76,7 +117,6 @@
 				$('#course_name').val(id[1]);
 				$('#college_id').val(id[2]);
 				populateDepartments(id[2], id[3]);
-				console.log($('#department_id').val());
 			}); // $('.updateCourse').click()
 
 			$('.updateCollege').click(function(){
@@ -145,7 +185,6 @@
 				id = id.split('//');
 				$('#room_type_id').val(id[0]);
 				$('#room_type').val(id[1]);
-				$('#room_description').val(id[1]);
 			}); // $('.updateRoomType').click()
 
 			$('.updateSubject').click(function(){
@@ -167,15 +206,15 @@
 				}
 			});
 
-			$(document).on('submit', '#frm_course_add', function(event){
-				college_id = $('#college_id_add').val();
-				department_id = $('#department_id_add').val();
-				if(college_id==0||department_id==0){
-					$('.alert-modal').removeClass('invisible');
-					event.preventDefault();
-					return false;
-				} 
-			})
+			// $(document).on('submit', '#frm_course_add', function(event){
+			// 	college_id = $('#college_id_add').val();
+			// 	department_id = $('#department_id_add').val();
+			// 	if(college_id==0||department_id==0){
+			// 		$('.alert-modal').removeClass('invisible');
+			// 		event.preventDefault();
+			// 		return false;
+			// 	} 
+			// })
 
 			function populateDepartments(college_id, department_id){
 				$.ajax({
