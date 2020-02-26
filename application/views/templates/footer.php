@@ -145,6 +145,7 @@
 				id = id.split('//');
 				$('#room_type_id').val(id[0]);
 				$('#room_type').val(id[1]);
+				$('#room_description').val(id[1]);
 			}); // $('.updateRoomType').click()
 
 			$('.updateSubject').click(function(){

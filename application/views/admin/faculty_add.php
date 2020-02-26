@@ -17,7 +17,6 @@
           <?=form_open('admin/addFaculty', 'id="frm_faculty_add"');?>
           <!--row start-->
           <div class="row">
-
             <div class="col-md-8">
 
               <div class="row">
