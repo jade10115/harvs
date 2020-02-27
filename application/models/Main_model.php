@@ -92,6 +92,14 @@ Class Main_model extends CI_Model{
 		$this->db->insert('tbl_subject', $_POST);
 	}
 
+	public function addLog($action){
+		$data = array(
+			'user_id' => 1,
+			'log_name' => $action
+		);
+		$this->db->insert('tbl_log', $data);
+	}
+
 	// -------------------------------------- ADD FUNCTIONS ------------------------------------------------- //
 
 	// ------------------------------------------------------------------------------------------------------ //
