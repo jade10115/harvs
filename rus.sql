@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2020 at 08:35 PM
+-- Generation Time: Feb 28, 2020 at 12:32 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -40,7 +40,8 @@ CREATE TABLE `tbl_building` (
 --
 
 INSERT INTO `tbl_building` (`building_id`, `building_name`, `no_of_rooms`, `no_of_floors`, `building_added`, `building_modified`) VALUES
-(2, 'Science Building', 10, 3, '2020-02-21 16:11:32', '2020-02-21 16:15:36');
+(2, 'Science Building', 10, 3, '2020-02-21 16:11:32', '2020-02-21 16:15:36'),
+(3, 'Information Technology', 2, 2, '2020-02-26 16:37:50', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,7 @@ INSERT INTO `tbl_college` (`college_id`, `college_name`, `college_added`, `colle
 (2, 'COE', '2020-02-20 16:45:17', '2020-02-20 16:45:24'),
 (3, 'COT', '2020-02-20 16:45:29', '0000-00-00 00:00:00'),
 (4, 'COBE', '2020-02-20 16:45:31', '2020-02-20 16:45:38'),
-(5, 'CAAD', '2020-02-20 16:45:35', '0000-00-00 00:00:00'),
+(5, 'College of Arts and Allied Disciplines', '2020-02-20 16:45:35', '2020-02-26 16:40:38'),
 (6, 'CAS', '2020-02-20 16:45:42', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -133,9 +134,9 @@ CREATE TABLE `tbl_department` (
 --
 
 INSERT INTO `tbl_department` (`department_id`, `college_id`, `department_name`, `department_added`, `department_modified`) VALUES
-(1, 2, 'IT', '2020-02-20 14:07:02', '0000-00-00 00:00:00'),
-(2, 2, 'CE', '2020-02-20 14:07:05', '0000-00-00 00:00:00'),
-(3, 4, 'ARCHI', '2020-02-20 14:07:18', '0000-00-00 00:00:00');
+(4, 1, 'CE', '2020-02-26 14:00:36', '0000-00-00 00:00:00'),
+(5, 1, 'IT', '2020-02-26 14:00:38', '0000-00-00 00:00:00'),
+(6, 5, 'ARCHI', '2020-02-26 14:00:53', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -176,7 +177,7 @@ CREATE TABLE `tbl_faculty` (
   `email` varchar(50) NOT NULL,
   `birth_date` varchar(50) NOT NULL,
   `address` varchar(50) NOT NULL,
-  `image_src` varchar(255) NOT NULL,
+  `image_src` varchar(255) NOT NULL DEFAULT 'avatar.png',
   `department_id` int(11) NOT NULL,
   `rank_id` int(11) NOT NULL,
   `designation_id` int(11) NOT NULL,
@@ -189,13 +190,7 @@ CREATE TABLE `tbl_faculty` (
 --
 
 INSERT INTO `tbl_faculty` (`faculty_id`, `identification`, `f_name`, `m_name`, `l_name`, `suffix_name`, `ext_name`, `contact_no`, `email`, `birth_date`, `address`, `image_src`, `department_id`, `rank_id`, `designation_id`, `faculty_added`, `faculty_modified`) VALUES
-(1, '', 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Tacloban City', '', 1, 1, 1, '2020-02-24 15:01:15', '2020-02-26 00:32:04'),
-(6, '', '3', '3', '3', '3', '3', '3', '3', '0003-03-31', '3', '', 2, 2, 1, '2020-02-26 01:06:14', '0000-00-00 00:00:00'),
-(7, '', '1', '1', '1', '1', '1', '1', '1', '0001-01-01', '1', '', 2, 1, 1, '2020-02-26 01:06:56', '0000-00-00 00:00:00'),
-(8, '', '4', '4', '4', '4', '4', '4', '4', '0044-04-04', '4', '', 3, 2, 1, '2020-02-26 02:41:34', '0000-00-00 00:00:00'),
-(9, '22', '2', '2', '2', '2', '2', '2', '22', '0002-02-02', '2', '', 2, 2, 1, '2020-02-26 02:42:17', '0000-00-00 00:00:00'),
-(10, 'zq20200226', 'qwe', 'asd', 'zxc', 'qwe', 'asd', '232', '23', '2020-02-26', '32', '', 3, 2, 1, '2020-02-26 02:44:39', '0000-00-00 00:00:00'),
-(11, 'gg20200226', 'ggg', '111', 'gg', '', '', 'g', 'gg', '2020-02-26', '', '', 0, 0, 0, '2020-02-26 03:25:32', '0000-00-00 00:00:00');
+(1, '', 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Tacloban City', 'avatar.png', 6, 2, 1, '2020-02-24 15:01:15', '2020-02-27 15:08:06');
 
 -- --------------------------------------------------------
 
@@ -239,7 +234,8 @@ CREATE TABLE `tbl_room` (
 --
 
 INSERT INTO `tbl_room` (`room_id`, `room_type_id`, `building_id`, `room_number`, `room_floor`, `room_added`, `room_modified`) VALUES
-(4, 3, 2, 4, 4, '2020-02-21 16:53:19', NULL);
+(4, 3, 2, 4, 4, '2020-02-21 16:53:19', NULL),
+(5, 1, 3, 201, 2, '2020-02-26 16:38:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -251,8 +247,8 @@ CREATE TABLE `tbl_room_type` (
   `room_type_id` int(11) NOT NULL,
   `room_type` varchar(50) NOT NULL,
   `room_description` varchar(150) NOT NULL,
-  `room_type_added` datetime NOT NULL,
-  `room_type_modified` datetime NOT NULL
+  `room_type_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `room_type_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -260,8 +256,8 @@ CREATE TABLE `tbl_room_type` (
 --
 
 INSERT INTO `tbl_room_type` (`room_type_id`, `room_type`, `room_description`, `room_type_added`, `room_type_modified`) VALUES
-(3, 'Laboratory', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'Lecture', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 'Laboratory', 'Laboratory', '2020-02-26 13:58:56', '2020-02-26 13:59:09'),
+(2, 'Lecture', 'Lecture', '2020-02-26 13:59:02', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -346,7 +342,16 @@ INSERT INTO `tbl_user` (`user_id`, `user_type_id`, `faculty_id`, `username`, `pa
 (2, 3, 8, '4', '4', '2020-02-26 02:41:34', '0000-00-00 00:00:00'),
 (3, 3, 9, '2', '2', '2020-02-26 02:42:17', '0000-00-00 00:00:00'),
 (4, 4, 10, 'fasd', 'asd', '2020-02-26 02:44:39', '0000-00-00 00:00:00'),
-(5, 3, 11, '4', '4', '2020-02-26 03:25:32', '0000-00-00 00:00:00');
+(5, 3, 11, '4', '4', '2020-02-26 03:25:32', '0000-00-00 00:00:00'),
+(6, 3, 12, 'zx', 'zxc', '2020-02-26 16:35:35', '0000-00-00 00:00:00'),
+(7, 3, 13, '1', '1', '2020-02-27 14:47:34', '0000-00-00 00:00:00'),
+(8, 3, 14, '23', '3', '2020-02-27 14:47:57', '0000-00-00 00:00:00'),
+(9, 3, 15, '3', '3', '2020-02-27 14:51:52', '0000-00-00 00:00:00'),
+(10, 3, 16, '555', '4', '2020-02-27 15:03:34', '0000-00-00 00:00:00'),
+(11, 3, 17, 'g', 'g', '2020-02-27 15:04:55', '0000-00-00 00:00:00'),
+(12, 3, 18, 'yyy', 'yyy', '2020-02-27 15:06:02', '0000-00-00 00:00:00'),
+(13, 3, 19, 't', 't', '2020-02-27 15:06:50', '0000-00-00 00:00:00'),
+(14, 3, 20, '4', '4', '2020-02-27 15:15:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -481,7 +486,7 @@ ALTER TABLE `tbl_user_type`
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_college`
 --
@@ -501,7 +506,7 @@ ALTER TABLE `tbl_course`
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
-  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_designation`
 --
@@ -511,7 +516,7 @@ ALTER TABLE `tbl_designation`
 -- AUTO_INCREMENT for table `tbl_faculty`
 --
 ALTER TABLE `tbl_faculty`
-  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_rank`
 --
@@ -521,12 +526,12 @@ ALTER TABLE `tbl_rank`
 -- AUTO_INCREMENT for table `tbl_room`
 --
 ALTER TABLE `tbl_room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_room_type`
 --
 ALTER TABLE `tbl_room_type`
-  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_semester`
 --
@@ -546,30 +551,12 @@ ALTER TABLE `tbl_sy`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tbl_user_type`
 --
 ALTER TABLE `tbl_user_type`
   MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tbl_course`
---
-ALTER TABLE `tbl_course`
-  ADD CONSTRAINT `FK_tbl_course_tbl_college` FOREIGN KEY (`college_id`) REFERENCES `tbl_college` (`college_id`),
-  ADD CONSTRAINT `FK_tbl_course_tbl_department` FOREIGN KEY (`department_id`) REFERENCES `tbl_department` (`department_id`);
-
---
--- Constraints for table `tbl_room`
---
-ALTER TABLE `tbl_room`
-  ADD CONSTRAINT `FK_tbl_room_tbl_building` FOREIGN KEY (`building_id`) REFERENCES `tbl_building` (`building_id`),
-  ADD CONSTRAINT `FK_tbl_room_tbl_room_type` FOREIGN KEY (`room_type_id`) REFERENCES `tbl_room_type` (`room_type_id`);
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
