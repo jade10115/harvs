@@ -17,3 +17,7 @@ nav {
 .profile {
 	height: 82%;
 }
+
+.hand {
+	cursor:pointer;
+}

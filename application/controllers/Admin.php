@@ -274,7 +274,8 @@ class Admin extends CI_Controller {
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
-    	$this->main_model->addFaculty();
+    	$this->main_model->addFaculty($_FILES['image_src']['name']);
+    	move_uploaded_file($_FILES['image_src']['tmp_name'], 'assets/img/users/'.$_FILES['image_src']['name']);
     	$this->session->set_flashdata('toast', 'New faculty successfully added.');
     }
 
@@ -375,7 +376,10 @@ class Admin extends CI_Controller {
 
 	// -------------------------------------- DELETE ------------------------------------- //
 
-	public function delete($name, $id){
+	public function delete($name, $id, $img=''){
+		if($name=='faculty'){
+			unlink('assets/img/users/'.$img);
+		}
 		$this->main_model->delete($name, $id);
 		$this->session->set_flashdata('toast', ucfirst($name).' successfully deleted.');
 		header('location:'.base_url('admin/'.$name));

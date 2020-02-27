@@ -33,7 +33,7 @@ Class Main_model extends CI_Model{
 		$this->db->insert('tbl_room', $_POST);
 	}
 
-	public function addFaculty(){
+	public function addFaculty($img){
 		$faculty = array(
 			'identification' => $_POST['identification'],
 			'f_name' => $_POST['f_name'],
@@ -47,7 +47,8 @@ Class Main_model extends CI_Model{
 			'address' => $_POST['address'],	
 			'department_id' => $_POST['department_id'],
 			'rank_id' => $_POST['rank_id'],
-			'designation_id' => $_POST['designation_id']
+			'designation_id' => $_POST['designation_id'],
+			'image_src' => $img
 		);
 		$this->db->insert('tbl_faculty', $faculty);
 
@@ -197,7 +198,11 @@ Class Main_model extends CI_Model{
 	}
 
 	public function updateRoomType(){
-		$this->db->where('room_type_id', $_POST['room_type_id'])->update('tbl_room_type', array('room_type' => $_POST['room_type']));
+		$data =  array(
+			'room_type' => $_POST['room_type'],
+			'room_description' => $_POST['room_description']
+		);
+		$this->db->where('room_type_id', $_POST['room_type_id'])->update('tbl_room_type', $data);
 	}
 
 	public function updateCourse(){

@@ -21,14 +21,46 @@
 				if($(this).val()=='edit'){
 					$(this).val('cancel');
 					$(this).text('Cancel');
+					$('.btnEdit').removeClass('invisible')
+					$('#image_src').addClass('imgClick hand');
 					$('.formEdit').attr('disabled', false);	
 					$('.focus').select();
 				} else {
 					$(this).val('edit');
 					$(this).text('Edit Faculty');
+					$('.btnEdit').addClass('invisible')
+					$('#image_src').removeClass('imgClick hand');
 					$('.formEdit').attr('disabled', true);
 				}
 			});
+
+			$(document).on('click', '.imgClick', function(){
+				$('#imgFile').click();
+			});
+
+			$('#imgFile').change(function(){
+				readURL(this);
+			});
+
+			$('#removePicture').click(function(){	
+				$('.imgClick').attr('src', base_url+'assets/img/system/avatar.png');
+			});
+
+			function readURL(input){
+				if(input.files[0].type=='image/jpeg'||input.files[0].type=='image/png'){
+					if(input.files && input.files[0]){
+						var reader = new FileReader();
+
+						reader.onload = function(e){
+							$('.imgClick').attr('src', e.target.result);
+						}
+
+						reader.readAsDataURL(input.files[0]);
+					}	
+				} else {
+					alert('Invalid image format');
+				}
+			}
 
 			$('.identification').on('input', function(){
 				a = $('#f_name').val();
@@ -185,6 +217,7 @@
 				id = id.split('//');
 				$('#room_type_id').val(id[0]);
 				$('#room_type').val(id[1]);
+				$('#room_description').val(id[2]);
 			}); // $('.updateRoomType').click()
 
 			$('.updateSubject').click(function(){

@@ -14,7 +14,7 @@
           </div>
         </h5>
 			  <div class="card-body">
-          <?=form_open('admin/addFaculty', 'id="frm_faculty_add"');?>
+          <?=form_open_multipart('admin/addFaculty', 'id="frm_faculty_add"');?>
           <!--row start-->
 
           <div class="row">
@@ -121,8 +121,16 @@
             <!--faculty picture-->
             <div class="col-md-4">
                <label>Faculty Picture <small>(optional)</small></label>
-               <div class="card profile">
-                 <img src="" class="rounded">
+               <div class="row">
+                 <div class="card profile col-md-10 p-0" style="height: 200px;">
+                   <img src="<?=base_url('assets/img/users/avatar.png')?>" height="100%" width="100%" class="hand imgClick">
+                   <input type="file" id="imgFile" class="invisible position-absolute" name="image_src">
+                 </div>
+                 <div class="col-md-1">
+                   <a href="#" tabindex="-1" class="btn btn-sm btn-outline-primary mt-1 mb-1 imgClick" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Select Picture"><span data-feather="image"></span></a>
+                   <a href="#" tabindex="-1" class="btn btn-sm btn-outline-success mt-1 mb-1" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Reset Picture"><span data-feather="refresh-ccw"></span></a>
+                   <a href="#" tabindex="-1" class="btn btn-sm btn-outline-danger mt-1 mb-1" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Remove Picture" id="removePicture"><span data-feather="x"></span></a>
+                 </div>
                </div>
             </div>
           </div>

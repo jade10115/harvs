@@ -9,7 +9,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Faculties')?'active':'';?>" href="<?=base_url('admin/faculty')?>">
-          <span data-feather="users"></span>
+          <span data-feather="check"></span>
           Faculties*
         </a>
       </li>
