@@ -164,6 +164,14 @@ Class Main_model extends CI_Model{
 		return $this->db->get('tbl_user_type')->result_array();
 	}
 
+	public function getLogs(){
+		return $this->db->join('tbl_user', 'tbl_logs.user_id = tbl_user.user_id')->
+						join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')->
+						join('tbl_user_type', 'tbl_user.user_type_id = tbl_user_type.user_type_id')->
+						join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')->
+						get('tbl_logs')->result_array();
+	}
+
 	public function getDeletedDataName($name, $id) {
 		switch ($name) {
 			case 'faculty':
