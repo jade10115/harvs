@@ -14,7 +14,7 @@
           </div>
         </h5>
 			  <div class="card-body login">
-          <?=form_open_multipart('admin/addFaculty', 'id="frm_faculty_add" class="form-signin"');?>
+          <?=form_open_multipart('admin/addFaculty', 'id="frm_faculty_add"');?>
           <!--row start-->
 
           <div class="row">
