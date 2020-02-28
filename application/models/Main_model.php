@@ -80,6 +80,13 @@ Class Main_model extends CI_Model{
 		$this->db->insert('tbl_semester', $_POST);
 	}
 
+	public function addSY(){
+		$data = array(
+			'school_year' => $_POST['sy_from'].'-'.$_POST['sy_to']
+		);
+		$this->db->insert('tbl_sy', $data);
+	}
+
 	public function addUserType(){
 		$this->db->insert('tbl_user_type', $_POST);
 	}
@@ -150,6 +157,10 @@ Class Main_model extends CI_Model{
 
 	public function getSemesters(){
 		return $this->db->get('tbl_semester')->result_array();
+	}
+
+	public function getSchoolYear(){
+		return $this->db->get('tbl_sy')->result_array();
 	}
 	
 	public function getuserTypes(){

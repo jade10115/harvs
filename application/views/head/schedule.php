@@ -35,9 +35,24 @@
             <label>Room</label>
             <select class="custom-select">
               <option value="0">asd</option>
-              <option></option>
-              <option></option>
-              <option></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Room</label>
+            <select class="custom-select">
+              <option value="0">asd</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Room</label>
+            <select class="custom-select">
+              <option value="0">asd</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Room</label>
+            <select class="custom-select">
+              <option value="0">asd</option>
             </select>
           </div>
         <?=form_close();?>

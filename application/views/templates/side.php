@@ -75,6 +75,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link <?=($title=='Semesters')?'active':'';?>" href="<?=base_url('admin/sy')?>">
+          <span data-feather="x"></span>
+          School Year*
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link <?=($title=='User Types')?'active':'';?>" href="<?=base_url('admin/user_type')?>">
           <span data-feather="check"></span>
           User Types
