@@ -124,6 +124,14 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function sy(){
+		$data['title'] = "Semesters";
+		$data['sy'] = $this->main_model->getSchoolYear();
+		$this->load->view('templates/header', $data);
+		$this->load->view('admin/sy');
+		$this->load->view('templates/footer');
+	}
+
 	public function subject(){
 		$data['title'] = "Subjects";
 		$data['subjects'] = $this->main_model->getSubjects();
@@ -146,6 +154,16 @@ class Admin extends CI_Controller {
 		$data['user_types'] = $this->main_model->getUserTypes();
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/user_type');
+		$this->load->view('templates/footer');
+	}
+
+	public function logs(){
+		$data['title'] = "Logs";
+		$data['logs'] = $this->main_model->getLogs();
+
+		//print_r($data); die();
+		$this->load->view('templates/header', $data);
+		$this->load->view('admin/logs');
 		$this->load->view('templates/footer');
 	}
 
@@ -342,6 +360,21 @@ class Admin extends CI_Controller {
     }
 
     header('location:'.base_url('admin/semester'));
+	}
+
+	public function addSY(){
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('sy_from', 'School Year', 'trim|required|is_unique[tbl_sy.school_year]');
+
+    if ($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->addSY();	
+    	$this->session->set_flashdata('toast', 'New school year successfully added.');
+    }
+
+    header('location:'.base_url('admin/sy'));
 	}
 
 	public function addUserType(){

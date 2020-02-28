@@ -16,7 +16,11 @@
 	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/jquery-confirm.min.css')?>">
 	<!-- fontAwesome -->
 	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/font-awesome.min.css')?>">
+	<!-- floating labels -->
+	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/floating-labels.css') ?>">
 	<!-- style -->
 	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/rus.css')?>">
+	
+
 </head>
 <body>

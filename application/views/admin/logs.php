@@ -14,25 +14,21 @@
           <table class="table table-striped table-hover table-sm">
             <thead>
               <tr>
-                <th>Faculty Names</th>
+                <th>Activity</th>
+                <th>Name</th>
                 <th>Department</th>
-                <th>Rank</th>
-                <th>Designation</th>
+                <th>User Type</th>
                 <th>Date Added</th>
-                <th>Date Updated</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($faculties as $row) {?>
+              <?php foreach ($logs as $row) {?>
               <tr>
+                <td><?=$row['log_name']?></td>
                 <td><?=$row['l_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></td>
                 <td><?=$row['department_name']?></td>
-                <td><?=$row['rank_type']?></td>
-                <td><?=$row['designation_name']?></td>
-                <td><?=$row['faculty_added']?></td>
-                <td><?=$row['faculty_modified']?></td>
-                <td>
+                <td><?=$row['user_type']?></td>
+                <td><?=$row['log_added']?></td>
                   <div class="btn-group" role="group">
                     <a href="<?=base_url('admin/faculty_view/'.$row['faculty_id']) ?>" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Faculty">
                       <span class="fa fa-eye"></span>
