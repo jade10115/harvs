@@ -92,6 +92,14 @@ Class Main_model extends CI_Model{
 		$this->db->insert('tbl_subject', $_POST);
 	}
 
+	public function addLog($action){
+		$data = array(
+			'log_name' => $action,
+			'user_id' => 1
+		);
+		$this->db->insert('tbl_logs', $data);
+	}
+
 	// -------------------------------------- ADD FUNCTIONS ------------------------------------------------- //
 
 	// ------------------------------------------------------------------------------------------------------ //
@@ -154,6 +162,42 @@ Class Main_model extends CI_Model{
 	
 	public function getuserTypes(){
 		return $this->db->get('tbl_user_type')->result_array();
+	}
+
+	public function getDeletedDataName($name, $id) {
+		switch ($name) {
+			case 'faculty':
+				$columnName = 'faculty_id';
+				break;
+			case 'rank':
+				$columnName = 'rank_type';
+				break;
+			case 'room':
+				$columnName = 'room_number';
+				break;
+			case 'room_type':
+				$columnName = 'room_type';
+				break;
+			case 'semester':
+				$columnName = 'semester_type';
+				break;
+			case 'subject':
+				$columnName = 'subject_code';
+				break;
+			case 'sy':
+				$columnName = 'school_year';
+				break;
+			case 'user':
+				$columnName = 'user_id';
+				break;
+			case 'user_type':
+				$columnName = 'user_type';
+				break;
+			default:
+				$columnName = $name.'_name';
+				break;
+		}
+		return $this->db->where($name.'_id', $id)->get('tbl_'.$name)->row_array()[$columnName];
 	}
 
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //

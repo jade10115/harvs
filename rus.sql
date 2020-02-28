@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2020 at 12:32 AM
+-- Generation Time: Feb 28, 2020 at 03:44 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -63,7 +63,6 @@ CREATE TABLE `tbl_college` (
 INSERT INTO `tbl_college` (`college_id`, `college_name`, `college_added`, `college_modified`) VALUES
 (1, 'COED', '2020-02-20 16:45:14', '2020-02-20 16:45:27'),
 (2, 'COE', '2020-02-20 16:45:17', '2020-02-20 16:45:24'),
-(3, 'COT', '2020-02-20 16:45:29', '0000-00-00 00:00:00'),
 (4, 'COBE', '2020-02-20 16:45:31', '2020-02-20 16:45:38'),
 (5, 'College of Arts and Allied Disciplines', '2020-02-20 16:45:35', '2020-02-26 16:40:38'),
 (6, 'CAS', '2020-02-20 16:45:42', '0000-00-00 00:00:00');
@@ -157,7 +156,7 @@ CREATE TABLE `tbl_designation` (
 --
 
 INSERT INTO `tbl_designation` (`designation_id`, `designation_name`, `regular_unit`, `designation_added`, `designation_modified`) VALUES
-(1, 'Department Head', 15, '2020-02-24 14:23:52', '0000-00-00 00:00:00');
+(1, 'Department Head', 12, '2020-02-24 14:23:52', '2020-02-28 10:44:07');
 
 -- --------------------------------------------------------
 
@@ -191,6 +190,27 @@ CREATE TABLE `tbl_faculty` (
 
 INSERT INTO `tbl_faculty` (`faculty_id`, `identification`, `f_name`, `m_name`, `l_name`, `suffix_name`, `ext_name`, `contact_no`, `email`, `birth_date`, `address`, `image_src`, `department_id`, `rank_id`, `designation_id`, `faculty_added`, `faculty_modified`) VALUES
 (1, '', 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Tacloban City', 'avatar.png', 6, 2, 1, '2020-02-24 15:01:15', '2020-02-27 15:08:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_logs`
+--
+
+CREATE TABLE `tbl_logs` (
+  `log_id` int(11) NOT NULL,
+  `log_name` varchar(255) NOT NULL,
+  `log_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_logs`
+--
+
+INSERT INTO `tbl_logs` (`log_id`, `log_name`, `log_added`, `user_id`) VALUES
+(1, 'Designation successfully updated: 122', '2020-02-28 02:43:11', 1),
+(2, 'Designation successfully updated: Department Head', '2020-02-28 02:44:07', 1);
 
 -- --------------------------------------------------------
 
@@ -235,7 +255,8 @@ CREATE TABLE `tbl_room` (
 
 INSERT INTO `tbl_room` (`room_id`, `room_type_id`, `building_id`, `room_number`, `room_floor`, `room_added`, `room_modified`) VALUES
 (4, 3, 2, 4, 4, '2020-02-21 16:53:19', NULL),
-(5, 1, 3, 201, 2, '2020-02-26 16:38:23', NULL);
+(5, 1, 3, 201, 2, '2020-02-26 16:38:23', NULL),
+(6, 1, 2, 122, 2, '2020-02-28 09:42:38', '2020-02-28 10:43:11');
 
 -- --------------------------------------------------------
 
@@ -427,6 +448,12 @@ ALTER TABLE `tbl_faculty`
   ADD KEY `FK_faculty_designation` (`designation_id`);
 
 --
+-- Indexes for table `tbl_logs`
+--
+ALTER TABLE `tbl_logs`
+  ADD PRIMARY KEY (`log_id`);
+
+--
 -- Indexes for table `tbl_rank`
 --
 ALTER TABLE `tbl_rank`
@@ -486,12 +513,12 @@ ALTER TABLE `tbl_user_type`
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_college`
 --
 ALTER TABLE `tbl_college`
-  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_colleges`
 --
@@ -501,47 +528,52 @@ ALTER TABLE `tbl_colleges`
 -- AUTO_INCREMENT for table `tbl_course`
 --
 ALTER TABLE `tbl_course`
-  MODIFY `course_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `course_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
-  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_designation`
 --
 ALTER TABLE `tbl_designation`
-  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_faculty`
 --
 ALTER TABLE `tbl_faculty`
   MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `tbl_logs`
+--
+ALTER TABLE `tbl_logs`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `tbl_rank`
 --
 ALTER TABLE `tbl_rank`
-  MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_room`
 --
 ALTER TABLE `tbl_room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tbl_room_type`
 --
 ALTER TABLE `tbl_room_type`
-  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_semester`
 --
 ALTER TABLE `tbl_semester`
-  MODIFY `semester_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `semester_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_subject`
 --
 ALTER TABLE `tbl_subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_sy`
 --
@@ -556,7 +588,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_user_type`
 --
 ALTER TABLE `tbl_user_type`
-  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
