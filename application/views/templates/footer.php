@@ -34,6 +34,10 @@
 				}
 			});
 
+			$('#sy').change(function(){
+				$('#sy2').val(parseInt($(this).val())+1);
+			});
+
 			$(document).on('click', '.imgClick', function(){
 				$('#imgFile').click();
 			});

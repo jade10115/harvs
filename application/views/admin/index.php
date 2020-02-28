@@ -6,7 +6,7 @@
 			    Authentication
 			  </div>
 			  <div class="card-body">
-			    <?=form_open('auth/login'); ?>
+			    <?=form_open('auth/validate'); ?>
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">Email address</label>
 					    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
