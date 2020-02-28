@@ -178,7 +178,7 @@ class Admin extends CI_Controller {
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
-    	$this->main_model->addBuilding();	
+    	$this->main_model->addBuilding();
     	$this->session->set_flashdata('toast', 'New building successfully added.');
     }
 
@@ -380,8 +380,8 @@ class Admin extends CI_Controller {
 		if($name=='faculty'){
 			unlink('assets/img/users/'.$img);
 		}
-		$this->main_model->delete($name, $id);
-		$this->session->set_flashdata('toast', ucfirst($name).' successfully deleted.');
+		$this->main_model->delete()ete($name, $id);
+		$this->session->set_flashdata('toast', ucfirst($name).' successfully deleted');
 		header('location:'.base_url('admin/'.$name));
 	}
 
