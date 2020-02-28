@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_building`
 --
 
-CREATE TABLE `tbl_building` (
+CREATE TABLE IF NOT EXISTS `tbl_building` (
   `building_id` int(10) NOT NULL,
   `building_name` varchar(255) NOT NULL,
   `no_of_rooms` int(10) NOT NULL,
@@ -34,6 +34,8 @@ CREATE TABLE `tbl_building` (
   `building_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `building_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+TRUNCATE TABLE `tbl_building`;
 
 --
 -- Dumping data for table `tbl_building`
@@ -49,13 +51,14 @@ INSERT INTO `tbl_building` (`building_id`, `building_name`, `no_of_rooms`, `no_o
 -- Table structure for table `tbl_college`
 --
 
-CREATE TABLE `tbl_college` (
+CREATE TABLE IF NOT EXISTS `tbl_college` (
   `college_id` int(11) NOT NULL,
   `college_name` varchar(250) NOT NULL,
   `college_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `college_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+TRUNCATE TABLE `tbl_college`;
 --
 -- Dumping data for table `tbl_college`
 --
@@ -67,29 +70,6 @@ INSERT INTO `tbl_college` (`college_id`, `college_name`, `college_added`, `colle
 (5, 'College of Arts and Allied Disciplines', '2020-02-20 16:45:35', '2020-02-26 16:40:38'),
 (6, 'CAS', '2020-02-20 16:45:42', '0000-00-00 00:00:00');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_colleges`
---
-
-CREATE TABLE `tbl_colleges` (
-  `college_id` int(11) NOT NULL,
-  `college_name` varchar(255) NOT NULL,
-  `college_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `college_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_colleges`
---
-
-INSERT INTO `tbl_colleges` (`college_id`, `college_name`, `college_added`, `college_modified`) VALUES
-(2, 'COE', '2020-02-19 15:17:23', '0000-00-00 00:00:00'),
-(3, 'COED', '2020-02-19 15:17:29', '0000-00-00 00:00:00'),
-(4, 'CAAD', '2020-02-19 15:17:34', '0000-00-00 00:00:00'),
-(5, 'CAS', '2020-02-19 15:17:35', '0000-00-00 00:00:00'),
-(6, 'COBE', '2020-02-19 15:17:40', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -97,7 +77,7 @@ INSERT INTO `tbl_colleges` (`college_id`, `college_name`, `college_added`, `coll
 -- Table structure for table `tbl_course`
 --
 
-CREATE TABLE `tbl_course` (
+CREATE TABLE IF NOT EXISTS `tbl_course` (
   `course_id` int(10) NOT NULL,
   `college_id` int(10) NOT NULL,
   `department_id` int(11) NOT NULL,
@@ -105,7 +85,7 @@ CREATE TABLE `tbl_course` (
   `course_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `course_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_course`;
 --
 -- Dumping data for table `tbl_course`
 --
@@ -120,14 +100,14 @@ INSERT INTO `tbl_course` (`course_id`, `college_id`, `department_id`, `course_na
 -- Table structure for table `tbl_department`
 --
 
-CREATE TABLE `tbl_department` (
+CREATE TABLE IF NOT EXISTS `tbl_department` (
   `department_id` int(10) NOT NULL,
   `college_id` int(11) NOT NULL,
   `department_name` varchar(255) NOT NULL,
   `department_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `department_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_department`;
 --
 -- Dumping data for table `tbl_department`
 --
@@ -143,14 +123,14 @@ INSERT INTO `tbl_department` (`department_id`, `college_id`, `department_name`, 
 -- Table structure for table `tbl_designation`
 --
 
-CREATE TABLE `tbl_designation` (
+CREATE TABLE IF NOT EXISTS `tbl_designation` (
   `designation_id` int(11) NOT NULL,
   `designation_name` varchar(150) NOT NULL,
   `regular_unit` int(11) NOT NULL,
   `designation_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `designation_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_designation`;
 --
 -- Dumping data for table `tbl_designation`
 --
@@ -164,7 +144,7 @@ INSERT INTO `tbl_designation` (`designation_id`, `designation_name`, `regular_un
 -- Table structure for table `tbl_faculty`
 --
 
-CREATE TABLE `tbl_faculty` (
+CREATE TABLE IF NOT EXISTS `tbl_faculty` (
   `faculty_id` int(10) NOT NULL,
   `identification` varchar(20) NOT NULL,
   `f_name` varchar(50) NOT NULL,
@@ -183,7 +163,7 @@ CREATE TABLE `tbl_faculty` (
   `faculty_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `faculty_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_faculty`;
 --
 -- Dumping data for table `tbl_faculty`
 --
@@ -197,13 +177,13 @@ INSERT INTO `tbl_faculty` (`faculty_id`, `identification`, `f_name`, `m_name`, `
 -- Table structure for table `tbl_logs`
 --
 
-CREATE TABLE `tbl_logs` (
+CREATE TABLE IF NOT EXISTS `tbl_logs` (
   `log_id` int(11) NOT NULL,
   `log_name` varchar(255) NOT NULL,
   `log_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_logs`;
 --
 -- Dumping data for table `tbl_logs`
 --
@@ -218,13 +198,13 @@ INSERT INTO `tbl_logs` (`log_id`, `log_name`, `log_added`, `user_id`) VALUES
 -- Table structure for table `tbl_rank`
 --
 
-CREATE TABLE `tbl_rank` (
+CREATE TABLE IF NOT EXISTS `tbl_rank` (
   `rank_id` int(11) NOT NULL,
   `rank_type` varchar(50) NOT NULL,
   `rank_added` datetime NOT NULL,
   `rank_modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_rank`;
 --
 -- Dumping data for table `tbl_rank`
 --
@@ -239,7 +219,7 @@ INSERT INTO `tbl_rank` (`rank_id`, `rank_type`, `rank_added`, `rank_modified`) V
 -- Table structure for table `tbl_room`
 --
 
-CREATE TABLE `tbl_room` (
+CREATE TABLE IF NOT EXISTS `tbl_room` (
   `room_id` int(11) NOT NULL,
   `room_type_id` int(50) NOT NULL,
   `building_id` int(11) NOT NULL,
@@ -248,7 +228,7 @@ CREATE TABLE `tbl_room` (
   `room_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `room_modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+TRUNCATE TABLE `tbl_room`;
 --
 -- Dumping data for table `tbl_room`
 --
@@ -264,14 +244,14 @@ INSERT INTO `tbl_room` (`room_id`, `room_type_id`, `building_id`, `room_number`,
 -- Table structure for table `tbl_room_type`
 --
 
-CREATE TABLE `tbl_room_type` (
+CREATE TABLE IF NOT EXISTS `tbl_room_type` (
   `room_type_id` int(11) NOT NULL,
   `room_type` varchar(50) NOT NULL,
   `room_description` varchar(150) NOT NULL,
   `room_type_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `room_type_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_room_type`;
 --
 -- Dumping data for table `tbl_room_type`
 --
@@ -286,13 +266,13 @@ INSERT INTO `tbl_room_type` (`room_type_id`, `room_type`, `room_description`, `r
 -- Table structure for table `tbl_semester`
 --
 
-CREATE TABLE `tbl_semester` (
+CREATE TABLE IF NOT EXISTS `tbl_semester` (
   `semester_id` int(10) NOT NULL,
   `semester_type` varchar(50) NOT NULL,
   `semester_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `semester_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_semester`;
 --
 -- Dumping data for table `tbl_semester`
 --
@@ -308,7 +288,7 @@ INSERT INTO `tbl_semester` (`semester_id`, `semester_type`, `semester_added`, `s
 -- Table structure for table `tbl_subject`
 --
 
-CREATE TABLE `tbl_subject` (
+CREATE TABLE IF NOT EXISTS `tbl_subject` (
   `subject_id` int(11) NOT NULL,
   `subject_code` varchar(50) NOT NULL,
   `subject_description` varchar(250) NOT NULL,
@@ -317,7 +297,7 @@ CREATE TABLE `tbl_subject` (
   `subject_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `subject_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_subject`;
 --
 -- Dumping data for table `tbl_subject`
 --
@@ -331,20 +311,20 @@ INSERT INTO `tbl_subject` (`subject_id`, `subject_code`, `subject_description`, 
 -- Table structure for table `tbl_sy`
 --
 
-CREATE TABLE `tbl_sy` (
+CREATE TABLE IF NOT EXISTS `tbl_sy` (
   `SY_ID` int(10) NOT NULL,
   `school_year` varchar(50) NOT NULL,
   `sy_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `sy_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_sy`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_user`
 --
 
-CREATE TABLE `tbl_user` (
+CREATE TABLE IF NOT EXISTS `tbl_user` (
   `user_id` int(10) NOT NULL,
   `user_type_id` int(11) NOT NULL,
   `faculty_id` int(11) NOT NULL,
@@ -353,7 +333,7 @@ CREATE TABLE `tbl_user` (
   `user_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_user`;
 --
 -- Dumping data for table `tbl_user`
 --
@@ -380,13 +360,13 @@ INSERT INTO `tbl_user` (`user_id`, `user_type_id`, `faculty_id`, `username`, `pa
 -- Table structure for table `tbl_user_type`
 --
 
-CREATE TABLE `tbl_user_type` (
+CREATE TABLE IF NOT EXISTS `tbl_user_type` (
   `user_type_id` int(11) NOT NULL,
   `user_type` varchar(50) NOT NULL,
   `user_type_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_type_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+TRUNCATE TABLE `tbl_user_type`;
 --
 -- Dumping data for table `tbl_user_type`
 --
