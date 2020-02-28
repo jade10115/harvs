@@ -1,6 +1,6 @@
 
 
-.login .form-group label, span {
+.faculty label, .notRequired {
   position: absolute;
   top: 8px;
   left: 25px;
@@ -10,8 +10,8 @@
   background: #fff;
 }
 
-.login .form-group input:focus ~ label,
-.login .form-group input:valid ~ label
+.faculty .form-group input:focus ~ label,
+.faculty .form-group input:valid ~ label
  {
   top: -12px;
   left: 25px;
@@ -19,25 +19,24 @@
   padding: 2px 4px;
 }
 
-.login .form-group textarea:focus ~ span, input:focus ~ span {
+.faculty .form-group textarea:focus ~ span, input:focus ~ span {
   top: -12px;
   left: 20px;
   font-size: 12px;
   padding: 2px 4px;
 }
 
-.login .form-group select:focus ~ label,
-.login .form-group select:valid ~ label {
+.faculty .form-group select:focus ~ label,
+.faculty .form-group select:valid ~ label {
   top: -12px;
   left: 20px;
   font-size: 12px;
   padding: 2px 4px;
 }
 
-.login .fixlabel label {
+.faculty .fixlabel label {
  top: -12px;
   left: 25px;
   font-size: 12px;
   padding: 2px 4px;
 }
-
