@@ -149,6 +149,16 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function logs(){
+		$data['title'] = "Logs";
+		$data['logs'] = $this->main_model->getLogs();
+
+		//print_r($data); die();
+		$this->load->view('templates/header', $data);
+		$this->load->view('admin/logs');
+		$this->load->view('templates/footer');
+	}
+
 	// -------------------------------------- VIEWS -------------------------------------- //
 
 	// ----------------------------------------------------------------------------------- //	

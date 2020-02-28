@@ -80,6 +80,12 @@
           User Types
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link <?=($title=='Logs')?'active':'';?>" href="<?=base_url('admin/logs')?>">
+          <span data-feather="check"></span>
+          Logs
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
