@@ -407,6 +407,8 @@ class Admin extends CI_Controller {
 		if($name=='faculty'){
 			unlink('assets/img/users/'.$img);
 		}
+		$action = 'Successfully deleted '.$name.': '.$this->main_model->getDeletedDataName($name, $id);
+		$this->main_model->addLog($action);
 		$this->main_model->delete($name, $id);
 		$this->session->set_flashdata('toast', ucfirst($name).' successfully deleted.');
 		header('location:'.base_url('admin/'.$name));
@@ -427,7 +429,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateBuilding();	
-    	$this->session->set_flashdata('toast', 'Building successfully updated.');
+    	$action = 'Building successfully updated: '.$_POST['building_name'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/building'));
@@ -442,7 +446,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateCollege();	
-    	$this->session->set_flashdata('toast', 'College successfully updated.');
+    	$action = 'College successfully updated: '.$_POST['college_name'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/college'));
@@ -457,7 +463,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateDepartment();	
-    	$this->session->set_flashdata('toast', 'Department successfully updated.');
+    	$action = 'Department successfully updated: '.$_POST['department_name'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/department'));
@@ -472,7 +480,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateCourse();	
-    	$this->session->set_flashdata('toast', 'Course successfully updated.');
+    	$action = 'Course successfully updated: '.$_POST['course_name'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/course'));
@@ -487,7 +497,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateDesignation();	
-    	$this->session->set_flashdata('toast', 'Designation successfully updated.');
+    	$action = 'Designation successfully updated: '.$_POST['designation_name'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/designation'));
@@ -505,7 +517,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateRoom();	
-    	$this->session->set_flashdata('toast', 'Room successfully Updated.');
+    	$action = 'Room successfully updated: '.$_POST['room_number'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
     header('location:'.base_url('admin/room'));
 	}
@@ -519,7 +533,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateRank();	
-    	$this->session->set_flashdata('toast', 'Rank successfully updated.');
+    	$action = 'Rank successfully updated: '.$_POST['rank_type'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/rank'));
@@ -534,7 +550,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateSemester();	
-    	$this->session->set_flashdata('toast', 'Semester successfully updated.');
+    	$action = 'Semester successfully updated: '.$_POST['semester_type'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/semester'));
@@ -549,7 +567,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateUserType();	
-    	$this->session->set_flashdata('toast', 'User type successfully updated.');
+    	$action = 'User type successfully updated: '.$_POST['user_type'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/user_type'));
@@ -564,7 +584,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateRoomType();	
-    	$this->session->set_flashdata('toast', 'Room type successfully updated.');
+    	$action = 'Room type successfully updated: '.$_POST['room_type'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/room_type'));
@@ -579,7 +601,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateSubject();	
-    	$this->session->set_flashdata('toast', 'Subject successfully updated.');
+    	$action = 'Subject successfully updated: '.$_POST['subject_code'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/subject'));
@@ -594,7 +618,9 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateFaculty();	
-    	$this->session->set_flashdata('toast', 'Faculty successfully updated.');
+    	$action = 'Faculty successfully updated: '.$_POST['identification'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
     }
 
     header('location:'.base_url('admin/faculty_view/'.$_POST['faculty_id']));
