@@ -1,4 +1,4 @@
-<?php $this->load->view('templates/nav'); ?>
+<?php $this->load->view('templates/nav'); ?> 
 
 <div class="container-fluid">
   <div class="row">
@@ -13,37 +13,38 @@
             <button class="btn btn-outline-dark btn-sm" form="frm_faculty_add">Add Faculty</button>
           </div>
         </h5>
-			  <div class="card-body">
+			  <div class="card-body login">
           <?=form_open_multipart('admin/addFaculty', 'id="frm_faculty_add" class="form-signin"');?>
           <!--row start-->
 
           <div class="row">
             <div class="col-md-2">
-              <div class="form-group">
+              <div class="form-group fixlabel">
+                <input style="background: none" type="text" class="form-control" name="identification" id="identification" required readonly>
                 <label>Faculty ID</label>
-                <input type="text" class="form-control" name="identification" id="identification" required readonly>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label>Username*</label>
-                <input type="text" class="form-control" placeholder="Enter Username" name="username" required autofocus>
+                <input type="text" class="form-control" name="username" required>
+                <label>Username</label>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label>Password*</label>
-                <input type="text" class="form-control" placeholder="Enter Password" name="password" required>
+                <input type="text" class="form-control" name="password" required>
+                <label>Password</label>
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
-                <label>Usertype</label>
-                <select class="custom-select" name="user_type_id">
+                <select class="custom-select" name="department_id" required>
+                  <option value=""></option>
                   <?php foreach ($user_types as $row) {?>
                   <option value="<?=$row['user_type_id']?>"><?=$row['user_type']?></option>
                   <?php } ?>
                 </select>
+                <label>Usertype</label>
               </div>
             </div>
           </div>
@@ -55,22 +56,22 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>First Name*</label>
-                    <input type="text" class="form-control identification" id="f_name" placeholder="Enter First Name" name="f_name" required>
+                    <input type="text" class="form-control identification" id="f_name" name="f_name" required>
+                    <label>First Name</label>
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>Middle Name <small>(optional)</small></label>
-                    <input type="text" class="form-control" placeholder="Enter Middle Name" name="m_name">
+                    <input type="text" class="form-control" name="m_name">
+                    <span>Middle Name <small>(optional)</small></span>
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>Last Name*</label>
-                    <input type="text" class="form-control identification" id="l_name" placeholder="Enter Last Name" name="l_name" required>
+                    <input type="text" class="form-control identification" id="l_name" name="l_name" required>
+                    <label>Last Name</label>
                   </div>
                 </div>
               </div>
@@ -79,21 +80,21 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>Suffix Name <small>(optional)</small></label>
-                    <input type="text" class="form-control" placeholder="Enter Suffix Name" name="suffix_name">
+                    <input type="text" class="form-control" name="suffix_name">
+                    <span>Suffix Name <small>(optional)</small></span>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>Extension Name <small>(optional)</small></label>
-                    <input type="text" class="form-control" placeholder="Enter Extension Name" name="ext_name">
+                    <input type="text" class="form-control" name="ext_name">
+                    <span>Extension Name <small>(optional)</small></span>
                   </div>
                 </div>
 
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Birthdate*</label>
+                  <div class="form-group fixlabel">
                     <input type="date" class="form-control identification" id="birth_date" placeholder="Enter Suffix Name" name="birth_date" required>
+                    <label>Birthdate*</label>
                   </div>
                 </div>
               </div>
@@ -103,15 +104,15 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Email*</label>
-                    <input type="text" class="form-control" placeholder="Enter Last Name" name="email" required>
+                    <input type="text" class="form-control" name="email" required>
+                    <label>Last Name</label>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Contact Number*</label>
-                    <input type="text" class="form-control" placeholder="Enter Contact Number" name="contact_no" required>
+                    <input type="text" class="form-control" name="contact_no" required>
+                    <label>Contact Number</label>
                   </div>
                 </div>
               </div>
@@ -138,9 +139,9 @@
 
           <!--row start-->
           <div class="row">
-            <div class="form-group col-md-12">
-              <label>Address <small>(optional)</small></label>
-              <textarea class="form-control" placeholder="Enter Faculty Address" name="address"></textarea>
+            <div class="form-group col-md-12 mt-2">
+              <textarea class="form-control" name="address"></textarea>
+              <span>Address <small>(optional)</small></span>
             </div>
           </div>
 
@@ -148,37 +149,37 @@
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
-                <label>Department</label>
                 <select class="custom-select" name="department_id" required>
-                  <option value="">-- select department --</option>
+                  <option value=""></option>
                   <?php foreach ($departments as $row) { ?>
                   <option value="<?=$row['department_id']?>"><?=$row['department_name']?></option>
                   <?php } ?>
                 </select>
+                <label>Select Department</label>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
-                <label>Rank</label>
                 <select class="custom-select" name="rank_id" required>
-                  <option value="">-- select rank --</option>
+                  <option value=""></option>
                   <?php foreach ($ranks as $row) { ?>
                   <option value="<?=$row['rank_id']?>"><?=$row['rank_type']?></option>
                   <?php } ?>
                 </select>
+                <label>Select Rank</label>
               </div>
             </div>
 
             <div class="col-md-4">
               <div class="form-group">
-                <label>Designation</label>
                 <select class="custom-select" name="designation_id" required>
-                  <option value="">-- select designation --</option>
+                  <option value=""></option>
                   <?php foreach ($designations as $row) { ?>
                   <option value="<?=$row['designation_id']?>"><?=$row['designation_name']?></option>
                   <?php } ?>
                 </select>
+                <label>Select Designation</label>
               </div>
             </div>
           </div>
