@@ -13,7 +13,7 @@
             <button class="btn btn-outline-dark btn-sm" form="frm_faculty_add">Add Faculty</button>
           </div>
         </h5>
-			  <div class="card-body login">
+			  <div class="card-body faculty">
           <?=form_open_multipart('admin/addFaculty', 'id="frm_faculty_add"');?>
           <!--row start-->
 
@@ -64,7 +64,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <input type="text" class="form-control" name="m_name">
-                    <span>Middle Name <small>(optional)</small></span>
+                    <span class="notRequired">Middle Name <small>(optional)</small></span>
                   </div>
                 </div>
 
@@ -81,13 +81,13 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <input type="text" class="form-control" name="suffix_name">
-                    <span>Suffix Name <small>(optional)</small></span>
+                    <span class="notRequired">Suffix Name <small>(optional)</small></span>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
                     <input type="text" class="form-control" name="ext_name">
-                    <span>Extension Name <small>(optional)</small></span>
+                    <span class="notRequired">Extension Name <small>(optional)</small></span>
                   </div>
                 </div>
 
@@ -141,7 +141,7 @@
           <div class="row">
             <div class="form-group col-md-12 mt-2">
               <textarea class="form-control" name="address"></textarea>
-              <span>Address <small>(optional)</small></span>
+              <span class="notRequired">Address <small>(optional)</small></span>
             </div>
           </div>
 

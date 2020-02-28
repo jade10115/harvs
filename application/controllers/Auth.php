@@ -23,18 +23,19 @@ class Auth extends CI_Controller {
     $password = $this->input->post('password');
     $this->db->select('*');
     $this->db->from('tbl_user');
-    $this->db->where('username',$username);
-    $this->db->where('password',$password);
+    $this->db->where('username', $username);
+    $this->db->where('password', $password);
 		  
     $query = $this->db->get();
     $result = $query->result_array();
+
     
     if($query->num_rows() > 0){
-      $this->session->set_userdata('user_id',$result);
+      $this->session->set_userdata('user_id', $result);
 
       if($query->row('user_type_id') == 5){
         redirect('Admin');
-      }elseif ($query->row('user_level') == 'student') {
+      } elseif ($query->row('user_level') == 'student') {
         redirect('event_user');
       } elseif ($query->row('user_level') == 'stud_pres') {
         redirect('event_pres');
