@@ -14,7 +14,7 @@
           <table class="table table-striped table-hover table-sm">
             <thead>
               <tr>
-                <th>Faculty Name</th>
+                <th>Faculty Names</th>
                 <th>Department</th>
                 <th>Rank</th>
                 <th>Designation</th>
