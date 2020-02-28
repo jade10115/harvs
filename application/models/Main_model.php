@@ -11,6 +11,10 @@ Class Main_model extends CI_Model{
 		return $last_id[0][$id];
 	}
 
+	public function checkDuplicate($where, $data, $table){
+		return $this->db->where($where, $data)->count_all_results($table);
+	}
+
 	// -------------------------------------- MISC FUNCTIONS ------------------------------------------------ //
 
 	// ------------------------------------------------------------------------------------------------------ //

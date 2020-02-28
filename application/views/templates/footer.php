@@ -34,8 +34,8 @@
 				}
 			});
 
-			$('#sy').change(function(){
-				$('#sy2').val(parseInt($(this).val())+1);
+			$('.sy').change(function(){
+				$('.sy2').val(parseInt($(this).val())+1);
 			});
 
 			$(document).on('click', '.imgClick', function(){
@@ -232,7 +232,16 @@
 				$('#subject_description').val(id[2]);
 				$('#subject_type').val(id[3]);
 				$('#subject_unit').val(id[4]);
-			}); // $('.updateSubject').click()			
+			}); // $('.updateSubject').click()		
+
+			$('.updateSY').click(function(){
+				id = this.id;
+				id = id.split('//');
+				$('#sy_id').val(id[0]);
+				sy = id[1].split('-');
+				$('#sy_update').val(sy[0]);
+				$('#sy2_update').val(sy[1]);
+			}); // $('.updateUserType').click()	
 
 			$('.college_id').change(function(){
 				if($(this).val()==0){
