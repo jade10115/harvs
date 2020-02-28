@@ -380,7 +380,7 @@ class Admin extends CI_Controller {
 		if($name=='faculty'){
 			unlink('assets/img/users/'.$img);
 		}
-		$this->main_model->delete()ete($name, $id);
+		$this->main_model->delete($name, $id);
 		$this->session->set_flashdata('toast', ucfirst($name).' successfully deleted');
 		header('location:'.base_url('admin/'.$name));
 	}
