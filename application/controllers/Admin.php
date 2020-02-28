@@ -410,7 +410,7 @@ class Admin extends CI_Controller {
 		$action = 'Successfully deleted '.$name.': '.$this->main_model->getDeletedDataName($name, $id);
 		$this->main_model->addLog($action);
 		$this->main_model->delete($name, $id);
-		$this->session->set_flashdata('toast', ucfirst($name).' successfully deleted.');
+		$this->session->set_flashdata('toast', ucfirst($name).' successfully deleted');
 		header('location:'.base_url('admin/'.$name));
 	}
 
