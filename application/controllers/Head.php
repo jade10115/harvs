@@ -12,6 +12,7 @@ class Head extends CI_Controller {
 
 	public function schedule(){
 		$data['title'] = "Schedule";
+		$data['colleges'] = $this->main_model->getColleges();
 		$this->load->view('templates/header', $data);
 		$this->load->view('head/schedule');
 		$this->load->view('templates/footer');

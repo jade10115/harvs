@@ -136,7 +136,7 @@ Class Main_model extends CI_Model{
 	}
 
 	public function getSubjects(){
-		return $this->db->get('tbl_subject')->result_array();
+		return $this->db->join('tbl_course', 'tbl_course.course_id=tbl_subject.course_id')->get('tbl_subject')->result_array();
 	}
 
 	public function getColleges(){
@@ -249,7 +249,11 @@ Class Main_model extends CI_Model{
 	}
 
 	public function updateCollege(){
-		$this->db->where('college_id', $_POST['college_id'])->update('tbl_college', array('college_name' => $_POST['college_name']));
+		$data = array(
+			'college_name' => $_POST['college_name'],
+			'college_abbr' => $_POST['college_abbr']
+		);
+		$this->db->where('college_id', $_POST['college_id'])->update('tbl_college', $data);
 	}
 
 	public function updateRank(){
@@ -275,7 +279,8 @@ Class Main_model extends CI_Model{
 	public function updateCourse(){
 		$data = array(
 			'college_id' => $_POST['college_id'],
-			'course_name' => $_POST['course_name']
+			'course_name' => $_POST['course_name'],
+			'course_abbr' => $_POST['course_abbr']
 		);
 
 		$this->db->where('course_id', $_POST['course_id'])->update('tbl_course', $data);

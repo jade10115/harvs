@@ -14,6 +14,7 @@
           <table class="table table-striped table-hover table-sm">
             <thead>
               <tr>
+                <th>Course</th>
                 <th>Subject Code</th>
                 <th>Subject Description</th>
                 <th>Subject Type</th>
@@ -26,6 +27,7 @@
             <tbody>
               <?php foreach ($subjects as $row) {?>
               <tr>
+                <td><?=$row['course_abbr']?></td>
                 <td><?=$row['subject_code']?></td>
                 <td><?=$row['subject_description']?></td>
                 <td><?=$row['subject_type']?></td>
@@ -34,7 +36,7 @@
                 <td><?=$row['subject_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateSubject" id="<?=$row['subject_id']?>//<?=$row['subject_code']?>//<?=$row['subject_description']?>//<?=$row['subject_type']?>//<?=$row['subject_unit']?>" data-toggle="modal" data-target="#modal_subject_update" data-toggle="tooltip" data-placement="top" title="Update Subject">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateSubject" id="<?=$row['subject_id']?>//<?=$row['subject_code']?>//<?=$row['subject_description']?>//<?=$row['subject_type']?>//<?=$row['subject_unit']?>//<?=$row['course_id']?>" data-toggle="modal" data-target="#modal_subject_update" data-toggle="tooltip" data-placement="top" title="Update Subject">
                       <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/subject/'.$row['subject_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Subject">
@@ -64,6 +66,16 @@
       </div>
       <div class="modal-body">
         <?=form_open('admin/addSubject', 'id="frm_subject_update"');?>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Course</label>
+              <select class="selectpicker" data-width="100%" data-live-search="true" name="course_id">
+                <?php foreach ($courses as $row) {?>
+                <option value="<?=$row['course_id']?>" data-tokens="<?=$row['course_abbr']?>"><?=$row['course_name']?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
           <div class="row">
             <div class="form-group col-md-12">
               <label>Subject Code</label>
@@ -113,6 +125,16 @@
       <div class="modal-body">
         <?=form_open('admin/updateSubject', 'id="frm_subject_add"');?>
           <input type="hidden" name="subject_id" id="subject_id">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>Course</label>
+              <select class="selectpicker" data-width="100%" data-live-search="true" name="course_id" id="course_id">
+                <?php foreach ($courses as $row) {?>
+                <option value="<?=$row['course_id']?>" data-tokens="<?=$row['course_abbr']?>"><?=$row['course_name']?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
           <div class="row">
             <div class="form-group col-md-12">
               <label>Subject Code</label>

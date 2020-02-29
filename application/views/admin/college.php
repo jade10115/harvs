@@ -15,6 +15,7 @@
             <thead>
               <tr>
                 <th>College Name</th>
+                <th>Abbreviation</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
                 <th>Action</th>
@@ -24,11 +25,12 @@
               <?php foreach ($colleges as $row) {?>
               <tr>
                 <td><?=$row['college_name']?></td>
+                <td><?=$row['college_abbr']?></td>
                 <td><?=$row['college_added']?></td>
                 <td><?=$row['college_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateCollege" id="<?=$row['college_id']?>//<?=$row['college_name']?>" data-toggle="modal" data-target="#modal_college_update" data-toggle="tooltip" data-placement="top" title="Update College">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateCollege" id="<?=$row['college_id']?>//<?=$row['college_name']?>//<?=$row['college_abbr']?>" data-toggle="modal" data-target="#modal_college_update" data-toggle="tooltip" data-placement="top" title="Update College">
                       <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/college/'.$row['college_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete College">
@@ -62,6 +64,10 @@
             <label>College Name</label>
             <input type="text" class="form-control focus" placeholder="Enter College Name" name="college_name" required>
           </div>
+          <div class="form-group">
+            <label>Abbreviation</label>
+            <input type="text" class="form-control" placeholder="Enter College Abbreviation" name="college_abbr" required>
+          </div>
         <?=form_close();?>
       </div>
       <div class="modal-footer">
@@ -88,6 +94,10 @@
           <div class="form-group">
             <label>College Name</label>
             <input type="text" class="form-control focus" placeholder="Enter College Name" name="college_name" id="college_name" required>
+          </div>
+          <div class="form-group">
+            <label>Abbreviation</label>
+            <input type="text" class="form-control" placeholder="Enter College Abbreviation" name="college_abbr" id="college_abbr" required>
           </div>
         <?=form_close();?>
       </div>

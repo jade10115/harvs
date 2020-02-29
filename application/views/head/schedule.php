@@ -31,29 +31,47 @@
       </div>
       <div class="modal-body">
         <?=form_open('admin/addSchedule', 'id="frm_schedule_add"');?>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>College</label>
+              <select class="selectpicker" title="Select College">
+                <?php foreach ($colleges as $row) {?>
+                <option value="0"><?=$row['college_name']?></option>
+                <?php } ?>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Course</label>
+              <select class="selectpicker" title="Select Course">
+                <option value="0">asd</option>
+              </select>
+            </div>
+          </div>
           <div class="form-group">
-            <label>Room</label>
-            <select class="custom-select">
+            <label>Subject</label>
+            <select class="selectpicker" title="Select">
               <option value="0">asd</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Room</label>
-            <select class="custom-select">
+            <label>Employee</label>
+            <select class="selectpicker" title="Select">
               <option value="0">asd</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Room</label>
-            <select class="custom-select">
-              <option value="0">asd</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Room</label>
-            <select class="custom-select">
-              <option value="0">asd</option>
-            </select>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Building</label>
+              <select class="selectpicker" title="Select">
+                <option value="0">asd</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Room</label>
+              <select class="selectpicker" title="Select">
+                <option value="0">asd</option>
+              </select>
+            </div>
           </div>
         <?=form_close();?>
       </div>
