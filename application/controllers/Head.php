@@ -38,8 +38,8 @@ class Head extends CI_Controller {
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
-    	$this->main_model->addDesignation();	
-    	$action = 'New designation successfully added: '.$_POST['designation_name'];
+    	$this->main_model->addSchedule();	
+    	$action = 'New schedule successfully added to: '.$_POST['designation_name'];
     	$this->session->set_flashdata('toast', $action);
     	$this->main_model->addLog($action);
     }

@@ -193,6 +193,8 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('building_name', 'Building Name', 'trim|required|is_unique[tbl_building.building_name]');
+    $this->form_validation->set_rules('no_of_rooms', 'No. of Rooms', 'trim|required|integer');
+    $this->form_validation->set_rules('no_of_floors', 'No. of Floors', 'trim|required|integer');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());

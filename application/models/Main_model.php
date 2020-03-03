@@ -84,6 +84,10 @@ Class Main_model extends CI_Model{
 		$this->db->insert('tbl_semester', $_POST);
 	}
 
+	public function addSchedule(){
+		$this->db->insert('tbl_schedule', $_POST);
+	}
+
 	public function addSY(){
 		$data = array(
 			'school_year' => $_POST['sy_from'].'-'.$_POST['sy_to']

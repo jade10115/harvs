@@ -83,14 +83,13 @@
                 <select class="selectpicker" title="Select Room" data-width="100%" data-live-search="true" name="room_id" required>
                   <?php foreach ($rooms as $row) {?>
                   <?php 
-                    $words = explode(" ", "Community College District");
                     $acronym = "";
-
+                    $words = explode(" ", $row['building_name']);
                     foreach ($words as $w) {
                       $acronym .= $w[0];
                     }
                    ?>
-                  <option value="<?=$row['room_id']?>" data-subtext="<?=$row['building_name']?>" data-tokens="Room <?=$row['room_number']?>,<?=$row['building_name']?>">Room <?=$row['room_number']?></option>
+                  <option value="<?=$row['room_id']?>" data-subtext="<?=$row['building_name']?>" data-tokens="Room <?=$row['room_number']?>,<?=$row['building_name']?>,<?=$acronym?>">Room <?=$row['room_number']?></option>
                   <?php } ?>
                 </select>
               </div>
