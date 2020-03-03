@@ -21,6 +21,8 @@
 	<!-- style -->
 	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/rus.css')?>">
 	
+	<style type="text/css">
+	</style>
 
 </head>
 <body>
