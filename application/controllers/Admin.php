@@ -6,7 +6,7 @@ class Admin extends CI_Controller {
 	// -------------------------------------- VIEWS -------------------------------------- //
 
 	public function index(){
-		$data['title'] = "Dashboards";
+		$data['title'] = "Dashboard";
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/dashboard');
 		$this->load->view('templates/footer');

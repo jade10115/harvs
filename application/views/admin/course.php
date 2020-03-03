@@ -17,7 +17,7 @@
                 <th>College</th>
                 <th>Department</th>
                 <th>Course Name</th>
-                <th>Abbreviation</th>
+                <th>Acronym</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
                 <th>Action</th>
@@ -74,8 +74,8 @@
           </div>
           <div class="form-group">
             <label>Department</label>
-            <select class="custom-select department_id" name="department_id" id="department_id_add" required>
-              <option>Select College First</option>
+            <select class="selectpicker department_id" name="department_id" data-width="100%" title="Select Department" id="department_id_add" required>
+              <!-- <option>Select College First</option> -->
             </select>
           </div>
           <div class="form-group">

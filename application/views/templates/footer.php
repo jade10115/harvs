@@ -279,6 +279,7 @@
 					event.preventDefault();
 					return false;
 				}
+				
 				if(department_id==0){
 					if(this.id=='frm_course_add'){
 						alert('add');

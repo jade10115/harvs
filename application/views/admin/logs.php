@@ -29,15 +29,6 @@
                 <td><?=$row['department_name']?></td>
                 <td><?=$row['user_type']?></td>
                 <td><?=$row['log_added']?></td>
-                  <div class="btn-group" role="group">
-                    <a href="<?=base_url('admin/faculty_view/'.$row['faculty_id']) ?>" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Faculty">
-                      <span class="fa fa-eye"></span>
-                    </a>
-                    <a href="#" id="<?=base_url('admin/delete/faculty/'.$row['faculty_id'].'/'.$row['image_src'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Faculty">
-                      <span class="fa fa-trash"></span>
-                    </a>
-                  </div>
-                </td>
               </tr>
               <?php } ?>
             </tbody>

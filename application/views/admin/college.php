@@ -15,7 +15,7 @@
             <thead>
               <tr>
                 <th>College Name</th>
-                <th>Abbreviation</th>
+                <th>Acronym</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
                 <th>Action</th>
