@@ -1,4 +1,4 @@
-
+/********************    FLOATING LABELS    *******************/
 
 .faculty label, .notRequired {
   position: absolute;
@@ -40,3 +40,6 @@
   font-size: 12px;
   padding: 2px 4px;
 }
+
+/********************    FLOATING LABELS    *******************/
+
