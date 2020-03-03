@@ -75,9 +75,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?=($title=='Semesters')?'active':'';?>" href="<?=base_url('admin/sy')?>">
-          <span data-feather="x"></span>
-          School Year*
+        <a class="nav-link <?=($title=='School Year')?'active':'';?>" href="<?=base_url('admin/sy')?>">
+          <span data-feather="check"></span>
+          School Year
         </a>
       </li>
       <li class="nav-item">

@@ -66,7 +66,7 @@
         <?=form_open('admin/addRoom', 'id="frm_room_add"');?>
           <div class="form-group">
             <label>Building</label>
-            <select class="custom-select focus" name="building_id">
+            <select class="selectpicker focus" data-width="100%" title="Select Building" data-live-search="true" name="building_id" required>
               <?php foreach ($buildings as $row) {?>
               <option value="<?=$row['building_id']?>"><?=$row['building_name']?></option>
               <?php } ?>
@@ -74,7 +74,7 @@
           </div>
           <div class="form-group">
             <label>Room Type</label>
-            <select class="custom-select" name="room_type_id">
+            <select class="selectpicker" data-width="100%" title="Select Room Type" name="room_type_id" required>
               <?php foreach ($room_types as $row) {?>
               <option value="<?=$row['room_type_id']?>"><?=$row['room_type']?></option>
               <?php } ?>
@@ -117,7 +117,7 @@
           <input type="hidden" name="room_id" id="room_id">
           <div class="form-group">
             <label>Building</label>
-            <select class="custom-select focus" name="building_id" id="building_id">
+            <select class="selectpicker focus" data-width="100%" title="Select Building" data-live-search="true" name="building_id" id="building_id" required>
               <?php foreach ($buildings as $row) {?>
               <option value="<?=$row['building_id']?>"><?=$row['building_name']?></option>
               <?php } ?>
@@ -125,7 +125,7 @@
           </div>
           <div class="form-group">
             <label>Room Type</label>
-            <select class="custom-select" name="room_type_id" id="room_type_id">
+              <select class="selectpicker" data-width="100%" title="Select Room Type" name="room_type_id" id="room_type_id" required>
               <?php foreach ($room_types as $row) {?>
               <option value="<?=$row['room_type_id']?>"><?=$row['room_type']?></option>
               <?php } ?>

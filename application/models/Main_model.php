@@ -11,6 +11,10 @@ Class Main_model extends CI_Model{
 		return $last_id[0][$id];
 	}
 
+	public function checkDuplicate($where, $data, $table){
+		return $this->db->where($where, $data)->count_all_results($table);
+	}
+
 	// -------------------------------------- MISC FUNCTIONS ------------------------------------------------ //
 
 	// ------------------------------------------------------------------------------------------------------ //
@@ -80,6 +84,10 @@ Class Main_model extends CI_Model{
 		$this->db->insert('tbl_semester', $_POST);
 	}
 
+	public function addSchedule(){
+		$this->db->insert('tbl_schedule', $_POST);
+	}
+
 	public function addSY(){
 		$data = array(
 			'school_year' => $_POST['sy_from'].'-'.$_POST['sy_to']
@@ -132,7 +140,7 @@ Class Main_model extends CI_Model{
 	}
 
 	public function getSubjects(){
-		return $this->db->get('tbl_subject')->result_array();
+		return $this->db->join('tbl_course', 'tbl_course.course_id=tbl_subject.course_id')->get('tbl_subject')->result_array();
 	}
 
 	public function getColleges(){
@@ -245,7 +253,11 @@ Class Main_model extends CI_Model{
 	}
 
 	public function updateCollege(){
-		$this->db->where('college_id', $_POST['college_id'])->update('tbl_college', array('college_name' => $_POST['college_name']));
+		$data = array(
+			'college_name' => $_POST['college_name'],
+			'college_abbr' => $_POST['college_abbr']
+		);
+		$this->db->where('college_id', $_POST['college_id'])->update('tbl_college', $data);
 	}
 
 	public function updateRank(){
@@ -271,7 +283,8 @@ Class Main_model extends CI_Model{
 	public function updateCourse(){
 		$data = array(
 			'college_id' => $_POST['college_id'],
-			'course_name' => $_POST['course_name']
+			'course_name' => $_POST['course_name'],
+			'course_abbr' => $_POST['course_abbr']
 		);
 
 		$this->db->where('course_id', $_POST['course_id'])->update('tbl_course', $data);

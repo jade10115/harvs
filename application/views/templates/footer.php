@@ -17,6 +17,8 @@
 
 			$('.formEdit').attr('disabled', true);
 
+			$('.selectpicker').selectpicker();
+
 			$('#btnEditFaculty').click(function(){
 				if($(this).val()=='edit'){
 					$(this).val('cancel');
@@ -34,8 +36,8 @@
 				}
 			});
 
-			$('#sy').change(function(){
-				$('#sy2').val(parseInt($(this).val())+1);
+			$('.sy').change(function(){
+				$('.sy2').val(parseInt($(this).val())+1);
 			});
 
 			$(document).on('click', '.imgClick', function(){
@@ -152,6 +154,7 @@
 				$('#course_id').val(id[0]);
 				$('#course_name').val(id[1]);
 				$('#college_id').val(id[2]);
+				$('#course_abbr').val(id[4]);
 				populateDepartments(id[2], id[3]);
 			}); // $('.updateCourse').click()
 
@@ -160,6 +163,7 @@
 				id = id.split('//');
 				$('#college_id').val(id[0]);
 				$('#college_name').val(id[1]);
+				$('#college_abbr').val(id[2]);
 			}); // $('.updateCollege').click()
 
 			$('.updateDesignation').click(function(){
@@ -186,6 +190,7 @@
 				$('#room_type_id').val(id[2]);
 				$('#room_number').val(id[3]);
 				$('#room_floor').val(id[4]);
+				$('.selectpicker').selectpicker('refresh')
 			}); // $('.updateRoom').click()
 
 			$('.updateInstructor').click(function(){
@@ -232,7 +237,18 @@
 				$('#subject_description').val(id[2]);
 				$('#subject_type').val(id[3]);
 				$('#subject_unit').val(id[4]);
-			}); // $('.updateSubject').click()			
+				$('#course_id').val(id[5]);
+				$('.selectpicker').selectpicker('refresh')
+			}); // $('.updateSubject').click()		
+
+			$('.updateSY').click(function(){
+				id = this.id;
+				id = id.split('//');
+				$('#sy_id').val(id[0]);
+				sy = id[1].split('-');
+				$('#sy_update').val(sy[0]);
+				$('#sy2_update').val(sy[1]);
+			}); // $('.updateUserType').click()	
 
 			$('.college_id').change(function(){
 				if($(this).val()==0){
@@ -242,16 +258,41 @@
 					populateDepartments($(this).val());	
 				}
 			});
-
-			// $(document).on('submit', '#frm_course_add', function(event){
-			// 	college_id = $('#college_id_add').val();
-			// 	department_id = $('#department_id_add').val();
-			// 	if(college_id==0||department_id==0){
-			// 		$('.alert-modal').removeClass('invisible');
-			// 		event.preventDefault();
-			// 		return false;
-			// 	} 
-			// })
+			// not done yet
+			$(document).on('submit', '.frm_course_submit', function(event){
+				if(this.id=='frm_course_add'){
+					college_id = $('#college_id_add').val();
+					department_id = $('#department_id_add').val();
+				} else {
+					college_id = $('#college_id').val();
+					department_id = $('#department_id').val();
+				}
+				
+				if(college_id==0){
+					if(this.id=='frm_course_add'){
+						alert('add');
+						$('#college_id_add').focus();
+					} else {
+						alert('update');
+						$('#college_id').focus();
+					}
+					event.preventDefault();
+					return false;
+				}
+				
+				if(department_id==0){
+					if(this.id=='frm_course_add'){
+						alert('add');
+						$('#department_id_add').focus();
+					} else {
+						alert('update');
+						$('#department_id').focus();
+					}
+					event.preventDefault();
+					return false;
+				}
+			})
+			// not done yet
 
 			function populateDepartments(college_id, department_id){
 				$.ajax({
