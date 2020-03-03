@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <input type="text" class="form-control" name="password" required>
+                <input type="password" class="form-control" name="password" required>
                 <label>Password</label>
               </div>
             </div>
@@ -105,7 +105,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <input type="text" class="form-control" name="email" required>
-                    <label>Last Name</label>
+                    <label>Email Address</label>
                   </div>
                 </div>
 
