@@ -19,6 +19,7 @@ class Head extends CI_Controller {
 		$data['faculties'] = $this->main_model->getFaculties();
 		$data['subjects'] = $this->main_model->getSubjects();
 		$data['rooms'] = $this->main_model->getRooms();
+		$data['schedules'] = $this->main_model->getSchedules();
 		$this->load->view('templates/header', $data);
 		$this->load->view('head/schedule');
 		$this->load->view('templates/footer');
@@ -38,13 +39,13 @@ class Head extends CI_Controller {
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
-    	$this->main_model->addSchedule();	
-    	$action = 'New schedule successfully added to: '.$_POST['designation_name'];
+    	$faculty = $this->main_model->addSchedule();
+    	$action = 'New schedule successfully added to: '.$faculty[0]['fname'].' '.$faculty[0]['mname'].' '.$faculty[0]['lname'];
     	$this->session->set_flashdata('toast', $action);
     	$this->main_model->addLog($action);
     }
 
-    header('location:'.base_url('admin/designation'));
+    header('location:'.base_url('admin/schedule'));
 	}
 
 	// -------------------------------------- INSERT-------------------------------------- //

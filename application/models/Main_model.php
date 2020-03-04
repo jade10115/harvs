@@ -86,6 +86,7 @@ Class Main_model extends CI_Model{
 
 	public function addSchedule(){
 		$this->db->insert('tbl_schedule', $_POST);
+		return $this->getFaculty($_POST['faculty_id']);
 	}
 
 	public function addSY(){
@@ -177,6 +178,15 @@ Class Main_model extends CI_Model{
 
 	public function getSchoolYear(){
 		return $this->db->get('tbl_sy')->result_array();
+	}
+
+	public function getSchedules(){
+		return $this->db->join('tbl_room', 'tbl_room.room_id=tbl_schedule.room_id')
+										->join('tbl_building', 'tbl_building.building_id=tbl_room.building_id')
+										->join('tbl_subject', 'tbl_subject.subject_id=tbl_schedule.subject_id')
+										->join('tbl_course', 'tbl_course.course_id=tbl_subject.course_id')
+										->join('tbl_faculty', 'tbl_faculty.faculty_id=tbl_schedule.faculty_id')
+										->get('tbl_schedule')->result_array();
 	}
 	
 	public function getuserTypes(){
