@@ -17,6 +17,7 @@
                 <th>College</th>
                 <th>Department</th>
                 <th>Course Name</th>
+                <th>Acronym</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
                 <th>Action</th>
@@ -28,11 +29,12 @@
                 <td><?=$row['college_name']?></td>
                 <td><?=$row['department_name']?></td>
                 <td><?=$row['course_name']?></td>
+                <td><?=$row['course_abbr']?></td>
                 <td><?=$row['course_added']?></td>
                 <td><?=$row['course_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateCourse" id="<?=$row['course_id']?>//<?=$row['course_name']?>//<?=$row['college_id']?>//<?=$row['department_id']?>" data-toggle="modal" data-target="#modal_course_update" data-toggle="tooltip" data-placement="top" title="Update Course">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateCourse" id="<?=$row['course_id']?>//<?=$row['course_name']?>//<?=$row['college_id']?>//<?=$row['department_id']?>//<?=$row['course_abbr']?>" data-toggle="modal" data-target="#modal_course_update" data-toggle="tooltip" data-placement="top" title="Update Course">
                       <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/course/'.$row['course_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Course">
@@ -61,25 +63,28 @@
         </button>
       </div>
       <div class="modal-body">
-        <?=form_open('admin/addCourse', 'id="frm_course_add"');?>
+        <?=form_open('admin/addCourse', 'id="frm_course_add class="frm_course_submit"');?>
           <div class="form-group">
             <label>College</label>
-            <select class="custom-select college_id" name="college_id" id="college_id_add" required>
-              <option value="">-- select college --</option>
+            <select class="selectpicker college_id" name="college_id" title="Select College" data-width="100%" data-live-search="true" id="college_id_add" required>
               <?php foreach ($colleges as $row) {?>
-                <option value="<?=$row['college_id']?>"><?=$row['college_name']?></option>
+                <option value="<?=$row['college_id']?>" data-tokens="<?=$row['college_abbr']?>"><?=$row['college_name']?></option>
               <?php } ?>
             </select>
           </div>
           <div class="form-group">
             <label>Department</label>
-            <select class="custom-select department_id" name="department_id" id="department_id_add" required>
-              <option>-- select college first --</option>
+            <select class="selectpicker department_id" name="department_id" data-width="100%" title="Select Department" id="department_id_add" required>
+              <!-- <option>Select College First</option> -->
             </select>
           </div>
           <div class="form-group">
             <label>Course Name</label>
             <input type="text" class="form-control focus" placeholder="Enter Course Name" name="course_name" required>
+          </div>
+          <div class="form-group">
+            <label>Abbreviation</label>
+            <input type="text" class="form-control" placeholder="Enter Course Abbreviation" name="course_abbr" required>
           </div>
         <?=form_close();?>
       </div>
@@ -102,14 +107,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <?=form_open('admin/updateCourse', 'id="frm_course_update"');?>
+        <?=form_open('admin/updateCourse', 'id="frm_course_update class="frm_course_submit"');?>
           <input type="hidden" name="course_id" id="course_id">
           <div class="form-group">
             <label>College</label>
-            <select class="custom-select college_id" name="college_id" id="college_id">
-              <option value="0">-- select college --</option>
+            <select class="selectpicker college_id" name="college_id" title="Select College" data-width="100%" data-live-search="true" id="college_id" required>
               <?php foreach ($colleges as $row) {?>
-                <option value="<?=$row['college_id']?>"><?=$row['college_name']?></option>
+                <option value="<?=$row['college_id']?>" data-tokens="<?=$row['college_abbr']?>"><?=$row['college_name']?></option>
               <?php } ?>
             </select>
           </div>
@@ -122,6 +126,10 @@
           <div class="form-group">
             <label>Course Name</label>
             <input type="text" class="form-control focus" placeholder="Enter Course Name" name="course_name" id="course_name" required>
+          </div>
+          <div class="form-group">
+            <label>Abbreviation</label>
+            <input type="text" class="form-control" placeholder="Enter Course Abbreviation" name="course_abbr" id="course_abbr" required>
           </div>
         <?=form_close();?>
       </div>

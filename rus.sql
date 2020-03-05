@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2020 at 03:44 AM
+-- Generation Time: Mar 04, 2020 at 01:19 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_building`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_building` (
+CREATE TABLE `tbl_building` (
   `building_id` int(10) NOT NULL,
   `building_name` varchar(255) NOT NULL,
   `no_of_rooms` int(10) NOT NULL,
@@ -35,15 +35,14 @@ CREATE TABLE IF NOT EXISTS `tbl_building` (
   `building_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-TRUNCATE TABLE `tbl_building`;
-
 --
 -- Dumping data for table `tbl_building`
 --
 
 INSERT INTO `tbl_building` (`building_id`, `building_name`, `no_of_rooms`, `no_of_floors`, `building_added`, `building_modified`) VALUES
 (2, 'Science Building', 10, 3, '2020-02-21 16:11:32', '2020-02-21 16:15:36'),
-(3, 'Information Technology', 2, 2, '2020-02-26 16:37:50', '0000-00-00 00:00:00');
+(3, 'Information Technology', 2, 2, '2020-02-26 16:37:50', '0000-00-00 00:00:00'),
+(4, '4', 4, 4, '2020-02-28 13:39:38', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -51,25 +50,24 @@ INSERT INTO `tbl_building` (`building_id`, `building_name`, `no_of_rooms`, `no_o
 -- Table structure for table `tbl_college`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_college` (
+CREATE TABLE `tbl_college` (
   `college_id` int(11) NOT NULL,
   `college_name` varchar(250) NOT NULL,
+  `college_abbr` varchar(20) NOT NULL,
   `college_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `college_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-TRUNCATE TABLE `tbl_college`;
 --
 -- Dumping data for table `tbl_college`
 --
 
-INSERT INTO `tbl_college` (`college_id`, `college_name`, `college_added`, `college_modified`) VALUES
-(1, 'COED', '2020-02-20 16:45:14', '2020-02-20 16:45:27'),
-(2, 'COE', '2020-02-20 16:45:17', '2020-02-20 16:45:24'),
-(4, 'COBE', '2020-02-20 16:45:31', '2020-02-20 16:45:38'),
-(5, 'College of Arts and Allied Disciplines', '2020-02-20 16:45:35', '2020-02-26 16:40:38'),
-(6, 'CAS', '2020-02-20 16:45:42', '0000-00-00 00:00:00');
-
+INSERT INTO `tbl_college` (`college_id`, `college_name`, `college_abbr`, `college_added`, `college_modified`) VALUES
+(1, 'College of Education', 'COED', '2020-02-20 16:45:14', '2020-02-28 16:01:05'),
+(4, 'College of Business and Entrepreneurship', 'COBE', '2020-02-20 16:45:31', '2020-02-28 16:01:28'),
+(5, 'College of Arts and Allied Disciplines', 'CAAD', '2020-02-20 16:45:35', '2020-02-28 16:01:11'),
+(6, 'College of Arts and Sciences', 'CAS', '2020-02-20 16:45:42', '2020-02-28 16:01:36'),
+(7, 'College of Engineering', 'COE', '2020-02-28 15:59:24', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -77,22 +75,23 @@ INSERT INTO `tbl_college` (`college_id`, `college_name`, `college_added`, `colle
 -- Table structure for table `tbl_course`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_course` (
+CREATE TABLE `tbl_course` (
   `course_id` int(10) NOT NULL,
   `college_id` int(10) NOT NULL,
   `department_id` int(11) NOT NULL,
   `course_name` varchar(255) NOT NULL,
+  `course_abbr` varchar(20) NOT NULL,
   `course_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `course_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_course`;
+
 --
 -- Dumping data for table `tbl_course`
 --
 
-INSERT INTO `tbl_course` (`course_id`, `college_id`, `department_id`, `course_name`, `course_added`, `course_modified`) VALUES
-(2, 2, 1, 'asd', '2020-02-20 14:28:11', '0000-00-00 00:00:00'),
-(14, 2, 2, 'ce', '2020-02-20 15:34:52', '0000-00-00 00:00:00');
+INSERT INTO `tbl_course` (`course_id`, `college_id`, `department_id`, `course_name`, `course_abbr`, `course_added`, `course_modified`) VALUES
+(15, 7, 5, 'Bachelor of Science in Information Technology', 'BSIT', '2020-02-28 16:05:11', '0000-00-00 00:00:00'),
+(17, 7, 4, 'Bachelor of Science in Civil Engineering', 'BSCE', '2020-02-28 16:13:59', '2020-02-28 16:14:21');
 
 -- --------------------------------------------------------
 
@@ -100,21 +99,21 @@ INSERT INTO `tbl_course` (`course_id`, `college_id`, `department_id`, `course_na
 -- Table structure for table `tbl_department`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_department` (
+CREATE TABLE `tbl_department` (
   `department_id` int(10) NOT NULL,
   `college_id` int(11) NOT NULL,
   `department_name` varchar(255) NOT NULL,
   `department_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `department_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_department`;
+
 --
 -- Dumping data for table `tbl_department`
 --
 
 INSERT INTO `tbl_department` (`department_id`, `college_id`, `department_name`, `department_added`, `department_modified`) VALUES
-(4, 1, 'CE', '2020-02-26 14:00:36', '0000-00-00 00:00:00'),
-(5, 1, 'IT', '2020-02-26 14:00:38', '0000-00-00 00:00:00'),
+(4, 7, 'CE', '2020-02-26 14:00:36', '2020-02-28 16:04:40'),
+(5, 7, 'IT', '2020-02-26 14:00:38', '2020-02-28 16:04:44'),
 (6, 5, 'ARCHI', '2020-02-26 14:00:53', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -123,14 +122,14 @@ INSERT INTO `tbl_department` (`department_id`, `college_id`, `department_name`, 
 -- Table structure for table `tbl_designation`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_designation` (
+CREATE TABLE `tbl_designation` (
   `designation_id` int(11) NOT NULL,
   `designation_name` varchar(150) NOT NULL,
   `regular_unit` int(11) NOT NULL,
   `designation_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `designation_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_designation`;
+
 --
 -- Dumping data for table `tbl_designation`
 --
@@ -144,7 +143,7 @@ INSERT INTO `tbl_designation` (`designation_id`, `designation_name`, `regular_un
 -- Table structure for table `tbl_faculty`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_faculty` (
+CREATE TABLE `tbl_faculty` (
   `faculty_id` int(10) NOT NULL,
   `identification` varchar(20) NOT NULL,
   `f_name` varchar(50) NOT NULL,
@@ -163,13 +162,13 @@ CREATE TABLE IF NOT EXISTS `tbl_faculty` (
   `faculty_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `faculty_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_faculty`;
+
 --
 -- Dumping data for table `tbl_faculty`
 --
 
 INSERT INTO `tbl_faculty` (`faculty_id`, `identification`, `f_name`, `m_name`, `l_name`, `suffix_name`, `ext_name`, `contact_no`, `email`, `birth_date`, `address`, `image_src`, `department_id`, `rank_id`, `designation_id`, `faculty_added`, `faculty_modified`) VALUES
-(1, '', 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Tacloban City', 'avatar.png', 6, 2, 1, '2020-02-24 15:01:15', '2020-02-27 15:08:06');
+(1, '', 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Tacloban City', 'avatar.png', 5, 2, 1, '2020-02-24 15:01:15', '2020-03-03 14:10:21');
 
 -- --------------------------------------------------------
 
@@ -177,20 +176,40 @@ INSERT INTO `tbl_faculty` (`faculty_id`, `identification`, `f_name`, `m_name`, `
 -- Table structure for table `tbl_logs`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_logs` (
+CREATE TABLE `tbl_logs` (
   `log_id` int(11) NOT NULL,
   `log_name` varchar(255) NOT NULL,
   `log_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_logs`;
+
 --
 -- Dumping data for table `tbl_logs`
 --
 
 INSERT INTO `tbl_logs` (`log_id`, `log_name`, `log_added`, `user_id`) VALUES
 (1, 'Designation successfully updated: 122', '2020-02-28 02:43:11', 1),
-(2, 'Designation successfully updated: Department Head', '2020-02-28 02:44:07', 1);
+(2, 'Designation successfully updated: Department Head', '2020-02-28 02:44:07', 1),
+(0, 'New college successfully added: College of Engineering', '2020-02-28 23:59:24', 1),
+(0, 'College successfully updated: College of Education', '2020-02-29 00:01:05', 1),
+(0, 'College successfully updated: College of Arts and Allied Disciplines', '2020-02-29 00:01:11', 1),
+(0, 'Successfully deleted college: COE', '2020-02-29 00:01:16', 1),
+(0, 'College successfully updated: College of Business and Entrepreneurship', '2020-02-29 00:01:28', 1),
+(0, 'College successfully updated: College of Arts and Sciences', '2020-02-29 00:01:36', 1),
+(0, 'Department successfully updated: CE', '2020-02-29 00:04:40', 1),
+(0, 'Department successfully updated: IT', '2020-02-29 00:04:44', 1),
+(0, 'New course successfully added: Bachelor of Science in Information Technology', '2020-02-29 00:05:11', 1),
+(0, 'New course successfully added: test', '2020-02-29 00:06:52', 1),
+(0, 'Course successfully updated: testss', '2020-02-29 00:06:57', 1),
+(0, 'Successfully deleted course: testss', '2020-02-29 00:06:59', 1),
+(0, 'New course successfully added: Bachelor of Science in Civil Engineering', '2020-02-29 00:13:59', 1),
+(0, 'Course successfully updated: Bachelor of Science in Civil Engineering', '2020-02-29 00:14:08', 1),
+(0, 'Course successfully updated: Bachelor of Science in Civil Engineering', '2020-02-29 00:14:21', 1),
+(0, 'New subject successfully added: CE 252', '2020-02-29 00:20:23', 1),
+(0, 'New subject successfully added: CE 253', '2020-02-29 00:20:55', 1),
+(0, 'Room successfully updated: 201', '2020-02-29 00:39:08', 1),
+(0, 'New course successfully added: a', '2020-02-29 00:42:40', 1),
+(0, 'New schedule successfully added to:   ', '2020-03-03 23:11:43', 1);
 
 -- --------------------------------------------------------
 
@@ -198,13 +217,13 @@ INSERT INTO `tbl_logs` (`log_id`, `log_name`, `log_added`, `user_id`) VALUES
 -- Table structure for table `tbl_rank`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_rank` (
+CREATE TABLE `tbl_rank` (
   `rank_id` int(11) NOT NULL,
   `rank_type` varchar(50) NOT NULL,
   `rank_added` datetime NOT NULL,
   `rank_modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_rank`;
+
 --
 -- Dumping data for table `tbl_rank`
 --
@@ -219,7 +238,7 @@ INSERT INTO `tbl_rank` (`rank_id`, `rank_type`, `rank_added`, `rank_modified`) V
 -- Table structure for table `tbl_room`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_room` (
+CREATE TABLE `tbl_room` (
   `room_id` int(11) NOT NULL,
   `room_type_id` int(50) NOT NULL,
   `building_id` int(11) NOT NULL,
@@ -228,14 +247,14 @@ CREATE TABLE IF NOT EXISTS `tbl_room` (
   `room_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `room_modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-TRUNCATE TABLE `tbl_room`;
+
 --
 -- Dumping data for table `tbl_room`
 --
 
 INSERT INTO `tbl_room` (`room_id`, `room_type_id`, `building_id`, `room_number`, `room_floor`, `room_added`, `room_modified`) VALUES
 (4, 3, 2, 4, 4, '2020-02-21 16:53:19', NULL),
-(5, 1, 3, 201, 2, '2020-02-26 16:38:23', NULL),
+(5, 2, 3, 201, 2, '2020-02-26 16:38:23', '2020-02-28 16:39:08'),
 (6, 1, 2, 122, 2, '2020-02-28 09:42:38', '2020-02-28 10:43:11');
 
 -- --------------------------------------------------------
@@ -244,14 +263,14 @@ INSERT INTO `tbl_room` (`room_id`, `room_type_id`, `building_id`, `room_number`,
 -- Table structure for table `tbl_room_type`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_room_type` (
+CREATE TABLE `tbl_room_type` (
   `room_type_id` int(11) NOT NULL,
   `room_type` varchar(50) NOT NULL,
   `room_description` varchar(150) NOT NULL,
   `room_type_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `room_type_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_room_type`;
+
 --
 -- Dumping data for table `tbl_room_type`
 --
@@ -263,16 +282,43 @@ INSERT INTO `tbl_room_type` (`room_type_id`, `room_type`, `room_description`, `r
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_schedule`
+--
+
+CREATE TABLE `tbl_schedule` (
+  `schedule_id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `faculty_id` int(11) NOT NULL,
+  `time_start` time NOT NULL,
+  `time_end` time NOT NULL,
+  `sy_id` int(11) NOT NULL,
+  `semester_id` int(11) NOT NULL,
+  `schedule_added` datetime NOT NULL,
+  `schedule_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_schedule`
+--
+
+INSERT INTO `tbl_schedule` (`schedule_id`, `room_id`, `subject_id`, `faculty_id`, `time_start`, `time_end`, `sy_id`, `semester_id`, `schedule_added`, `schedule_modified`) VALUES
+(1, 0, 0, 0, '00:00:00', '00:00:00', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 5, 3, 1, '07:00:00', '13:00:00', 1, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_semester`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_semester` (
+CREATE TABLE `tbl_semester` (
   `semester_id` int(10) NOT NULL,
   `semester_type` varchar(50) NOT NULL,
   `semester_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `semester_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_semester`;
+
 --
 -- Dumping data for table `tbl_semester`
 --
@@ -288,8 +334,9 @@ INSERT INTO `tbl_semester` (`semester_id`, `semester_type`, `semester_added`, `s
 -- Table structure for table `tbl_subject`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_subject` (
+CREATE TABLE `tbl_subject` (
   `subject_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
   `subject_code` varchar(50) NOT NULL,
   `subject_description` varchar(250) NOT NULL,
   `subject_type` varchar(50) NOT NULL,
@@ -297,13 +344,15 @@ CREATE TABLE IF NOT EXISTS `tbl_subject` (
   `subject_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `subject_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_subject`;
+
 --
 -- Dumping data for table `tbl_subject`
 --
 
-INSERT INTO `tbl_subject` (`subject_id`, `subject_code`, `subject_description`, `subject_type`, `subject_unit`, `subject_added`, `subject_modified`) VALUES
-(3, 'IT 363L', 'Lodi Programming I', 'Laboratory', 3, '2020-02-21 15:49:22', '0000-00-00 00:00:00');
+INSERT INTO `tbl_subject` (`subject_id`, `course_id`, `subject_code`, `subject_description`, `subject_type`, `subject_unit`, `subject_added`, `subject_modified`) VALUES
+(3, 15, 'IT 363L', 'Lodi Programming I', 'Laboratory', 3, '2020-02-21 15:49:22', '2020-02-28 16:15:42'),
+(4, 17, 'CE 252', 'I don''t know', 'Laboratory', 3, '2020-02-28 16:20:23', '2020-02-28 16:20:42'),
+(5, 17, 'CE 253', 'I don''t know again', 'Lecture', 3, '2020-02-28 16:20:55', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -311,20 +360,28 @@ INSERT INTO `tbl_subject` (`subject_id`, `subject_code`, `subject_description`, 
 -- Table structure for table `tbl_sy`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_sy` (
-  `SY_ID` int(10) NOT NULL,
-  `school_year` varchar(50) NOT NULL,
+CREATE TABLE `tbl_sy` (
+  `sy_id` int(11) NOT NULL,
+  `school_year` varchar(25) NOT NULL,
   `sy_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `sy_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_sy`;
+
+--
+-- Dumping data for table `tbl_sy`
+--
+
+INSERT INTO `tbl_sy` (`sy_id`, `school_year`, `sy_added`, `sy_modified`) VALUES
+(1, '2020-2021', '2020-02-28 15:10:40', '0000-00-00 00:00:00'),
+(2, '2021-2022', '2020-02-28 15:20:40', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_user`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_user` (
+CREATE TABLE `tbl_user` (
   `user_id` int(10) NOT NULL,
   `user_type_id` int(11) NOT NULL,
   `faculty_id` int(11) NOT NULL,
@@ -333,26 +390,13 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `user_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_user`;
+
 --
 -- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`user_id`, `user_type_id`, `faculty_id`, `username`, `password`, `user_added`, `user_modified`) VALUES
-(1, 3, 7, '1', '1', '2020-02-26 01:06:56', '0000-00-00 00:00:00'),
-(2, 3, 8, '4', '4', '2020-02-26 02:41:34', '0000-00-00 00:00:00'),
-(3, 3, 9, '2', '2', '2020-02-26 02:42:17', '0000-00-00 00:00:00'),
-(4, 4, 10, 'fasd', 'asd', '2020-02-26 02:44:39', '0000-00-00 00:00:00'),
-(5, 3, 11, '4', '4', '2020-02-26 03:25:32', '0000-00-00 00:00:00'),
-(6, 3, 12, 'zx', 'zxc', '2020-02-26 16:35:35', '0000-00-00 00:00:00'),
-(7, 3, 13, '1', '1', '2020-02-27 14:47:34', '0000-00-00 00:00:00'),
-(8, 3, 14, '23', '3', '2020-02-27 14:47:57', '0000-00-00 00:00:00'),
-(9, 3, 15, '3', '3', '2020-02-27 14:51:52', '0000-00-00 00:00:00'),
-(10, 3, 16, '555', '4', '2020-02-27 15:03:34', '0000-00-00 00:00:00'),
-(11, 3, 17, 'g', 'g', '2020-02-27 15:04:55', '0000-00-00 00:00:00'),
-(12, 3, 18, 'yyy', 'yyy', '2020-02-27 15:06:02', '0000-00-00 00:00:00'),
-(13, 3, 19, 't', 't', '2020-02-27 15:06:50', '0000-00-00 00:00:00'),
-(14, 3, 20, '4', '4', '2020-02-27 15:15:52', '0000-00-00 00:00:00');
+(1, 5, 1, 'admin', 'admin', '2020-02-26 01:06:56', '2020-02-28 14:51:38');
 
 -- --------------------------------------------------------
 
@@ -360,20 +404,21 @@ INSERT INTO `tbl_user` (`user_id`, `user_type_id`, `faculty_id`, `username`, `pa
 -- Table structure for table `tbl_user_type`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_user_type` (
+CREATE TABLE `tbl_user_type` (
   `user_type_id` int(11) NOT NULL,
   `user_type` varchar(50) NOT NULL,
   `user_type_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_type_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-TRUNCATE TABLE `tbl_user_type`;
+
 --
 -- Dumping data for table `tbl_user_type`
 --
 
 INSERT INTO `tbl_user_type` (`user_type_id`, `user_type`, `user_type_added`, `user_type_modified`) VALUES
 (3, 'Dean', '2020-02-21 15:38:49', '0000-00-00 00:00:00'),
-(4, 'Faculty', '2020-02-21 15:38:52', '0000-00-00 00:00:00');
+(4, 'Faculty', '2020-02-21 15:38:52', '0000-00-00 00:00:00'),
+(5, 'Administrator', '2020-02-28 14:54:39', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -389,12 +434,6 @@ ALTER TABLE `tbl_building`
 -- Indexes for table `tbl_college`
 --
 ALTER TABLE `tbl_college`
-  ADD PRIMARY KEY (`college_id`);
-
---
--- Indexes for table `tbl_colleges`
---
-ALTER TABLE `tbl_colleges`
   ADD PRIMARY KEY (`college_id`);
 
 --
@@ -428,12 +467,6 @@ ALTER TABLE `tbl_faculty`
   ADD KEY `FK_faculty_designation` (`designation_id`);
 
 --
--- Indexes for table `tbl_logs`
---
-ALTER TABLE `tbl_logs`
-  ADD PRIMARY KEY (`log_id`);
-
---
 -- Indexes for table `tbl_rank`
 --
 ALTER TABLE `tbl_rank`
@@ -454,6 +487,12 @@ ALTER TABLE `tbl_room_type`
   ADD PRIMARY KEY (`room_type_id`);
 
 --
+-- Indexes for table `tbl_schedule`
+--
+ALTER TABLE `tbl_schedule`
+  ADD PRIMARY KEY (`schedule_id`);
+
+--
 -- Indexes for table `tbl_semester`
 --
 ALTER TABLE `tbl_semester`
@@ -469,7 +508,7 @@ ALTER TABLE `tbl_subject`
 -- Indexes for table `tbl_sy`
 --
 ALTER TABLE `tbl_sy`
-  ADD PRIMARY KEY (`SY_ID`);
+  ADD PRIMARY KEY (`sy_id`);
 
 --
 -- Indexes for table `tbl_user`
@@ -493,17 +532,12 @@ ALTER TABLE `tbl_user_type`
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_college`
 --
 ALTER TABLE `tbl_college`
-  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT for table `tbl_colleges`
---
-ALTER TABLE `tbl_colleges`
-  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tbl_course`
 --
@@ -513,42 +547,42 @@ ALTER TABLE `tbl_course`
 -- AUTO_INCREMENT for table `tbl_department`
 --
 ALTER TABLE `tbl_department`
-  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `department_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_designation`
 --
 ALTER TABLE `tbl_designation`
-  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `designation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_faculty`
 --
 ALTER TABLE `tbl_faculty`
   MODIFY `faculty_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `tbl_logs`
---
-ALTER TABLE `tbl_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
 -- AUTO_INCREMENT for table `tbl_rank`
 --
 ALTER TABLE `tbl_rank`
-  MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_room`
 --
 ALTER TABLE `tbl_room`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_room_type`
 --
 ALTER TABLE `tbl_room_type`
-  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `room_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tbl_schedule`
+--
+ALTER TABLE `tbl_schedule`
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_semester`
 --
 ALTER TABLE `tbl_semester`
-  MODIFY `semester_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `semester_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_subject`
 --
@@ -558,17 +592,17 @@ ALTER TABLE `tbl_subject`
 -- AUTO_INCREMENT for table `tbl_sy`
 --
 ALTER TABLE `tbl_sy`
-  MODIFY `SY_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `sy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_user_type`
 --
 ALTER TABLE `tbl_user_type`
-  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

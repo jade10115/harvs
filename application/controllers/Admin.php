@@ -6,7 +6,7 @@ class Admin extends CI_Controller {
 	// -------------------------------------- VIEWS -------------------------------------- //
 
 	public function index(){
-		$data['title'] = "Dashboards";
+		$data['title'] = "Dashboard";
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/dashboard');
 		$this->load->view('templates/footer');
@@ -125,7 +125,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function sy(){
-		$data['title'] = "Semesters";
+		$data['title'] = "School Year";
 		$data['sy'] = $this->main_model->getSchoolYear();
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/sy');
@@ -134,6 +134,7 @@ class Admin extends CI_Controller {
 
 	public function subject(){
 		$data['title'] = "Subjects";
+		$data['courses'] = $this->main_model->getCourses();
 		$data['subjects'] = $this->main_model->getSubjects();
 		$data['room_types'] = $this->main_model->getRoomTypes();
 		$this->load->view('templates/header', $data);
@@ -192,6 +193,8 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('building_name', 'Building Name', 'trim|required|is_unique[tbl_building.building_name]');
+    $this->form_validation->set_rules('no_of_rooms', 'No. of Rooms', 'trim|required|integer');
+    $this->form_validation->set_rules('no_of_floors', 'No. of Floors', 'trim|required|integer');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -365,7 +368,7 @@ class Admin extends CI_Controller {
 	public function addSY(){
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('sy_from', 'School Year', 'trim|required|is_unique[tbl_sy.school_year]');
+    $this->form_validation->set_rules('sy_from', 'School Year', 'trim|required|callback_sy_check');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -375,6 +378,18 @@ class Admin extends CI_Controller {
     }
 
     header('location:'.base_url('admin/sy'));
+	}
+
+	public function sy_check($str){
+		$schoolYear = $_POST['sy_from'].'-'.$_POST['sy_to'];
+		$duplicate = $this->main_model->checkDuplicate('school_year', $schoolYear, 'tbl_sy');
+		
+		if($duplicate==0){
+			return true;
+		} else {
+			$this->form_validation->set_message('sy_check', 'School year already exist.');
+      return false;
+		}
 	}
 
 	public function addUserType(){

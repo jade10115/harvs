@@ -62,14 +62,14 @@
             <label>School Year</label>
             <div class="row">
               <div class="col-md-6">
-                <select class="custom-select" name="sy_from" id="sy" required>
+                <select class="custom-select sy" name="sy_from" id="sy" required>
                   <?php for ($i=date('Y')-5; $i<date('Y')+5; $i++) { ?> 
                   <option value="<?=$i?>" <?=($i==date('Y'))?'selected':'';?>><?=$i?></option>
                   <?php } ?>
                 </select>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" name="sy_to" id="sy2" readonly required value="<?=date('Y')+1?>">
+                <input type="text" class="form-control sy2" name="sy_to" id="sy2" readonly required value="<?=date('Y')+1?>">
               </div>
             </div>
           </div>
@@ -95,18 +95,19 @@
       </div>
       <div class="modal-body">
         <?=form_open('admin/updateSY', 'id="frm_sy_update"');?>
+          <input type="hidden" name="sy_id" id="sy_id">
           <div class="form-group">
             <label>School Year</label>
             <div class="row">
               <div class="col-md-6">
-                <select class="custom-select" name="sy_from" id="sy" required>
+                <select class="custom-select sy" name="sy_from" id="sy_update" required>
                   <?php for ($i=date('Y')-5; $i<date('Y')+5; $i++) { ?> 
                   <option value="<?=$i?>" <?=($i==date('Y'))?'selected':'';?>><?=$i?></option>
                   <?php } ?>
                 </select>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control" name="sy_to" id="sy2" readonly required value="<?=date('Y')+1?>">
+                <input type="text" class="form-control sy2" name="sy_to" id="sy2_update" readonly required value="<?=date('Y')+1?>">
               </div>
             </div>  
           </div>
