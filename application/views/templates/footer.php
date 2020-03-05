@@ -10,6 +10,8 @@
 	<script type="text/javascript" src="<?=base_url('assets/js/dataTables.bootstrap4.min.js')?>"></script>
 	<!-- jQuery Confirm -->
 	<script type="text/javascript" src="<?=base_url('assets/js/jquery-confirm.min.js')?>"></script>
+	<!-- floating labels -->
+	<script type="text/javascript" src="<?=base_url('assets/js/floating-labels.js')?>"></script>
 	<!-- scripts -->
 	<script type="text/javascript">
 		$(document).ready(function(){
