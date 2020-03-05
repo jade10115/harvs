@@ -106,7 +106,7 @@
                   </div>
                 </div>
               </div>
-
+              
               <!--row start-->
               <div class="row">
                 <div class="col-md-4">
@@ -121,25 +121,12 @@
                     <input type="text" class="form-control" name="ext_name" placeholder="Extension Name">
                   </div>
                 </div>
-
-
-
-
                 <div class="col-md-4">
                   <div class="form-group fixlabel">
                     <input type="date" class="form-control identification" id="birth_date" placeholder="Enter Suffix Name" name="birth_date" required>
                     <span>Birthdate</span>
                   </div>
                 </div>
-
-
-                      
-
-
-
-
-
-
               </div>
               <!--row end-->
 
