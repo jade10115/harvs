@@ -136,7 +136,7 @@
                 <div class="col-md-8">
                   <div class="form-group">
                     <input type="text" class="form-control" name="email" required>
-                    <label>Email</label>
+                    <label>Email Address</label>
                   </div>
                 </div>
 
