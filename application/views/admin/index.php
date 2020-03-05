@@ -27,12 +27,14 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4 offset-md-4 mt-3">
-			<div class="alert alert-warning alert-dismissible fade show shadow-sm" role="alert">
-			  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-			  </button>
-			</div>
+			<?php if (isset($_SESSION['toast'])) { ?>
+				<div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+				  <?=$this->session->flashData('toast');?>.
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+			<?php } ?>
 		</div>
 	</div>
 </div>

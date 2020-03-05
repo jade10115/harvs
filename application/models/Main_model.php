@@ -60,7 +60,7 @@ Class Main_model extends CI_Model{
 
 		$user = array(
 			'username' => $_POST['username'],
-			'password' => $_POST['password'],
+			'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
 			'faculty_id' => $faculty_id,
 			'user_type_id' => $_POST['user_type_id'],
 		);
@@ -228,6 +228,33 @@ Class Main_model extends CI_Model{
 	}
 
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
+
+	// ------------------------------------------------------------------------------------------------------ //
+
+	// -------------------------------------- LOGIN AUTHENTICATION ------------------------------------------ // 
+
+	public function userAuthentication(){
+		$username = $this->input->post('username');
+    	$password = $this->input->post('password');//sha1($this->input->post('password'));
+    	$res = $this->db->join('tbl_user', 'tbl_user_type.user_type_id = tbl_user.user_type_id')->
+						join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')->
+						join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')->
+						join('tbl_designation', 'tbl_faculty.designation_id = tbl_designation.designation_id')->
+						where('tbl_user.username', $username)->
+						get('tbl_user_type')->result_array();
+		if (count($res) > 0) {
+			if (password_verify($password, $res[0]['password'])) {
+				$this->session->set_userdata('user', $res[0]);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	// -------------------------------------- LOGIN AUTHENTICATION ------------------------------------------ //
 
 	// ------------------------------------------------------------------------------------------------------ //
 
