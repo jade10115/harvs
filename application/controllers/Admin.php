@@ -229,7 +229,7 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('college_name', 'College Name', 'trim|required|is_unique[tbl_college.college_name]');
-
+    $this->form_validation->set_rules('college_abbr', 'Abbreviation', 'trim|required|is_unique[tbl_college.college_abbr]');
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
@@ -246,7 +246,7 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('designation_name', 'Designation Name', 'trim|required|is_unique[tbl_designation.designation_name]');
-
+    $this->form_validation->set_rules('regular_unit', 'Regular Unit', 'trim|required|integer');
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
@@ -267,6 +267,7 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required|is_unique[tbl_course.course_name]');
+     $this->form_validation->set_rules('course_abbr', 'Abbreviation', 'trim|required|is_unique[tbl_course.course_abbr]');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -283,10 +284,10 @@ class Admin extends CI_Controller {
 	public function addRoom(){
 		$this->load->library('form_validation');
 
-    $this->form_validation->set_rules('building_id', 'Building Name', 'trim|required');
-    $this->form_validation->set_rules('room_type_id', 'Room Type', 'trim|required');
-    $this->form_validation->set_rules('room_number', 'Floor Number', 'trim|required');
-    $this->form_validation->set_rules('room_floor', 'Room Number', 'trim|required');
+    $this->form_validation->set_rules('building_id', 'Building Name', 'trim|required|integer');
+    $this->form_validation->set_rules('room_type_id', 'Room Type', 'trim|required|integer');
+    $this->form_validation->set_rules('room_number', 'Floor Number', 'trim|required|integer');
+    $this->form_validation->set_rules('room_floor', 'Room Number', 'trim|required|integer');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -303,6 +304,24 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('identification', 'Identification', 'trim|required|is_unique[tbl_faculty.identification]|callback_id_check');
+
+
+ 	 $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[tbl_user.username]');
+     $this->form_validation->set_rules('password', 'Password', 'trim|required');
+     $this->form_validation->set_rules('f_name', 'First Name ', 'trim|required');
+     $this->form_validation->set_rules('l_name', 'Last Name', 'trim|required');
+     $this->form_validation->set_rules('email', 'Email Address', 'trim|required|is_unique[tbl_faculty.email]');
+     $this->form_validation->set_rules('contact_no', 'Contact Number', 'trim|required|integer|is_unique[tbl_faculty.contact_no]');
+     $this->form_validation->set_rules('address', 'Address', 'trim|required');
+     $this->form_validation->set_rules('department_id', 'Select Department', 'trim|required');
+     $this->form_validation->set_rules('rank_id', 'Select Rank', 'trim|required');
+     $this->form_validation->set_rules('designation_id', 'Select Designation', 'trim|required');
+    
+
+
+
+
+
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -430,7 +449,9 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('subject_code', 'Subject Code', 'trim|required|is_unique[tbl_subject.subject_code]');
-
+      $this->form_validation->set_rules('subject_description', 'Subject Description', 'trim|required');
+      $this->form_validation->set_rules('subject_type', 'Subject Type', 'trim|required');
+      $this->form_validation->set_rules('subject_unit', 'Unit', 'trim|required');
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
@@ -522,7 +543,9 @@ class Admin extends CI_Controller {
 	public function updateCourse(){
 		$this->load->library('form_validation');
 
+    $this->form_validation->set_rules('college_id', 'College', 'trim|required');
     $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
+    $this->form_validation->set_rules('course_abbr', 'Abbreviation', 'trim|required');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -590,9 +613,9 @@ class Admin extends CI_Controller {
 	}
 
 	public function updateSemester(){
-		$this->load->library('form_validation');
+		  $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('semester_type', 'Semester Type', 'trim|required|is_unique[tbl_semester.semester_type]');
+      $this->form_validation->set_rules('semester_type', 'Semester Type', 'trim|required|is_unique[tbl_semester.semester_type]');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -607,9 +630,9 @@ class Admin extends CI_Controller {
 	}
 
 	public function updateUserType(){
-		$this->load->library('form_validation');
+		 $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('user_type', 'User Type', 'trim|required|is_unique[tbl_user_type.user_type]');
+     $this->form_validation->set_rules('user_type', 'User Type', 'trim|required|is_unique[tbl_user_type.user_type]');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -641,10 +664,12 @@ class Admin extends CI_Controller {
 	}
 
 	public function updateSubject(){
-		$this->load->library('form_validation');
+		  $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('subject_code', 'Subject Code', 'trim|required');
-
+      $this->form_validation->set_rules('subject_code', 'Subject Code', 'trim|required');
+      $this->form_validation->set_rules('subject_description', 'Subject Description', 'trim|required');
+      $this->form_validation->set_rules('subject_type', 'Subject Type', 'trim|required');
+      $this->form_validation->set_rules('subject_unit', 'Unit', 'trim|required');
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
@@ -661,6 +686,16 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('l_name', 'Last Name', 'trim|required');
+
+     
+     $this->form_validation->set_rules('email', 'Email Address', 'trim|required');
+     $this->form_validation->set_rules('contact_no', 'Contact Number', 'trim|required|integer');
+     $this->form_validation->set_rules('address', 'Address', 'trim|required');
+     $this->form_validation->set_rules('department_id', 'Select Department', 'trim|required');
+     $this->form_validation->set_rules('rank_id', 'Select Rank', 'trim|required');
+     $this->form_validation->set_rules('designation_id', 'Select Designation', 'trim|required');
+    
+
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());

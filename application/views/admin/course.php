@@ -63,7 +63,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <?=form_open('admin/addCourse', 'id="frm_course_add class="frm_course_submit"');?>
+        <?=form_open('admin/addCourse', 'id="frm_course_add" class="frm_course_submit"');?>
           <div class="form-group">
             <label>College</label>
             <select class="selectpicker college_id" name="college_id" title="Select College" data-width="100%" data-live-search="true" id="college_id_add" required>
@@ -74,8 +74,8 @@
           </div>
           <div class="form-group">
             <label>Department</label>
-            <select class="selectpicker department_id" name="department_id" data-width="100%" title="Select Department" id="department_id_add" required>
-              <!-- <option>Select College First</option> -->
+            <select class="custom-select department_id" name="department_id" data-width="100%" title="Select Department" id="department_id_add" required>
+              <option>Select College First</option>
             </select>
           </div>
           <div class="form-group">
@@ -107,7 +107,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <?=form_open('admin/updateCourse', 'id="frm_course_update class="frm_course_submit"');?>
+        <?=form_open('admin/updateCourse', 'id="frm_course_update" class="frm_course_submit"');?>
           <input type="hidden" name="course_id" id="course_id">
           <div class="form-group">
             <label>College</label>

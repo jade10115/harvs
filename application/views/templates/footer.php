@@ -278,6 +278,7 @@
 						alert('update');
 						$('#college_id').focus();
 					}
+
 					event.preventDefault();
 					return false;
 				}
