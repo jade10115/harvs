@@ -314,6 +314,14 @@
 				});
 			}
 
+
+			$('.time_start').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+			  console.log(clickedIndex);
+			  $('.time_end').eq(10).css('background', 'black');
+			  $('.time_end').prop('disabled');
+			});
+
+
 		}); // $(document).ready()
 	</script>
 </footer>
