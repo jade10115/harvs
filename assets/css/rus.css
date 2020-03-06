@@ -21,3 +21,63 @@ nav {
 .hand {
 	cursor:pointer;
 }
+
+/******************************* LOGIN FORM *******************************/
+
+body.sign-in {
+	background: radial-gradient(ellipse at center, #f5f0f0 0%, #afa67c 100%);
+	font-family: 'Poppins', sans-serif;
+	font-size: 14px;
+	color: #666;
+}
+
+.login-container {
+	height: 80vh;
+	width: 100%;
+}
+
+.login-form {
+	max-width: 100%;
+	width: 370px;
+	padding: 15px;
+	margin: auto;
+	opacity: 90%
+}
+
+button.btn-login {
+	background-color: #800000;
+}
+
+button.btn-login:hover {
+    color: #fff;
+	border-color: #023d02;
+	background: #023d02 !important;
+}
+
+.login-wrapper {
+	border-radius: 10px;
+	margin: auto;
+}
+
+.sign-in label {
+	font-size: 14px;
+}
+
+label.remember {
+	font-size: 14px;
+}
+
+label.login-label {
+	font-size: 16px;
+	margin: 0;
+	color: #800000;
+}
+
+input::placeholder {
+	font-size: 14px !important;
+}
+
+
+
+
+/******************************* LOGIN FORM *******************************/
