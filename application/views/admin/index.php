@@ -16,47 +16,59 @@
 
 </head>
 <body class="sign-in">
-		<div class="login-container d-flex align-items-center justify-content-center" id="container">
-			<div class="bg-white login-wrapper">
-				<?=form_open('auth/validate', 'class="login-form"'); ?>
-					<div>
-						<div class="mb-5 text-center"> 	
-							<img src="<?= base_url('assets/img/system/login.png') ?>" alt="loading..." height="130" width="155"><br>
-							<label class="login-label">Scheduling System Login</label>
-						</div>
-					</div>	
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="user" data-feather="user"></i>
-								</div>
+	<div class="login-container d-flex align-items-center justify-content-center" id="container">
+		<div class="bg-white login-wrapper">
+			<?=form_open('auth/validate', 'class="login-form"'); ?>
+				<div>
+					<div class="mb-5 text-center"> 	
+						<img src="<?= base_url('assets/img/system/login.png') ?>" alt="loading..." height="130" width="155"><br>
+						<label class="login-label">Scheduling System Login</label>
+					</div>
+				</div>	
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="user" data-feather="user"></i>
 							</div>
-							<input type="text" name="username" class="form-control" placeholder="Enter Username" id="exampleInputEmail1">
 						</div>
+						<input type="text" name="username" class="form-control" placeholder="Enter Username">
 					</div>
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i data-feather="lock"></i>
-								</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i data-feather="lock"></i>
 							</div>
-							<input type="password" name="password" class="form-control" placeholder="Enter Password" id="exampleInputPassword1">
 						</div>
+						<input type="password" name="password" class="form-control" placeholder="Enter Password">
 					</div>
-					<div class="forgot-link d-flex align-items-center justify-content-between mb-4">
-						<div class="form-check">
-							<input type="checkbox" class="form-check-input" id=""remember>
-							<label class="remember" for="remember">Remember Password</label>
-						</div>
-						<a href="#">Forgot Password?</a>
+				</div>
+				<div class="forgot-link d-flex align-items-center justify-content-between mb-4">
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="remember">
+						<label class="remember" for="remember">Remember Password</label>
 					</div>
-					<button type="submit" class="btn btn-login btn-block text-white my-4">Login</button>
-				<?=form_close()?>
-				<!-- </form> -->
-			</div>
+					<a href="#">Forgot Password?</a>
+				</div>
+				<button type="submit" class="btn btn-login btn-block text-white my-4">Login</button>
+			<?=form_close()?>
+			<!-- </form> -->
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 offset-md-4 mt-3">
+			<?php if (isset($_SESSION['toast'])) { ?>
+				<div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+				  <?=$this->session->flashData('toast');?>.
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+			<?php } ?>
+		</div>
+	</div>
 </body>
 <footer>
 	<script type="text/javascript" src="<?=base_url('assets/js/jquery-3.4.1.min.js')?>"></script>

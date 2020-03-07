@@ -60,7 +60,7 @@ Class Main_model extends CI_Model{
 
 		$user = array(
 			'username' => $_POST['username'],
-			'password' => $_POST['password'],
+			'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
 			'faculty_id' => $faculty_id,
 			'user_type_id' => $_POST['user_type_id'],
 		);
@@ -86,6 +86,7 @@ Class Main_model extends CI_Model{
 
 	public function addSchedule(){
 		$this->db->insert('tbl_schedule', $_POST);
+		return $this->getFaculty($_POST['faculty_id']);
 	}
 
 	public function addSY(){
@@ -178,6 +179,15 @@ Class Main_model extends CI_Model{
 	public function getSchoolYear(){
 		return $this->db->get('tbl_sy')->result_array();
 	}
+
+	public function getSchedules(){
+		return $this->db->join('tbl_room', 'tbl_room.room_id=tbl_schedule.room_id')
+										->join('tbl_building', 'tbl_building.building_id=tbl_room.building_id')
+										->join('tbl_subject', 'tbl_subject.subject_id=tbl_schedule.subject_id')
+										->join('tbl_course', 'tbl_course.course_id=tbl_subject.course_id')
+										->join('tbl_faculty', 'tbl_faculty.faculty_id=tbl_schedule.faculty_id')
+										->get('tbl_schedule')->result_array();
+	}
 	
 	public function getuserTypes(){
 		return $this->db->get('tbl_user_type')->result_array();
@@ -228,6 +238,33 @@ Class Main_model extends CI_Model{
 	}
 
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
+
+	// ------------------------------------------------------------------------------------------------------ //
+
+	// -------------------------------------- LOGIN AUTHENTICATION ------------------------------------------ // 
+
+	public function userAuthentication(){
+		$username = $this->input->post('username');
+    	$password = $this->input->post('password');//sha1($this->input->post('password'));
+    	$res = $this->db->join('tbl_user', 'tbl_user_type.user_type_id = tbl_user.user_type_id')->
+						join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')->
+						join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')->
+						join('tbl_designation', 'tbl_faculty.designation_id = tbl_designation.designation_id')->
+						where('tbl_user.username', $username)->
+						get('tbl_user_type')->result_array();
+		if (count($res) > 0) {
+			if (password_verify($password, $res[0]['password'])) {
+				$this->session->set_userdata('user', $res[0]);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	// -------------------------------------- LOGIN AUTHENTICATION ------------------------------------------ //
 
 	// ------------------------------------------------------------------------------------------------------ //
 

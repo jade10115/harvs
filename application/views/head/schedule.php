@@ -11,8 +11,41 @@
           <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#modal_schedule_add">Add Schedule</a>  
         </h5>
 			  <div class="card-body">
-          <!-- body -->
-          body
+          <table class="table table-striped table-hover table-sm">
+            <thead>
+              <tr>
+                <th>Building</th>
+                <th>Room</th>
+                <th>Course</th>
+                <th>Subject</th>
+                <th>Employee</th>
+                <th>Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($schedules as $row) {?>
+              <tr>
+                <td><?=$row['building_name']?></td>
+                <td><?=$row['room_number']?></td>
+                <td><?=$row['course_abbr']?></td>
+                <td><?=$row['subject_code']?></td>
+                <td><?=$row['l_name']?> <?=$row['suffix_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></td>
+                <td>Wednesday <?=$row['time_start']?> - <?=$row['time_end']?></td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn update" id="" data-toggle="modal" data-target="#modal_schedule_update" data-toggle="tooltip" data-placement="top" title="Update Schedule">
+                      <span class="fa fa-pencil"></span>
+                    </a>
+                    <a href="#" id="<?=base_url('admin/delete/schedule/'.$row['schedule_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Schedule">
+                      <span class="fa fa-trash"></span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <?php } ?>
+            </tbody>
+          </table>
 			  </div>
 			</div>
    </main>
@@ -97,10 +130,27 @@
           </div>
 
           <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Day</label>
+                <select class="selectpicker" title="Select Day" data-width="100%" data-live-search="true" name="day" required>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
+                  <option value="Sunday">Sunday</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label>Time Start</label>
-                <select class="selectpicker" title="Select Time Start" data-width="100%" data-live-search="true" name="time_start" required>
+                <select class="selectpicker time_start" title="Select Time Start" data-width="100%" data-live-search="true" name="time_start" required>
                   <optgroup label="Morning Time">
                     <?php for ($i=7; $i <= 12; $i++) { ?>
                       <?php $t=7;?>
@@ -129,7 +179,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Time End</label>
-                <select class="selectpicker" title="Select Room" data-width="100%" data-live-search="true" name="time_end" required>
+                <select class="selectpicker time_end" title="Select Room" data-width="100%" data-live-search="true" name="time_end" required>
                   <optgroup label="Morning Time">
                     <?php for ($i=7; $i <= 12; $i++) { ?>
                       <?php $t=7;?>
