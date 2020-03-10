@@ -60,7 +60,7 @@ Class Main_model extends CI_Model{
 
 		$user = array(
 			'username' => $_POST['username'],
-			'password' => $_POST['password'],
+			'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
 			'faculty_id' => $faculty_id,
 			'user_type_id' => $_POST['user_type_id'],
 		);
@@ -86,6 +86,7 @@ Class Main_model extends CI_Model{
 
 	public function addSchedule(){
 		$this->db->insert('tbl_schedule', $_POST);
+		return $this->getFaculty($_POST['faculty_id']);
 	}
 
 	public function addSY(){
@@ -121,22 +122,59 @@ Class Main_model extends CI_Model{
 
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
 
+	public function checkTimeConflict($time){
+		return $this->db->where('time_start<=',date('H:i:s',strtotime('+1 seconds',strtotime($time))))
+										->where('time_end>=',date('H:i:s',strtotime('+1 seconds',strtotime($time))))
+										->where('day', $_POST['day'])
+										->where('room_id', $_POST['room_id'])
+										->where('sy_id', $_POST['sy_id'])
+										->where('semester_id', $_POST['semester_id'])
+										->get('tbl_schedule')->result_array();
+	}
+
+	public function checkTimeConflict2($time){
+		return $this->db->where('time_start<=',date('H:i:s',strtotime('-1 seconds',strtotime($time))))
+										->where('time_end>=',date('H:i:s',strtotime('-1 seconds',strtotime($time))))
+										->where('day', $_POST['day'])
+										->where('room_id', $_POST['room_id'])
+										->where('sy_id', $_POST['sy_id'])
+										->where('semester_id', $_POST['semester_id'])
+										->get('tbl_schedule')->result_array();
+	}
+
 	public function getBuildings(){
 		return $this->db->get('tbl_building')->result_array();
 	}
 
 	public function getRooms(){
-		return $this->db->join('tbl_building', 'tbl_building.building_id = tbl_room.building_id')->join('tbl_room_type', 'tbl_room_type.room_type_id = tbl_room.room_type_id')->get('tbl_room')->result_array();
+		return $this->db->join('tbl_building', 'tbl_building.building_id = tbl_room.building_id')
+										->join('tbl_room_type', 'tbl_room_type.room_type_id = tbl_room.room_type_id')
+										->get('tbl_room')->result_array();
 	}
 
 	public function getFaculties(){
 		// return $this->db->select('tbl_instructor.instructor_id, tbl_instructor.instructor_name, tbl_instructor.instructor_added, tbl_instructor.instructor_updated, count(tbl_subject.subject_id)')->from('tbl_instructor')->join('tbl_subject', 'tbl_instructor.instructor_id = tbl_subject.instructor_id', 'left')->group_by('tbl_instructor.instructor_id')->get()->result_array();	
 		// return $this->db->get('tbl_faculty')->result_array();
-		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')->get('tbl_faculty')->result_array();
+		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
+										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
+										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')
+										->get('tbl_faculty')->result_array();
+	}
+
+	public function getFacultiesByDeptId() {
+		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
+										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
+										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')
+										->where('tbl_faculty.department_id = '.$_SESSION['user']['department_id'])
+										->get('tbl_faculty')->result_array();
 	}
 
 	public function getFaculty($id){
-		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')->where('tbl_faculty.faculty_id', $id)->get('tbl_faculty')->result_array();
+		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
+										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
+										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')
+										->where('tbl_faculty.faculty_id', $id)
+										->get('tbl_faculty')->result_array();
 	}
 
 	public function getSubjects(){
@@ -152,7 +190,9 @@ Class Main_model extends CI_Model{
 	}
 
 	public function getCourses(){
-		return $this->db->join('tbl_college', 'tbl_college.college_id = tbl_course.college_id')->join('tbl_department', 'tbl_department.department_id = tbl_course.department_id')->get('tbl_course')->result_array();
+		return $this->db->join('tbl_college', 'tbl_college.college_id = tbl_course.college_id')
+										->join('tbl_department', 'tbl_department.department_id = tbl_course.department_id')
+										->get('tbl_course')->result_array();
 	}
 
 	public function getDepartments(){
@@ -178,17 +218,39 @@ Class Main_model extends CI_Model{
 	public function getSchoolYear(){
 		return $this->db->get('tbl_sy')->result_array();
 	}
+
+	public function getSchedules(){
+		return $this->db->join('tbl_room', 'tbl_room.room_id=tbl_schedule.room_id')
+										->join('tbl_building', 'tbl_building.building_id=tbl_room.building_id')
+										->join('tbl_subject', 'tbl_subject.subject_id=tbl_schedule.subject_id')
+										->join('tbl_course', 'tbl_course.course_id=tbl_subject.course_id')
+										->join('tbl_faculty', 'tbl_faculty.faculty_id=tbl_schedule.faculty_id')
+										->join('tbl_semester', 'tbl_semester.semester_id=tbl_schedule.semester_id')
+										->join('tbl_sy', 'tbl_sy.sy_id=tbl_schedule.sy_id')
+										->get('tbl_schedule')->result_array();
+	}
+
+	public function getSchedulesByFacultyId($id){
+		return $this->db->join('tbl_room', 'tbl_room.room_id=tbl_schedule.room_id')
+										->join('tbl_building', 'tbl_building.building_id=tbl_room.building_id')
+										->join('tbl_subject', 'tbl_subject.subject_id=tbl_schedule.subject_id')
+										->join('tbl_course', 'tbl_course.course_id=tbl_subject.course_id')
+										->join('tbl_faculty', 'tbl_faculty.faculty_id=tbl_schedule.faculty_id')
+										->join('tbl_semester', 'tbl_semester.semester_id=tbl_schedule.semester_id')
+										->join('tbl_sy', 'tbl_sy.sy_id=tbl_schedule.sy_id')
+										->get('tbl_schedule')->result_array();
+	}
 	
 	public function getuserTypes(){
 		return $this->db->get('tbl_user_type')->result_array();
 	}
 
 	public function getLogs(){
-		return $this->db->join('tbl_user', 'tbl_logs.user_id = tbl_user.user_id')->
-						join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')->
-						join('tbl_user_type', 'tbl_user.user_type_id = tbl_user_type.user_type_id')->
-						join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')->
-						get('tbl_logs')->result_array();
+		return $this->db->join('tbl_user', 'tbl_logs.user_id = tbl_user.user_id')
+										->join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')
+										->join('tbl_user_type', 'tbl_user.user_type_id = tbl_user_type.user_type_id')
+										->join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')
+										->get('tbl_logs')->result_array();
 	}
 
 	public function getDeletedDataName($name, $id) {
@@ -228,6 +290,33 @@ Class Main_model extends CI_Model{
 	}
 
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
+
+	// ------------------------------------------------------------------------------------------------------ //
+
+	// -------------------------------------- LOGIN AUTHENTICATION ------------------------------------------ // 
+
+	public function userAuthentication(){
+		$username = $this->input->post('username');
+    	$password = $this->input->post('password');//sha1($this->input->post('password'));
+    	$res = $this->db->join('tbl_user', 'tbl_user_type.user_type_id = tbl_user.user_type_id')->
+						join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')->
+						join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')->
+						join('tbl_designation', 'tbl_faculty.designation_id = tbl_designation.designation_id')->
+						where('tbl_user.username', $username)->
+						get('tbl_user_type')->result_array();
+		if (count($res) > 0) {
+			if (password_verify($password, $res[0]['password'])) {
+				$this->session->set_userdata('user', $res[0]);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	// -------------------------------------- LOGIN AUTHENTICATION ------------------------------------------ //
 
 	// ------------------------------------------------------------------------------------------------------ //
 
@@ -343,6 +432,20 @@ Class Main_model extends CI_Model{
 			'designation_id' => $_POST['designation_id']
 		);
 		$this->db->where('faculty_id', $_POST['faculty_id'])->update('tbl_faculty', $data);
+	}
+
+	public function updateSchedule(){
+		$data = array(
+			'room_id' => $_POST['room_id'],
+			'subject_id' => $_POST['subject_id'],
+			'faculty_id' => $_POST['faculty_id'],
+			'day' => $_POST['day'],
+			'time_start' => $_POST['time_start'],
+			'time_end' => $_POST['time_end'],
+			'sy_id' => $_POST['sy_id'],
+			'semester_id' => $_POST['semester_id']
+		);
+		$this->db->where('schedule_id', $_POST['schedule_id'])->update('tbl_schedule', $data);
 	}
 
 	// -------------------------------------- UPDATE FUNCTIONS ---------------------------------------------- // 

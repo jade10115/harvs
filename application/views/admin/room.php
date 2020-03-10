@@ -84,7 +84,7 @@
             <div class="row">
               <div class="col-md-6">
                 <label>Room Number</label>
-                <input type="number" class="form-control" placeholder="Enter Room Number" name="room_number" min="0" required>
+                <input type="Text" class="form-control" placeholder="Enter Room Number" name="room_number" min="0" required>
               </div>
               <div class="col-md-6">
                 <label>Floor Number</label>
@@ -135,7 +135,7 @@
             <div class="row">
               <div class="col-md-6">
                 <label>Room Number</label>
-                <input type="number" class="form-control" placeholder="Enter Room Number" name="room_number" id="room_number" min="0" required>
+                <input type="text" class="form-control" placeholder="Enter Room Number" name="room_number" id="room_number" min="0" required>
               </div>
               <div class="col-md-6">
                 <label>Floor Number</label>

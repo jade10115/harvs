@@ -286,7 +286,7 @@ class Admin extends CI_Controller {
 
     $this->form_validation->set_rules('building_id', 'Building Name', 'trim|required|integer');
     $this->form_validation->set_rules('room_type_id', 'Room Type', 'trim|required|integer');
-    $this->form_validation->set_rules('room_number', 'Floor Number', 'trim|required|integer');
+    $this->form_validation->set_rules('room_number', 'Floor Number', 'trim|required');
     $this->form_validation->set_rules('room_floor', 'Room Number', 'trim|required|integer');
 
     if ($this->form_validation->run() == FALSE){

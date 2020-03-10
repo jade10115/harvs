@@ -260,6 +260,28 @@
 					populateDepartments($(this).val());	
 				}
 			});
+
+			$('.updateSchedule').click(function(){
+				id = this.id;
+				id = id.split('//');
+				$('input[name="schedule_id"]').val(id[0]);
+				$('select[name="sy_id"]').val(id[1]);
+				$('select[name="semester_id"]').val(id[2]);
+				$('select[name="faculty_id"]').val(id[3]);
+				$('select[name="subject_id"]').val(id[4]);
+				$('select[name="room_id"]').val(id[5]);
+				$('select[name="day"]').val(id[6]);
+				if(id[7].charAt(0)=='0'){
+					id[7] = id[7].substring(1, id[7].length)
+				}
+				if(id[8].charAt(0)=='0'){
+					id[8] = id[8].substring(1, id[8].length)
+				}
+				$('.time_start').val(id[7]);
+				$('.time_end').val(id[8]);
+				$('.selectpicker').selectpicker('refresh');
+			}); // $('.updateSchedule').click()
+
 			// not done yet
 			$(document).on('submit', '.frm_course_submit', function(event){
 				if(this.id=='frm_course_add'){
@@ -316,6 +338,12 @@
 					}
 				});
 			}
+
+
+			// $('.time_start').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+			//   $('.time_end').prop('disabled');
+			// });
+
 
 		}); // $(document).ready()
 	</script>

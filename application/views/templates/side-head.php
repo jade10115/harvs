@@ -13,6 +13,12 @@
           Schedule*
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link <?=($title=='Faculties')?'active':'';?>" href="<?=base_url('head/faculty')?>">
+          <span data-feather="x"></span>
+          Faculty
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
