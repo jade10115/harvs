@@ -9,14 +9,14 @@
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Schedule')?'active':'';?>" href="<?=base_url('head/schedule')?>">
-          <span data-feather="x"></span>
-          Schedule*
+          <span data-feather="check"></span>
+          Schedule
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Faculties')?'active':'';?>" href="<?=base_url('head/faculty')?>">
           <span data-feather="x"></span>
-          Faculty
+          Faculty*
         </a>
       </li>
     </ul>
