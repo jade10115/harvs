@@ -122,22 +122,41 @@ Class Main_model extends CI_Model{
 
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
 
+	public function checkTimeConflict($time){
+		return $this->db->where('time_start<=',$time)
+										->where('time_end>=',$time)
+										->where('day', $_POST['day'])
+										->where('room_id', $_POST['room_id'])
+										->where('sy_id', $_POST['sy_id'])
+										->where('semester_id', $_POST['semester_id'])
+										->get('tbl_schedule')->result_array();
+	}
+
 	public function getBuildings(){
 		return $this->db->get('tbl_building')->result_array();
 	}
 
 	public function getRooms(){
-		return $this->db->join('tbl_building', 'tbl_building.building_id = tbl_room.building_id')->join('tbl_room_type', 'tbl_room_type.room_type_id = tbl_room.room_type_id')->get('tbl_room')->result_array();
+		return $this->db->join('tbl_building', 'tbl_building.building_id = tbl_room.building_id')
+										->join('tbl_room_type', 'tbl_room_type.room_type_id = tbl_room.room_type_id')
+										->get('tbl_room')->result_array();
 	}
 
 	public function getFaculties(){
 		// return $this->db->select('tbl_instructor.instructor_id, tbl_instructor.instructor_name, tbl_instructor.instructor_added, tbl_instructor.instructor_updated, count(tbl_subject.subject_id)')->from('tbl_instructor')->join('tbl_subject', 'tbl_instructor.instructor_id = tbl_subject.instructor_id', 'left')->group_by('tbl_instructor.instructor_id')->get()->result_array();	
 		// return $this->db->get('tbl_faculty')->result_array();
-		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')->get('tbl_faculty')->result_array();
+		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
+										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
+										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')
+										->get('tbl_faculty')->result_array();
 	}
 
 	public function getFaculty($id){
-		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')->where('tbl_faculty.faculty_id', $id)->get('tbl_faculty')->result_array();
+		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
+										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
+										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')
+										->where('tbl_faculty.faculty_id', $id)
+										->get('tbl_faculty')->result_array();
 	}
 
 	public function getSubjects(){
@@ -153,7 +172,9 @@ Class Main_model extends CI_Model{
 	}
 
 	public function getCourses(){
-		return $this->db->join('tbl_college', 'tbl_college.college_id = tbl_course.college_id')->join('tbl_department', 'tbl_department.department_id = tbl_course.department_id')->get('tbl_course')->result_array();
+		return $this->db->join('tbl_college', 'tbl_college.college_id = tbl_course.college_id')
+										->join('tbl_department', 'tbl_department.department_id = tbl_course.department_id')
+										->get('tbl_course')->result_array();
 	}
 
 	public function getDepartments(){
@@ -186,6 +207,8 @@ Class Main_model extends CI_Model{
 										->join('tbl_subject', 'tbl_subject.subject_id=tbl_schedule.subject_id')
 										->join('tbl_course', 'tbl_course.course_id=tbl_subject.course_id')
 										->join('tbl_faculty', 'tbl_faculty.faculty_id=tbl_schedule.faculty_id')
+										->join('tbl_semester', 'tbl_semester.semester_id=tbl_schedule.semester_id')
+										->join('tbl_sy', 'tbl_sy.sy_id=tbl_schedule.sy_id')
 										->get('tbl_schedule')->result_array();
 	}
 	
@@ -194,11 +217,11 @@ Class Main_model extends CI_Model{
 	}
 
 	public function getLogs(){
-		return $this->db->join('tbl_user', 'tbl_logs.user_id = tbl_user.user_id')->
-						join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')->
-						join('tbl_user_type', 'tbl_user.user_type_id = tbl_user_type.user_type_id')->
-						join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')->
-						get('tbl_logs')->result_array();
+		return $this->db->join('tbl_user', 'tbl_logs.user_id = tbl_user.user_id')
+										->join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')
+										->join('tbl_user_type', 'tbl_user.user_type_id = tbl_user_type.user_type_id')
+										->join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')
+										->get('tbl_logs')->result_array();
 	}
 
 	public function getDeletedDataName($name, $id) {
