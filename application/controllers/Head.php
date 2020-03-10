@@ -45,9 +45,11 @@ class Head extends CI_Controller {
       $t++;
     }
 
+    echo "Lunch Time";echo "<br>";
+
     for ($i=1; $i <= 8; $i++) { 
-      $t.':00:00';
-      $t.':30:00';
+      echo$t.':00:00';echo "<br>";
+      echo$t.':30:00';echo "<br>";
       $t++;
     } 
 		// $rooms = $this->main_model->checkTimeStart('07:'.$time.':00');
