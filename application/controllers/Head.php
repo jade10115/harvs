@@ -33,6 +33,19 @@ class Head extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function faculty_schedule($id){
+		$data['title'] = "Faculties";
+		$data['sy'] = $this->main_model->getSchoolYear();
+		$data['semesters'] = $this->main_model->getSemesters();
+		$data['subjects'] = $this->main_model->getSubjects();
+		$data['rooms'] = $this->main_model->getRooms();
+		$data['schedules'] = $this->main_model->getSchedulesByFacultyId($id);
+		$data['faculties'] = $this->main_model->getFaculty($id);
+		$this->load->view('templates/header', $data);
+		$this->load->view('head/faculty_schedule');
+		$this->load->view('templates/footer');
+	}
+
 	// -------------------------------------- VIEWS -------------------------------------- //
 
 	// ----------------------------------------------------------------------------------- //	

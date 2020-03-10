@@ -8,7 +8,7 @@
       <div class="card shadow-sm">
 			  <h5 class="card-header d-flex justify-content-between align-items-center">
           <?=$title?>
-          <a href="<?=base_url('admin/faculty_add')?>" class="btn btn-outline-dark btn-sm">Add Faculty</a>  
+          <!-- <a href="<?=base_url('admin/faculty_add')?>" class="btn btn-outline-dark btn-sm">Add Faculty</a>   -->
         </h5>
 			  <div class="card-body">
           <table class="table table-striped table-hover table-sm">
@@ -34,7 +34,7 @@
                 <td><?=$row['faculty_modified']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="<?=base_url('admin/faculty_view/'.$row['faculty_id']) ?>" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Faculty">
+                    <a href="<?=base_url('head/faculty_schedule/'.$row['faculty_id']) ?>" class="btn btn-sm btn-outline-info action-btn" data-toggle="tooltip" data-placement="top" title="View Schedule">
                       <span class="fa fa-eye"></span>
                     </a>
                     
