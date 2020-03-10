@@ -5,12 +5,12 @@ class Auth extends CI_Controller {
 
 	public function index()	{
 		$data['title'] = "Authentication";
-		$this->load->view('templates/header', $data);
-		$this->load->view('admin/index');
-		$this->load->view('templates/footer');
+		// $this->load->view('templates/header', $data);   
+		$this->load->view('admin/index', $data);
+		// $this->load->view('templates/footer');
 	}
 
-	public function login(){
+	public function login(){ 
 		header('location:'.base_url('admin'));
 	}
 
@@ -19,31 +19,20 @@ class Auth extends CI_Controller {
 	}
 
 	public function validate(){
-	  $username = $this->input->post('username');
-    $password = $this->input->post('password');
-    $this->db->select('*');
-    $this->db->from('tbl_user');
-    $this->db->where('username', $username);
-    $this->db->where('password', $password);
-		  
-    $query = $this->db->get();
-    $result = $query->result_array();
-
-    
-    if($query->num_rows() > 0){
-      $this->session->set_userdata('user_id', $result);
-
-      if($query->row('user_type_id') == 5){
-        redirect('Admin');
-      } elseif ($query->row('user_level') == 'student') {
-        redirect('event_user');
-      } elseif ($query->row('user_level') == 'stud_pres') {
-        redirect('event_pres');
-      } else{
-        redirect('login');
-      }
+    $this->load->library('form_validation');
+	  $this->form_validation->set_rules('username', 'Username', 'required');
+    $this->form_validation->set_rules('password', 'Password', 'required');
+    if ($this->form_validation->run() == FALSE){
+      $this->session->set_flashdata('toast', validation_errors());
+      redirect('auth');
     } else {
-      echo "<p style='color: red;font-weight: bold;'>Wrong username or password! </p>";
+        if ($this->main_model->userAuthentication()) {
+        // User role based redirect here
+        redirect('Admin');
+      } else {
+        $this->session->set_flashdata('toast', "Login failed! Incorrect username or password");
+        redirect('auth');
+      }    
     }
   }
 }

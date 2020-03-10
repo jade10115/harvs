@@ -25,6 +25,14 @@ class Head extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function faculty(){
+		$data['title'] = "Faculties";
+		$data['faculties'] = $this->main_model->getFacultiesByDeptId();
+		$this->load->view('templates/header', $data);
+		$this->load->view('head/faculty');
+		$this->load->view('templates/footer');
+	}
+
 	// -------------------------------------- VIEWS -------------------------------------- //
 
 	// ----------------------------------------------------------------------------------- //	

@@ -1,42 +1,74 @@
+/********************    FLOATING LABELS 1    *******************/
+
+  .fixlabel span{
+    position: absolute;
+    top: 8px;
+    left: 25px;
+    padding: 0;
+    transition: 0.51s;
+    pointer-events: none;
+    color: #aaa;
+    background: #fff;
+  }
+
+  .faculty .fixlabel span {    
+    top: -12px;
+    left: 25px;
+    font-size: 13px;
+    padding: 2px 4px;
+  }
 
 
-.faculty label, .notRequired {
-  position: absolute;
-  top: 8px;
-  left: 25px;
-  padding: 0;
-  transition: 0.51s;
-  pointer-events: none;
-  background: #fff;
-}
+  .field-wrapper 
+    {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    label 
+    {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      font-size: 13px;
+      color: #aaa;
+      transition: all 0.1s linear;
+      opacity: 0;
+      font-weight:b old;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    label.on 
+    {
+      color: #4481C4;
+      background: #fff;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    label.show 
+    {
+      left: 9px;
+      top: -12px;
+      opacity: 1;
+      background: #fff;
 
-.faculty .form-group input:focus ~ label,
-.faculty .form-group input:valid ~ label
- {
-  top: -12px;
-  left: 25px;
-  font-size: 12px;
-  padding: 2px 4px;
-}
+    }
+    option
+    {
+      color: black;
+    }
+    .watermark
+    {
+      color: #aaa;
+    }
+    body 
+    {
+      padding: 20px;
+         the following line fixes a blink in chrome https://code.google.com/p/chromium/issues/detail?id=108025 
+      -webkit-backface-visibility: hidden;
+    }
 
-.faculty .form-group textarea:focus ~ span, input:focus ~ span {
-  top: -12px;
-  left: 20px;
-  font-size: 12px;
-  padding: 2px 4px;
-}
+/********************    FLOATING LABELS 1   *******************/
 
-.faculty .form-group select:focus ~ label,
-.faculty .form-group select:valid ~ label {
-  top: -12px;
-  left: 20px;
-  font-size: 12px;
-  padding: 2px 4px;
-}
 
-.faculty .fixlabel label {
- top: -12px;
-  left: 25px;
-  font-size: 12px;
-  padding: 2px 4px;
-}
+
+
