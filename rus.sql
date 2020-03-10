@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2020 at 02:35 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Generation Time: Mar 10, 2020 at 09:49 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,62 @@ SET time_zone = "+00:00";
 --
 -- Database: `rus`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_adjacent`
+--
+
+CREATE TABLE `tbl_adjacent` (
+  `adjacent_id` int(11) NOT NULL,
+  `building_id` int(11) DEFAULT NULL,
+  `adjacent_building_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_adjacent`
+--
+
+INSERT INTO `tbl_adjacent` (`adjacent_id`, `building_id`, `adjacent_building_id`) VALUES
+(1, 3, 11),
+(2, 3, 10),
+(3, 10, 16),
+(4, 11, 10),
+(5, 8, 5),
+(6, 5, 8),
+(7, 11, 3),
+(8, 10, 11),
+(9, 10, 3),
+(10, 20, 8),
+(11, 8, 20),
+(12, 18, 12),
+(13, 12, 18),
+(14, 12, 16),
+(15, 16, 12),
+(16, 16, 10),
+(17, 9, 8),
+(18, 8, 9),
+(19, 18, 20),
+(20, 20, 18),
+(21, 12, 13),
+(22, 13, 12),
+(23, 9, 13),
+(24, 13, 9),
+(25, 13, 18),
+(26, 18, 13),
+(27, 10, 13),
+(28, 13, 10),
+(29, 18, 24),
+(30, 24, 18),
+(31, 18, 19),
+(32, 19, 18),
+(33, 19, 12),
+(34, 12, 19),
+(35, 13, 19),
+(36, 19, 13),
+(37, 5, 6),
+(38, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -61,7 +117,8 @@ INSERT INTO `tbl_building` (`building_id`, `building_name`, `no_of_rooms`, `no_o
 (20, 'GABALDON BUILDING', 4, 1, '2020-03-06 13:07:42', '0000-00-00 00:00:00'),
 (21, 'INDUSTRIAL ARTS BUILDING', 7, 1, '2020-03-06 13:07:57', '2020-03-06 13:13:02'),
 (22, 'INDUSTRIAL TECHNOLOGY BUILDING', 12, 3, '2020-03-06 13:08:33', '0000-00-00 00:00:00'),
-(23, 'DRAFTING BUILDING', 8, 2, '2020-03-06 13:16:57', '0000-00-00 00:00:00');
+(23, 'DRAFTING BUILDING', 8, 2, '2020-03-06 13:16:57', '0000-00-00 00:00:00'),
+(24, 'Education Building', 15, 3, '2020-03-10 15:29:22', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -440,7 +497,8 @@ INSERT INTO `tbl_logs` (`log_id`, `log_name`, `log_added`, `user_id`) VALUES
 (0, 'New room successfully added: ITB306', '2020-03-06 06:59:33', 1),
 (0, 'New room successfully added: ITB304', '2020-03-06 06:59:43', 1),
 (0, 'New room successfully added: ITB303', '2020-03-06 06:59:55', 1),
-(0, 'New room successfully added: ITB301', '2020-03-06 07:00:06', 1);
+(0, 'New room successfully added: ITB301', '2020-03-06 07:00:06', 1),
+(0, 'New building successfully added: Education Building', '2020-03-10 07:29:22', 1);
 
 -- --------------------------------------------------------
 
@@ -835,6 +893,13 @@ INSERT INTO `tbl_user_type` (`user_type_id`, `user_type`, `user_type_added`, `us
 --
 
 --
+-- Indexes for table `tbl_adjacent`
+--
+ALTER TABLE `tbl_adjacent`
+  ADD PRIMARY KEY (`adjacent_id`),
+  ADD KEY `building_id` (`building_id`);
+
+--
 -- Indexes for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
@@ -939,10 +1004,16 @@ ALTER TABLE `tbl_user_type`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_adjacent`
+--
+ALTER TABLE `tbl_adjacent`
+  MODIFY `adjacent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_college`
@@ -1027,6 +1098,16 @@ ALTER TABLE `tbl_user`
 --
 ALTER TABLE `tbl_user_type`
   MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tbl_adjacent`
+--
+ALTER TABLE `tbl_adjacent`
+  ADD CONSTRAINT `tbl_adjacent_ibfk_1` FOREIGN KEY (`building_id`) REFERENCES `tbl_building` (`building_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
