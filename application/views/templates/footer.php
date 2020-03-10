@@ -282,7 +282,6 @@
 				$('.selectpicker').selectpicker('refresh');
 			}); // $('.updateSchedule').click()
 
-			// not done yet
 			$(document).on('submit', '.frm_course_submit', function(event){
 				if(this.id=='frm_course_add'){
 					college_id = $('#college_id_add').val();
@@ -319,7 +318,6 @@
 
 				$('.selectpicker').selectpicker('refresh')
 			})
-			// not done yet
 
 			function populateDepartments(college_id, department_id){
 				$.ajax({

@@ -34,8 +34,30 @@ class Head extends CI_Controller {
 	}
 
 	public function checkavailability(){
-		$rooms = $this->main_model->checkavailability();
-		echo "<pre>";print_r(var_dump($rooms));die;
+		$t=7;
+    for ($i=7; $i <= 12; $i++) { 
+      if($i!=12){ 
+        echo $t.':00:00';echo "<br>";
+        echo $t.':30:00';echo "<br>";
+      } else { 
+        echo $t.':30:00';echo "<br>";
+      } 
+      $t++;
+    }
+
+    for ($i=1; $i <= 8; $i++) { 
+      $t.':00:00';
+      $t.':30:00';
+      $t++;
+    } 
+		// $rooms = $this->main_model->checkTimeStart('07:'.$time.':00');
+		// echo "<pre>";print_r(var_dump($rooms[0]['time_end']));die;
+
+		// foreach ($rooms as $row) {
+		// 	echo "<br>";
+		// 	// echo $row['room_number'];
+		// 	echo $row['room_id'];
+		// }
 	}
 
 	// -------------------------------------- VIEWS -------------------------------------- //
