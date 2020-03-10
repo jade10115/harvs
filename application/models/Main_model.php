@@ -123,8 +123,18 @@ Class Main_model extends CI_Model{
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
 
 	public function checkTimeConflict($time){
-		return $this->db->where('time_start<=',$time)
-										->where('time_end>=',$time)
+		return $this->db->where('time_start<=',date('H:i:s',strtotime('+1 seconds',strtotime($time))))
+										->where('time_end>=',date('H:i:s',strtotime('+1 seconds',strtotime($time))))
+										->where('day', $_POST['day'])
+										->where('room_id', $_POST['room_id'])
+										->where('sy_id', $_POST['sy_id'])
+										->where('semester_id', $_POST['semester_id'])
+										->get('tbl_schedule')->result_array();
+	}
+
+	public function checkTimeConflict2($time){
+		return $this->db->where('time_start<=',date('H:i:s',strtotime('-1 seconds',strtotime($time))))
+										->where('time_end>=',date('H:i:s',strtotime('-1 seconds',strtotime($time))))
 										->where('day', $_POST['day'])
 										->where('room_id', $_POST['room_id'])
 										->where('sy_id', $_POST['sy_id'])
@@ -403,6 +413,20 @@ Class Main_model extends CI_Model{
 			'designation_id' => $_POST['designation_id']
 		);
 		$this->db->where('faculty_id', $_POST['faculty_id'])->update('tbl_faculty', $data);
+	}
+
+	public function updateSchedule(){
+		$data = array(
+			'room_id' => $_POST['room_id'],
+			'subject_id' => $_POST['subject_id'],
+			'faculty_id' => $_POST['faculty_id'],
+			'day' => $_POST['day'],
+			'time_start' => $_POST['time_start'],
+			'time_end' => $_POST['time_end'],
+			'sy_id' => $_POST['sy_id'],
+			'semester_id' => $_POST['semester_id']
+		);
+		$this->db->where('schedule_id', $_POST['schedule_id'])->update('tbl_schedule', $data);
 	}
 
 	// -------------------------------------- UPDATE FUNCTIONS ---------------------------------------------- // 
