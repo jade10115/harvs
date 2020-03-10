@@ -151,6 +151,14 @@ Class Main_model extends CI_Model{
 										->get('tbl_faculty')->result_array();
 	}
 
+	public function getFacultiesByDeptId() {
+		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
+										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
+										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')
+										->where('tbl_faculty.department_id = '.$_SESSION['user']['department_id'])
+										->get('tbl_faculty')->result_array();
+	}
+
 	public function getFaculty($id){
 		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
 										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
@@ -202,6 +210,17 @@ Class Main_model extends CI_Model{
 	}
 
 	public function getSchedules(){
+		return $this->db->join('tbl_room', 'tbl_room.room_id=tbl_schedule.room_id')
+										->join('tbl_building', 'tbl_building.building_id=tbl_room.building_id')
+										->join('tbl_subject', 'tbl_subject.subject_id=tbl_schedule.subject_id')
+										->join('tbl_course', 'tbl_course.course_id=tbl_subject.course_id')
+										->join('tbl_faculty', 'tbl_faculty.faculty_id=tbl_schedule.faculty_id')
+										->join('tbl_semester', 'tbl_semester.semester_id=tbl_schedule.semester_id')
+										->join('tbl_sy', 'tbl_sy.sy_id=tbl_schedule.sy_id')
+										->get('tbl_schedule')->result_array();
+	}
+
+	public function getSchedulesByFacultyId($id){
 		return $this->db->join('tbl_room', 'tbl_room.room_id=tbl_schedule.room_id')
 										->join('tbl_building', 'tbl_building.building_id=tbl_room.building_id')
 										->join('tbl_subject', 'tbl_subject.subject_id=tbl_schedule.subject_id')
