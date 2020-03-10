@@ -20,6 +20,7 @@
                 <th>Subject</th>
                 <th>Employee</th>
                 <th>Time</th>
+                <th>School Year / Semester</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -31,7 +32,8 @@
                 <td><?=$row['course_abbr']?></td>
                 <td><?=$row['subject_code']?></td>
                 <td><?=$row['l_name']?> <?=$row['suffix_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></td>
-                <td>Wednesday <?=$row['time_start']?> - <?=$row['time_end']?></td>
+                <td><?=$row['day']?> <?=$row['time_start']?> - <?=$row['time_end']?></td>
+                <td><?=$row['school_year']?> <?=$row['semester_type']?></td>
                 <td>
                   <div class="btn-group" role="group">
                     <a href="#" class="btn btn-sm btn-outline-success action-btn update" id="" data-toggle="modal" data-target="#modal_schedule_update" data-toggle="tooltip" data-placement="top" title="Update Schedule">
@@ -152,21 +154,20 @@
                 <label>Time Start</label>
                 <select class="selectpicker time_start" title="Select Time Start" data-width="100%" data-live-search="true" name="time_start" required>
                   <optgroup label="Morning Time">
+                    <?php $t=7;?>
                     <?php for ($i=7; $i <= 12; $i++) { ?>
-                      <?php $t=7;?>
-                        <?php if($i!=12){ ?>
+                      <?php if($i!=12){ ?>
                         <option value="<?=$t?>:00:00"><?=$i?>:00 PM</option>
                         <option value="<?=$t?>:30:00"><?=$i?>:30 PM</option>
-                        <?php } else { ?>
+                      <?php } else { ?>
                         <option value="<?=$t?>:00:00"><?=$i?>:00 NN</option>
-                        <?php } ?>
+                      <?php } ?>
                       <?php $t++;?>
                     <?php } ?>
                   </optgroup>
 
                   <optgroup label="Afternoon Time">
                     <?php for ($i=1; $i <= 8; $i++) { ?>
-                      <?php $t=13;?>
                       <option value="<?=$t?>:00:00"><?=$i?>:00 PM</option>
                       <option value="<?=$t?>:30:00"><?=$i?>:30 PM</option>
                       <?php $t++;?>
@@ -181,21 +182,20 @@
                 <label>Time End</label>
                 <select class="selectpicker time_end" title="Select Room" data-width="100%" data-live-search="true" name="time_end" required>
                   <optgroup label="Morning Time">
+                    <?php $t=7;?>
                     <?php for ($i=7; $i <= 12; $i++) { ?>
-                      <?php $t=7;?>
-                        <?php if($i!=12){ ?>
+                      <?php if($i!=12){ ?>
                         <option value="<?=$t?>:00:00"><?=$i?>:00 PM</option>
                         <option value="<?=$t?>:30:00"><?=$i?>:30 PM</option>
-                        <?php } else { ?>
+                      <?php } else { ?>
                         <option value="<?=$t?>:00:00"><?=$i?>:00 NN</option>
-                        <?php } ?>
+                      <?php } ?>
                       <?php $t++;?>
                     <?php } ?>
                   </optgroup>
 
                   <optgroup label="Afternoon Time">
                     <?php for ($i=1; $i <= 8; $i++) { ?>
-                      <?php $t=13;?>
                       <option value="<?=$t?>:00:00"><?=$i?>:00 PM</option>
                       <option value="<?=$t?>:30:00"><?=$i?>:30 PM</option>
                       <?php $t++;?>
