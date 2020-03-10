@@ -24,7 +24,7 @@
       position: relative;
       margin-bottom: 20px;
     }
-    label 
+    #frm_faculty_add label 
     {
       position: absolute;
       top: -20px;
@@ -37,14 +37,14 @@
       padding-left: 4px;
       padding-right: 4px;
     }
-    label.on 
+    #frm_faculty_add label.on 
     {
       color: #4481C4;
       background: #fff;
       padding-left: 4px;
       padding-right: 4px;
     }
-    label.show 
+    #frm_faculty_add label.show 
     {
       left: 9px;
       top: -12px;
@@ -59,12 +59,6 @@
     .watermark
     {
       color: #aaa;
-    }
-    body 
-    {
-      padding: 20px;
-         the following line fixes a blink in chrome https://code.google.com/p/chromium/issues/detail?id=108025 
-      -webkit-backface-visibility: hidden;
     }
 
 /********************    FLOATING LABELS 1   *******************/
