@@ -33,6 +33,11 @@ class Head extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function checkavailability(){
+		$rooms = $this->main_model->checkavailability();
+		echo "<pre>";print_r(var_dump($rooms));die;
+	}
+
 	// -------------------------------------- VIEWS -------------------------------------- //
 
 	// ----------------------------------------------------------------------------------- //	

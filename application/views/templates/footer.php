@@ -316,6 +316,8 @@
 					event.preventDefault();
 					return false;
 				}
+
+				$('.selectpicker').selectpicker('refresh')
 			})
 			// not done yet
 

@@ -450,7 +450,8 @@ Class Main_model extends CI_Model{
 
 	// -------------------------------------- UPDATE FUNCTIONS ---------------------------------------------- // 
 
-
-
-	
+	public function checkavailability(){
+		return $this->db->join('tbl_schedule', 'tbl_schedule.room_id = tbl_room.room_id', 'right')
+										->get('tbl_room')->result_array();
+	}
 }
