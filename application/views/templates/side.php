@@ -87,6 +87,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link <?=($title=='Sample Schedule Layout')?'active':'';?>" href="<?=base_url('admin/sched_layout')?>">
+          <span data-feather="check"></span>
+          Schedule Layout
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link <?=($title=='Logs')?'active':'';?>" href="<?=base_url('admin/logs')?>">
           <span data-feather="check"></span>
           Logs

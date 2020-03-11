@@ -32,7 +32,7 @@
 								<i class="user" data-feather="user"></i>
 							</div>
 						</div>
-						<input type="text" name="username" class="form-control" placeholder="Enter Username">
+						<input type="text" name="username" class="form-control" placeholder="Enter Username" autofocus>
 					</div>
 				</div>
 				<div class="form-group">

@@ -158,6 +158,13 @@ class Admin extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function sched_layout(){
+		$data['title'] = "Sample Schedule Layout";
+		$this->load->view('templates/header', $data);
+		$this->load->view('admin/schedule_layout');
+		$this->load->view('templates/footer');
+	}
+
 	public function logs(){
 		$data['title'] = "Logs";
 		$data['logs'] = $this->main_model->getLogs();

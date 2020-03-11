@@ -3,9 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2020 at 08:52 AM
+
+-- Generation Time: Mar 10, 2020 at 09:49 AM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- PHP Version: 7.2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +22,62 @@ SET time_zone = "+00:00";
 --
 -- Database: `rus`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_adjacent`
+--
+
+CREATE TABLE `tbl_adjacent` (
+  `adjacent_id` int(11) NOT NULL,
+  `building_id` int(11) DEFAULT NULL,
+  `adjacent_building_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_adjacent`
+--
+
+INSERT INTO `tbl_adjacent` (`adjacent_id`, `building_id`, `adjacent_building_id`) VALUES
+(1, 3, 11),
+(2, 3, 10),
+(3, 10, 16),
+(4, 11, 10),
+(5, 8, 5),
+(6, 5, 8),
+(7, 11, 3),
+(8, 10, 11),
+(9, 10, 3),
+(10, 20, 8),
+(11, 8, 20),
+(12, 18, 12),
+(13, 12, 18),
+(14, 12, 16),
+(15, 16, 12),
+(16, 16, 10),
+(17, 9, 8),
+(18, 8, 9),
+(19, 18, 20),
+(20, 20, 18),
+(21, 12, 13),
+(22, 13, 12),
+(23, 9, 13),
+(24, 13, 9),
+(25, 13, 18),
+(26, 18, 13),
+(27, 10, 13),
+(28, 13, 10),
+(29, 18, 24),
+(30, 24, 18),
+(31, 18, 19),
+(32, 19, 18),
+(33, 19, 12),
+(34, 12, 19),
+(35, 13, 19),
+(36, 19, 13),
+(37, 5, 6),
+(38, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -42,9 +99,28 @@ CREATE TABLE `tbl_building` (
 --
 
 INSERT INTO `tbl_building` (`building_id`, `building_name`, `no_of_rooms`, `no_of_floors`, `building_added`, `building_modified`) VALUES
-(2, 'Science Building', 10, 3, '2020-02-21 16:11:32', '2020-02-21 16:15:36'),
-(3, 'Information Technology', 2, 2, '2020-02-26 16:37:50', '0000-00-00 00:00:00'),
-(4, '4', 4, 4, '2020-02-28 13:39:38', '0000-00-00 00:00:00');
+
+(3, 'INFORMATION TECHNOLOGY BUILDING (IT)', 8, 3, '2020-02-26 16:37:50', '2020-03-06 12:58:49'),
+(5, 'ACADEMIC BUILDING (CAS)', 17, 3, '2020-03-06 12:53:24', '0000-00-00 00:00:00'),
+(6, 'HOME TECHNOLOGY BUILDING (HTB)', 23, 3, '2020-03-06 12:54:20', '0000-00-00 00:00:00'),
+(7, 'COLLEGE OF BUSINESS AND ENTREPRENEURSHIP (COBE) (NEW BUILDING)', 10, 3, '2020-03-06 12:56:16', '0000-00-00 00:00:00'),
+(8, 'ABS-CBN LINGKOD KAPAMILYA BUILDING', 6, 2, '2020-03-06 12:56:51', '0000-00-00 00:00:00'),
+(9, 'GRADUATE SCHOOL BUILDING', 10, 2, '2020-03-06 12:57:24', '0000-00-00 00:00:00'),
+(10, 'COLLEGE OF ARCHITECTURE AND ALLIED DICIPLINE (CAAD)', 10, 2, '2020-03-06 12:58:09', '0000-00-00 00:00:00'),
+(11, 'INFORMATION TECHNOLOGY TRAINING DEVELOPMENT CENTER (ITTDC)', 4, 2, '2020-03-06 13:03:27', '2020-03-06 14:17:22'),
+(12, 'TECHNOLOGICAL BUILDING', 18, 3, '2020-03-06 13:03:58', '0000-00-00 00:00:00'),
+(13, 'SCIENCE BUILDING', 20, 3, '2020-03-06 13:04:41', '0000-00-00 00:00:00'),
+(14, 'FOUNDRY BUILDING', 1, 1, '2020-03-06 13:04:53', '0000-00-00 00:00:00'),
+(15, 'ETB BUILDING/ERAC BUILDING', 1, 1, '2020-03-06 13:05:33', '0000-00-00 00:00:00'),
+(16, 'MARINE BUILDING (NEW)', 4, 2, '2020-03-06 13:05:55', '0000-00-00 00:00:00'),
+(17, 'AUTOMOTIVE BUILDING', 4, 2, '2020-03-06 13:06:10', '0000-00-00 00:00:00'),
+(18, 'ADMIN/ENGINEERING BUILDING', 21, 3, '2020-03-06 13:06:46', '0000-00-00 00:00:00'),
+(19, 'MECHANICAL ENGINEERING BUILDING (NEW)', 4, 2, '2020-03-06 13:07:25', '0000-00-00 00:00:00'),
+(20, 'GABALDON BUILDING', 4, 1, '2020-03-06 13:07:42', '0000-00-00 00:00:00'),
+(21, 'INDUSTRIAL ARTS BUILDING', 7, 1, '2020-03-06 13:07:57', '2020-03-06 13:13:02'),
+(22, 'INDUSTRIAL TECHNOLOGY BUILDING', 12, 3, '2020-03-06 13:08:33', '0000-00-00 00:00:00'),
+(23, 'DRAFTING BUILDING', 8, 2, '2020-03-06 13:16:57', '0000-00-00 00:00:00'),
+(24, 'Education Building', 15, 3, '2020-03-10 15:29:22', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -212,27 +288,219 @@ INSERT INTO `tbl_logs` (`log_id`, `log_name`, `log_added`, `user_id`) VALUES
 (0, 'Room successfully updated: 201', '2020-02-29 00:39:08', 1),
 (0, 'New course successfully added: a', '2020-02-29 00:42:40', 1),
 (0, 'New schedule successfully added to:   ', '2020-03-03 23:11:43', 1),
-(0, 'New schedule successfully added to:   ', '2020-03-09 06:39:38', 1),
-(0, 'New schedule successfully added to:   ', '2020-03-09 06:39:53', 1),
-(0, 'New schedule successfully added to:   ', '2020-03-09 06:54:05', 1),
-(0, 'New schedule successfully added to: Francisco Osdon Ibañez', '2020-03-10 01:22:21', 1),
-(0, 'Successfully deleted schedule: ', '2020-03-10 05:04:29', 1),
-(0, 'Successfully deleted schedule: ', '2020-03-10 05:05:59', 1),
-(0, 'Successfully deleted schedule: ', '2020-03-10 05:06:08', 1),
-(0, 'Successfully deleted schedule: ', '2020-03-10 05:06:25', 1),
-(0, 'New schedule successfully added to: Francisco Osdon Ibañez', '2020-03-10 05:11:57', 1),
-(0, 'New schedule successfully added to: Francisco Osdon Ibañez', '2020-03-10 05:16:27', 1),
-(0, 'New schedule successfully added to: Francisco Osdon Ibañez', '2020-03-10 05:16:31', 1),
-(0, 'New schedule successfully added to: Francisco Osdon Ibañez', '2020-03-10 05:16:35', 1),
-(0, 'Successfully deleted schedule: ', '2020-03-10 05:16:43', 1),
-(0, 'Successfully deleted schedule: ', '2020-03-10 05:16:44', 1),
-(0, 'Successfully deleted schedule: ', '2020-03-10 05:16:45', 1),
-(0, 'New schedule successfully added to: Francisco Osdon Ibañez', '2020-03-10 05:18:57', 1),
-(0, 'New schedule successfully added to: Francisco Osdon Ibañez', '2020-03-10 05:21:21', 1),
-(0, 'Successfully deleted schedule: ', '2020-03-10 05:21:37', 1),
-(0, 'New schedule successfully added to: Francisco Osdon Ibañez', '2020-03-10 05:21:45', 1),
-(0, 'New schedule successfully added to:   ', '2020-03-10 06:02:44', 1),
-(0, 'Faculty successfully updated: ', '2020-03-10 07:06:26', 1);
+(0, 'New building successfully added: ACADEMIC BUILDING (CAS)', '2020-03-06 04:53:24', 1),
+(0, 'Successfully deleted building: 4', '2020-03-06 04:53:30', 1),
+(0, 'Successfully deleted building: Science Building', '2020-03-06 04:53:33', 1),
+(0, 'New building successfully added: HOME TECHNOLOGY BUILDING (HTB)', '2020-03-06 04:54:20', 1),
+(0, 'New building successfully added: COLLEGE OF BUSINESS AND ENTREPRENEURSHIP (COBE) (NEW BUILDING)', '2020-03-06 04:56:16', 1),
+(0, 'New building successfully added: ABS-CBN LINGKOD KAPAMILYA BUILDING', '2020-03-06 04:56:51', 1),
+(0, 'New building successfully added: GRADUATE SCHOOL BUILDING', '2020-03-06 04:57:24', 1),
+(0, 'New building successfully added: COLLEGE OF ARCHITECTURE AND ALLIED DICIPLINE (CAAD)', '2020-03-06 04:58:09', 1),
+(0, 'Building successfully updated: INFORMATION TECHNOLOGY BUILDING (IT)', '2020-03-06 04:58:49', 1),
+(0, 'New building successfully added: INFORMATION TECHNOLOGY TRAINING DEVELOPMENT CENTER', '2020-03-06 05:03:27', 1),
+(0, 'New building successfully added: TECHNOLOGICAL BUILDING', '2020-03-06 05:03:58', 1),
+(0, 'New building successfully added: SCIENCE BUILDING', '2020-03-06 05:04:41', 1),
+(0, 'New building successfully added: FOUNDRY BUILDING', '2020-03-06 05:04:53', 1),
+(0, 'New building successfully added: ETB BUILDING/ERAC BUILDING', '2020-03-06 05:05:33', 1),
+(0, 'New building successfully added: MARINE BUILDING (NEW)', '2020-03-06 05:05:55', 1),
+(0, 'New building successfully added: AUTOMOTIVE BUILDING', '2020-03-06 05:06:10', 1),
+(0, 'New building successfully added: ADMIN/ENGINEERING BUILDING', '2020-03-06 05:06:46', 1),
+(0, 'New building successfully added: MECHANICAL ENGINEERING BUILDING (NEW)', '2020-03-06 05:07:25', 1),
+(0, 'New building successfully added: GABALDON BUILDING', '2020-03-06 05:07:42', 1),
+(0, 'New building successfully added: INDUSTRIAL BUILDING', '2020-03-06 05:07:57', 1),
+(0, 'New building successfully added: INDUSTRIAL TECHNOLOGY BUILDING', '2020-03-06 05:08:33', 1),
+(0, 'Building successfully updated: INDUSTRIAL ARTS BUILDING', '2020-03-06 05:09:25', 1),
+(0, 'Building successfully updated: INDUSTRIAL ARTS BUILDING', '2020-03-06 05:13:02', 1),
+(0, 'New building successfully added: DRAFTING BUILDING', '2020-03-06 05:16:58', 1),
+(0, 'New room successfully added: frm_room_add', '2020-03-06 05:46:12', 1),
+(0, 'New room successfully added: ACB22', '2020-03-06 05:46:25', 1),
+(0, 'Room successfully updated: ACB21', '2020-03-06 05:47:02', 1),
+(0, 'New room successfully added: ACB23', '2020-03-06 05:47:16', 1),
+(0, 'New room successfully added: ACB24', '2020-03-06 05:47:24', 1),
+(0, 'New room successfully added: ACB25', '2020-03-06 05:47:34', 1),
+(0, 'New room successfully added: ACB26', '2020-03-06 05:47:45', 1),
+(0, 'New room successfully added: ACB27', '2020-03-06 05:47:57', 1),
+(0, 'New room successfully added: ACB28', '2020-03-06 05:48:04', 1),
+(0, 'New room successfully added: ACB31', '2020-03-06 05:48:19', 1),
+(0, 'New room successfully added: ACB32', '2020-03-06 05:48:34', 1),
+(0, 'New room successfully added: ACB33', '2020-03-06 05:48:43', 1),
+(0, 'New room successfully added: ACB33', '2020-03-06 05:48:53', 1),
+(0, 'New room successfully added: ACB34', '2020-03-06 05:49:02', 1),
+(0, 'New room successfully added: ACB35', '2020-03-06 05:49:20', 1),
+(0, 'New room successfully added: ACB36', '2020-03-06 05:49:29', 1),
+(0, 'New room successfully added: ACB37', '2020-03-06 05:49:37', 1),
+(0, 'New room successfully added: ACB38', '2020-03-06 05:49:48', 1),
+(0, 'New room successfully added: HTB101', '2020-03-06 05:50:47', 1),
+(0, 'New room successfully added: HTB102', '2020-03-06 05:51:01', 1),
+(0, 'New room successfully added: HTB103', '2020-03-06 05:51:20', 1),
+(0, 'New room successfully added: HTB105', '2020-03-06 05:51:31', 1),
+(0, 'New room successfully added: HTB106', '2020-03-06 05:51:39', 1),
+(0, 'New room successfully added: HTB107', '2020-03-06 05:51:52', 1),
+(0, 'New room successfully added: HTB201', '2020-03-06 05:52:33', 1),
+(0, 'New room successfully added: HTB202', '2020-03-06 05:52:41', 1),
+(0, 'Room successfully updated: HTB201', '2020-03-06 05:53:02', 1),
+(0, 'New room successfully added: HTB202', '2020-03-06 05:53:20', 1),
+(0, 'New room successfully added: HTB203', '2020-03-06 05:53:31', 1),
+(0, 'New room successfully added: HTB203', '2020-03-06 05:53:43', 1),
+(0, 'New room successfully added: HTB204', '2020-03-06 05:53:52', 1),
+(0, 'New room successfully added: HTB205', '2020-03-06 05:53:59', 1),
+(0, 'New room successfully added: HTB206', '2020-03-06 05:54:17', 1),
+(0, 'New room successfully added: HTB207', '2020-03-06 05:54:33', 1),
+(0, 'Room successfully updated: HTB207', '2020-03-06 05:54:49', 1),
+(0, 'New room successfully added: HTB208', '2020-03-06 05:55:41', 1),
+(0, 'New room successfully added: HTB301', '2020-03-06 05:56:02', 1),
+(0, 'New room successfully added: HTB302', '2020-03-06 05:56:11', 1),
+(0, 'New room successfully added: HTB303', '2020-03-06 05:56:20', 1),
+(0, 'New room successfully added: HTB304', '2020-03-06 05:56:36', 1),
+(0, 'New room successfully added: HTB305', '2020-03-06 05:56:47', 1),
+(0, 'New room successfully added: HTB306', '2020-03-06 05:57:03', 1),
+(0, 'New room successfully added: HTB307', '2020-03-06 05:57:12', 1),
+(0, 'New room successfully added: HTB308', '2020-03-06 05:57:34', 1),
+(0, 'New room successfully added: HTB309', '2020-03-06 05:57:48', 1),
+(0, 'New room successfully added: Room 1', '2020-03-06 05:59:08', 1),
+(0, 'New room successfully added: Room 2', '2020-03-06 05:59:16', 1),
+(0, 'New room successfully added: Room 3', '2020-03-06 05:59:29', 1),
+(0, 'New room successfully added: Room 4', '2020-03-06 05:59:36', 1),
+(0, 'New room successfully added: GSB 101', '2020-03-06 06:05:12', 1),
+(0, 'New room successfully added: GSB 110', '2020-03-06 06:06:31', 1),
+(0, 'New room successfully added: GSB201', '2020-03-06 06:07:15', 1),
+(0, 'Room successfully updated: GSB101', '2020-03-06 06:07:22', 1),
+(0, 'Room successfully updated: GSB110', '2020-03-06 06:07:29', 1),
+(0, 'New room successfully added: GSB202', '2020-03-06 06:07:48', 1),
+(0, 'New room successfully added: GSB203', '2020-03-06 06:07:57', 1),
+(0, 'New room successfully added: GSB204', '2020-03-06 06:08:08', 1),
+(0, 'New room successfully added: GSB205', '2020-03-06 06:08:24', 1),
+(0, 'New room successfully added: GSB206', '2020-03-06 06:08:35', 1),
+(0, 'New room successfully added: GSB207', '2020-03-06 06:08:43', 1),
+(0, 'New room successfully added: GSB208', '2020-03-06 06:08:49', 1),
+(0, 'New room successfully added: DRAFTING STUDIO 1', '2020-03-06 06:10:40', 1),
+(0, 'New room successfully added: DRAFTING STUDIO 2', '2020-03-06 06:10:47', 1),
+(0, 'New room successfully added: DRAFTING STUDIO 3', '2020-03-06 06:10:58', 1),
+(0, 'New room successfully added: DRAFTING STUDIO 4', '2020-03-06 06:11:04', 1),
+(0, 'New room successfully added: LECTURE ROOM 1', '2020-03-06 06:11:23', 1),
+(0, 'New room successfully added: LECTURE ROOM 2', '2020-03-06 06:11:28', 1),
+(0, 'New room successfully added: LECTURE ROOM 3', '2020-03-06 06:11:34', 1),
+(0, 'New room successfully added: LECTURE ROOM 4', '2020-03-06 06:11:42', 1),
+(0, 'New room successfully added: IT201', '2020-03-06 06:12:10', 1),
+(0, 'New room successfully added: IT202', '2020-03-06 06:12:20', 1),
+(0, 'New room successfully added: METROLOGY LABORATORY ROOM', '2020-03-06 06:13:05', 1),
+(0, 'New room successfully added: IT301', '2020-03-06 06:13:15', 1),
+(0, 'Room successfully updated: IT201', '2020-03-06 06:14:06', 1),
+(0, 'Room successfully updated: IT202', '2020-03-06 06:14:19', 1),
+(0, 'New room successfully added: IT203', '2020-03-06 06:14:37', 1),
+(0, 'New room successfully added: IT302', '2020-03-06 06:14:58', 1),
+(0, 'New room successfully added: IT303', '2020-03-06 06:15:19', 1),
+(0, 'New room successfully added: IT304', '2020-03-06 06:15:29', 1),
+(0, 'Building successfully updated: INFORMATION TECHNOLOGY TRAINING DEVELOPMENT CENTER (ITTDC)', '2020-03-06 06:17:22', 1),
+(0, 'New room successfully added: ITTDC249', '2020-03-06 06:19:56', 1),
+(0, 'New room successfully added: ITTDC248', '2020-03-06 06:20:08', 1),
+(0, 'New room successfully added: DB101', '2020-03-06 06:25:24', 1),
+(0, 'New room successfully added: DB102', '2020-03-06 06:26:12', 1),
+(0, 'New room successfully added: DB103', '2020-03-06 06:26:20', 1),
+(0, 'New room successfully added: DB104', '2020-03-06 06:26:28', 1),
+(0, 'New room successfully added: DB201', '2020-03-06 06:27:14', 1),
+(0, 'New room successfully added: DB202', '2020-03-06 06:27:23', 1),
+(0, 'New room successfully added: DB203', '2020-03-06 06:27:41', 1),
+(0, 'New room successfully added: DB204', '2020-03-06 06:27:49', 1),
+(0, 'New room successfully added: TB105', '2020-03-06 06:29:19', 1),
+(0, 'New room successfully added: TB101', '2020-03-06 06:30:05', 1),
+(0, 'New room successfully added: TB102', '2020-03-06 06:30:20', 1),
+(0, 'New room successfully added: TB201', '2020-03-06 06:30:44', 1),
+(0, 'New room successfully added: TB202', '2020-03-06 06:30:58', 1),
+(0, 'New room successfully added: TB203', '2020-03-06 06:31:11', 1),
+(0, 'New room successfully added: TB204', '2020-03-06 06:31:22', 1),
+(0, 'New room successfully added: TB205', '2020-03-06 06:31:30', 1),
+(0, 'New room successfully added: TB206', '2020-03-06 06:31:41', 1),
+(0, 'New room successfully added: TB208', '2020-03-06 06:32:16', 1),
+(0, 'New room successfully added: TB301', '2020-03-06 06:32:40', 1),
+(0, 'New room successfully added: TB302', '2020-03-06 06:32:48', 1),
+(0, 'New room successfully added: TB305', '2020-03-06 06:33:21', 1),
+(0, 'New room successfully added: TB303', '2020-03-06 06:33:34', 1),
+(0, 'New room successfully added: TB304', '2020-03-06 06:33:43', 1),
+(0, 'New room successfully added: TB306', '2020-03-06 06:34:17', 1),
+(0, 'New room successfully added: SB127', '2020-03-06 06:35:27', 1),
+(0, 'New room successfully added: SB128', '2020-03-06 06:35:37', 1),
+(0, 'New room successfully added: SB129', '2020-03-06 06:35:45', 1),
+(0, 'New room successfully added: SB129', '2020-03-06 06:35:54', 1),
+(0, 'New room successfully added: SB130', '2020-03-06 06:36:03', 1),
+(0, 'New room successfully added: SB131', '2020-03-06 06:36:11', 1),
+(0, 'New room successfully added: SB132', '2020-03-06 06:36:21', 1),
+(0, 'New room successfully added: SB233', '2020-03-06 06:36:56', 1),
+(0, 'New room successfully added: SB234', '2020-03-06 06:37:07', 1),
+(0, 'New room successfully added: SB235', '2020-03-06 06:37:22', 1),
+(0, 'New room successfully added: SB236', '2020-03-06 06:37:29', 1),
+(0, 'New room successfully added: SB237', '2020-03-06 06:37:39', 1),
+(0, 'New room successfully added: SB238', '2020-03-06 06:37:45', 1),
+(0, 'New room successfully added: SB239', '2020-03-06 06:37:52', 1),
+(0, 'New room successfully added: SB240', '2020-03-06 06:38:07', 1),
+(0, 'New room successfully added: SB322', '2020-03-06 06:38:21', 1),
+(0, 'New room successfully added: SB323', '2020-03-06 06:38:31', 1),
+(0, 'New room successfully added: SB324', '2020-03-06 06:38:37', 1),
+(0, 'New room successfully added: SB326', '2020-03-06 06:38:52', 1),
+(0, 'New room successfully added: SB327', '2020-03-06 06:39:04', 1),
+(0, 'New room successfully added: SB328', '2020-03-06 06:39:17', 1),
+(0, 'New room successfully added: SB329', '2020-03-06 06:39:25', 1),
+(0, 'New room successfully added: ROOM 1', '2020-03-06 06:39:46', 1),
+(0, 'New room successfully added: ROOM 1', '2020-03-06 06:40:00', 1),
+(0, 'New room successfully added: ROOM 201', '2020-03-06 06:40:57', 1),
+(0, 'New room successfully added: ROOM 202', '2020-03-06 06:41:03', 1),
+(0, 'New room successfully added: ROOM 203', '2020-03-06 06:41:11', 1),
+(0, 'New room successfully added: ROOM 201', '2020-03-06 06:41:55', 1),
+(0, 'New room successfully added: ROOM 202', '2020-03-06 06:42:04', 1),
+(0, 'New room successfully added: ROOM 203', '2020-03-06 06:42:41', 1),
+(0, 'New room successfully added: EB201', '2020-03-06 06:44:13', 1),
+(0, 'New room successfully added: EB202', '2020-03-06 06:44:24', 1),
+(0, 'New room successfully added: EB203', '2020-03-06 06:44:36', 1),
+(0, 'New room successfully added: EB205', '2020-03-06 06:44:59', 1),
+(0, 'New room successfully added: EB206', '2020-03-06 06:45:08', 1),
+(0, 'New room successfully added: EB207', '2020-03-06 06:45:25', 1),
+(0, 'New room successfully added: EB209', '2020-03-06 06:45:38', 1),
+(0, 'New room successfully added: EB210', '2020-03-06 06:45:48', 1),
+(0, 'New room successfully added: EB211', '2020-03-06 06:46:03', 1),
+(0, 'New room successfully added: EB301', '2020-03-06 06:46:25', 1),
+(0, 'New room successfully added: EB302', '2020-03-06 06:46:31', 1),
+(0, 'New room successfully added: EB303', '2020-03-06 06:46:36', 1),
+(0, 'New room successfully added: EB304', '2020-03-06 06:46:43', 1),
+(0, 'New room successfully added: EB305', '2020-03-06 06:46:48', 1),
+(0, 'New room successfully added: EB306', '2020-03-06 06:46:56', 1),
+(0, 'New room successfully added: EB307', '2020-03-06 06:47:12', 1),
+(0, 'New room successfully added: EB308', '2020-03-06 06:47:18', 1),
+(0, 'New room successfully added: EB310', '2020-03-06 06:47:30', 1),
+(0, 'New room successfully added: EB311', '2020-03-06 06:47:37', 1),
+(0, 'New room successfully added: EB312', '2020-03-06 06:47:46', 1),
+(0, 'New room successfully added: EB312', '2020-03-06 06:47:54', 1),
+(0, 'New room successfully added: EB313', '2020-03-06 06:50:39', 1),
+(0, 'New room successfully added: EB314', '2020-03-06 06:50:50', 1),
+(0, 'New room successfully added: EB315', '2020-03-06 06:50:56', 1),
+(0, 'New room successfully added: EB316', '2020-03-06 06:51:10', 1),
+(0, 'New room successfully added: EB317', '2020-03-06 06:52:00', 1),
+(0, 'New room successfully added: ELB201', '2020-03-06 06:53:06', 1),
+(0, 'New room successfully added: ELB202', '2020-03-06 06:53:17', 1),
+(0, 'New room successfully added: ELB203', '2020-03-06 06:53:23', 1),
+(0, 'New room successfully added: GB1', '2020-03-06 06:53:52', 1),
+(0, 'New room successfully added: GB2', '2020-03-06 06:53:59', 1),
+(0, 'New room successfully added: GB3', '2020-03-06 06:54:08', 1),
+(0, 'New room successfully added: GB4', '2020-03-06 06:54:19', 1),
+(0, 'New room successfully added: IAB01', '2020-03-06 06:54:50', 1),
+(0, 'New room successfully added: IAB02', '2020-03-06 06:55:01', 1),
+(0, 'New room successfully added: IAB03', '2020-03-06 06:55:11', 1),
+(0, 'New room successfully added: IAB04A', '2020-03-06 06:55:21', 1),
+(0, 'New room successfully added: IAB04B', '2020-03-06 06:55:28', 1),
+(0, 'New room successfully added: IAB05', '2020-03-06 06:55:37', 1),
+(0, 'New room successfully added: IAB06', '2020-03-06 06:55:47', 1),
+(0, 'New room successfully added: ITB103', '2020-03-06 06:56:36', 1),
+(0, 'New room successfully added: ITB104', '2020-03-06 06:56:48', 1),
+(0, 'New room successfully added: ITB105', '2020-03-06 06:56:58', 1),
+(0, 'New room successfully added: ITB201', '2020-03-06 06:57:18', 1),
+(0, 'New room successfully added: ITB202', '2020-03-06 06:58:37', 1),
+(0, 'New room successfully added: ITB203', '2020-03-06 06:58:51', 1),
+(0, 'New room successfully added: ITB205', '2020-03-06 06:59:08', 1),
+(0, 'New room successfully added: ITB305', '2020-03-06 06:59:24', 1),
+(0, 'New room successfully added: ITB306', '2020-03-06 06:59:33', 1),
+(0, 'New room successfully added: ITB304', '2020-03-06 06:59:43', 1),
+(0, 'New room successfully added: ITB303', '2020-03-06 06:59:55', 1),
+(0, 'New room successfully added: ITB301', '2020-03-06 07:00:06', 1),
+(0, 'New building successfully added: Education Building', '2020-03-10 07:29:22', 1);
 
 -- --------------------------------------------------------
 
@@ -327,6 +595,7 @@ CREATE TABLE `tbl_schedule` (
 --
 
 INSERT INTO `tbl_schedule` (`schedule_id`, `room_id`, `subject_id`, `faculty_id`, `day`, `time_start`, `time_end`, `sy_id`, `semester_id`, `schedule_added`, `schedule_modified`) VALUES
+
 (2, 5, 3, 1, 'Wednesday', '07:00:00', '13:00:00', 1, 3, '2020-03-11 15:32:34', '0000-00-00 00:00:00'),
 (7, 5, 3, 1, 'Monday', '09:00:00', '10:00:00', 1, 1, '2020-03-12 13:11:57', NULL),
 (12, 5, 3, 1, 'Monday', '19:30:00', '20:30:00', 2, 5, '2020-03-10 13:21:21', NULL),
@@ -451,6 +720,13 @@ INSERT INTO `tbl_user_type` (`user_type_id`, `user_type`, `user_type_added`, `us
 --
 
 --
+-- Indexes for table `tbl_adjacent`
+--
+ALTER TABLE `tbl_adjacent`
+  ADD PRIMARY KEY (`adjacent_id`),
+  ADD KEY `building_id` (`building_id`);
+
+--
 -- Indexes for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
@@ -555,6 +831,12 @@ ALTER TABLE `tbl_user_type`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_adjacent`
+--
+ALTER TABLE `tbl_adjacent`
+  MODIFY `adjacent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
@@ -643,6 +925,16 @@ ALTER TABLE `tbl_user`
 --
 ALTER TABLE `tbl_user_type`
   MODIFY `user_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tbl_adjacent`
+--
+ALTER TABLE `tbl_adjacent`
+  ADD CONSTRAINT `tbl_adjacent_ibfk_1` FOREIGN KEY (`building_id`) REFERENCES `tbl_building` (`building_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
