@@ -142,8 +142,34 @@ Class Main_model extends CI_Model{
 										->get('tbl_schedule')->result_array();
 	}
 
+	public function checkTimeConflictSession($room_id){
+		return $this->db->where('time_start<=',date('H:i:s',strtotime('+1 seconds',strtotime($_SESSION['available_rooms']['time_start']))))
+										->where('time_end>=',date('H:i:s',strtotime('+1 seconds',strtotime($_SESSION['available_rooms']['time_start']))))
+										->where('day', $_SESSION['available_rooms']['day'])
+										->where('room_id', $room_id)
+										->where('sy_id', $_SESSION['available_rooms']['sy_id'])
+										->where('semester_id', $_SESSION['available_rooms']['semester_id'])
+										->get('tbl_schedule')->result_array();
+	}
+
+	public function checkTimeConflictSession2($room_id){
+		return $this->db->where('time_start<=',date('H:i:s',strtotime('-1 seconds',strtotime($_SESSION['available_rooms']['time_end']))))
+										->where('time_end>=',date('H:i:s',strtotime('-1 seconds',strtotime($_SESSION['available_rooms']['time_end']))))
+										->where('day', $_SESSION['available_rooms']['day'])
+										->where('room_id', $room_id)
+										->where('sy_id', $_SESSION['available_rooms']['sy_id'])
+										->where('semester_id', $_SESSION['available_rooms']['semester_id'])
+										->get('tbl_schedule')->result_array();
+	}
+
 	public function getBuildings(){
 		return $this->db->get('tbl_building')->result_array();
+	}
+
+	public function getBuilding($room_id){
+		return $this->db->where('room_id', $room_id)
+										->join('tbl_room','tbl_room.building_id=tbl_building.building_id')
+										->get('tbl_building')->result_array();
 	}
 
 	public function getRooms(){
@@ -152,9 +178,14 @@ Class Main_model extends CI_Model{
 										->get('tbl_room')->result_array();
 	}
 
+	public function getBuildingRooms($building_id){
+		return $this->db->where('tbl_room.building_id', $building_id)
+										->join('tbl_building', 'tbl_building.building_id = tbl_room.building_id')
+										->join('tbl_room_type', 'tbl_room_type.room_type_id = tbl_room.room_type_id')
+										->get('tbl_room')->result_array();
+	}
+
 	public function getFaculties(){
-		// return $this->db->select('tbl_instructor.instructor_id, tbl_instructor.instructor_name, tbl_instructor.instructor_added, tbl_instructor.instructor_updated, count(tbl_subject.subject_id)')->from('tbl_instructor')->join('tbl_subject', 'tbl_instructor.instructor_id = tbl_subject.instructor_id', 'left')->group_by('tbl_instructor.instructor_id')->get()->result_array();	
-		// return $this->db->get('tbl_faculty')->result_array();
 		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
 										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
 										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')

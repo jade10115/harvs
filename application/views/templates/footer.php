@@ -282,6 +282,12 @@
 				$('.selectpicker').selectpicker('refresh');
 			}); // $('.updateSchedule').click()
 
+			$('.modal').on('hidden.bs.modal', function (e) {
+			  $('.selectpicker').selectpicker('deselectAll');
+			  $('.selectpicker').selectpicker('val', '');
+			  $('.selectpicker').selectpicker('refresh');
+			})
+
 			$(document).on('submit', '.frm_course_submit', function(event){
 				if(this.id=='frm_course_add'){
 					college_id = $('#college_id_add').val();

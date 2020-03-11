@@ -33,34 +33,52 @@ class Head extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function checkavailability(){
-		$t=7;
-    for ($i=7; $i <= 12; $i++) { 
-      if($i!=12){ 
-        echo $t.':00:00';echo "<br>";
-        echo $t.':30:00';echo "<br>";
-      } else { 
-        echo $t.':30:00';echo "<br>";
-      } 
-      $t++;
-    }
+	public function available_rooms(){
+		$data['title'] = "Schedule";
+		$data['building'] = $this->main_model->getBuilding($_SESSION['available_rooms']['room_id']);
+		$rooms = $this->main_model->getBuildingRooms($data['building'][0]['building_id']);
+		foreach ($rooms as $row) {
+			$conflictStart = $this->main_model->checkTimeConflictSession($row['room_id']);
+			$conflictEnd = $this->main_model->checkTimeConflictSession2($row['room_id']);
+			if($conflictStart||$conflictEnd){
 
-    echo "Lunch Time";echo "<br>";
-
-    for ($i=1; $i <= 8; $i++) { 
-      echo$t.':00:00';echo "<br>";
-      echo$t.':30:00';echo "<br>";
-      $t++;
-    } 
-		// $rooms = $this->main_model->checkTimeStart('07:'.$time.':00');
-		// echo "<pre>";print_r(var_dump($rooms[0]['time_end']));die;
-
-		// foreach ($rooms as $row) {
-		// 	echo "<br>";
-		// 	// echo $row['room_number'];
-		// 	echo $row['room_id'];
-		// }
+	  	} else {
+	  		echo "<pre>";print_r(var_dump($row['room_id']));die;
+	  	}
+		}
+		$this->load->view('templates/header', $data);
+		$this->load->view('head/available_rooms');
+		$this->load->view('templates/footer');
 	}
+
+	// public function checkavailability(){
+	// 	$t=7;
+ //    for ($i=7; $i <= 12; $i++) { 
+ //      if($i!=12){ 
+ //        echo $t.':00:00';echo "<br>";
+ //        echo $t.':30:00';echo "<br>";
+ //      } else { 
+ //        echo $t.':30:00';echo "<br>";
+ //      } 
+ //      $t++;
+ //    }
+
+ //    echo "Lunch Time";echo "<br>";
+
+ //    for ($i=1; $i <= 8; $i++) { 
+ //      echo$t.':00:00';echo "<br>";
+ //      echo$t.':30:00';echo "<br>";
+ //      $t++;
+ //    } 
+	// 	// $rooms = $this->main_model->checkTimeStart('07:'.$time.':00');
+	// 	// echo "<pre>";print_r(var_dump($rooms[0]['time_end']));die;
+
+	// 	// foreach ($rooms as $row) {
+	// 	// 	echo "<br>";
+	// 	// 	// echo $row['room_number'];
+	// 	// 	echo $row['room_id'];
+	// 	// }
+	// }
 
 	// -------------------------------------- VIEWS -------------------------------------- //
 
@@ -74,6 +92,14 @@ class Head extends CI_Controller {
 
   	if($conflictStart||$conflictEnd){
   		$this->form_validation->set_message('schedule_check', 'This schedule is not available.');
+  		$_SESSION['available_rooms']['room_id'] = $_POST['room_id'];
+  		$_SESSION['available_rooms']['day'] = $_POST['day'];
+  		$_SESSION['available_rooms']['sy_id'] = $_POST['sy_id'];
+  		$_SESSION['available_rooms']['semester_id'] = $_POST['semester_id'];
+  		$_SESSION['available_rooms']['time_start'] = $_POST['time_start'];
+  		$_SESSION['available_rooms']['time_end'] = $_POST['time_end'];
+
+  		redirect('/head/available_rooms', 'refresh');
       return false;
   	} else {
   		return true;
@@ -99,7 +125,7 @@ class Head extends CI_Controller {
 		$this->load->library('form_validation');
 
     $this->form_validation->set_rules('sy_id', 'School Year', 'trim|required');
-    $this->form_validation->set_rules('time_start', 'Start Time', 'trim|required|callback_schedule_check|callback_time_check');
+    $this->form_validation->set_rules('time_start', 'Start Time', 'trim|required|callback_time_check|callback_schedule_check');
 
     if ($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
