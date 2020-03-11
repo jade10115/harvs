@@ -4,7 +4,7 @@
   <div class="row">
     <?php $this->load->view('templates/side');?>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-4 px-4 mb-3">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-2 mb-3">
       <div class="card shadow-sm">
 			  <h5 class="card-header d-flex justify-content-between align-items-center">
           <?=$title?>

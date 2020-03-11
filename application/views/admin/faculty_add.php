@@ -159,7 +159,7 @@
             <div class="col-md-12 mt-2">
               <div class="form-group field-wrapper ">
                 <label for="address">Address <small>(optional)</small></label>
-                <textarea class="form-control" name="address" placeholder="Adrress"></textarea>
+                <textarea class="form-control" name="address" placeholder="Address"></textarea>
               </div>
             </div>
           </div>
