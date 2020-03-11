@@ -32,50 +32,30 @@ class Head extends CI_Controller {
   
 	public function available_rooms(){
 		$data['title'] = "Schedule";
+		$data['faculty'] = $this->main_model->getFaculty($_SESSION['available_rooms']['faculty_id']);
 		$data['building'] = $this->main_model->getBuilding($_SESSION['available_rooms']['room_id']);
+		$data['semester'] = $this->main_model->getSemester($_SESSION['available_rooms']['semester_id']);
+		$data['sy'] = $this->main_model->getSchoolYearName($_SESSION['available_rooms']['sy_id']);
+		$data['room'] = $this->main_model->getRoom($_SESSION['available_rooms']['room_id']);
 		$rooms = $this->main_model->getBuildingRooms($data['building'][0]['building_id']);
+		$available_rooms = [];
+
 		foreach ($rooms as $row) {
-			$conflictStart = $this->main_model->checkTimeConflictSession($row['room_id']);
-			$conflictEnd = $this->main_model->checkTimeConflictSession2($row['room_id']);
+			$conflictStart = $this->main_model->checkTimeConflict($_SESSION['available_rooms']['time_start'], $_SESSION['available_rooms']['day'], $row['room_id'], $_SESSION['available_rooms']['sy_id'], $_SESSION['available_rooms']['semester_id']);
+			$conflictEnd = $this->main_model->checkTimeConflict2($_SESSION['available_rooms']['time_end'], $_SESSION['available_rooms']['day'], $row['room_id'], $_SESSION['available_rooms']['sy_id'], $_SESSION['available_rooms']['semester_id']);
 			if($conflictStart||$conflictEnd){
 
 	  	} else {
-	  		echo "<pre>";print_r(var_dump($row['room_id']));die;
+	  		array_push($available_rooms, $row);
 	  	}
 		}
+
+		$data['available_rooms'] = $available_rooms;
+
 		$this->load->view('templates/header', $data);
 		$this->load->view('head/available_rooms');
 		$this->load->view('templates/footer');
 	}
-
-	// public function checkavailability(){
-	// 	$t=7;
- //    for ($i=7; $i <= 12; $i++) { 
- //      if($i!=12){ 
- //        echo $t.':00:00';echo "<br>";
- //        echo $t.':30:00';echo "<br>";
- //      } else { 
- //        echo $t.':30:00';echo "<br>";
- //      } 
- //      $t++;
- //    }
-
- //    echo "Lunch Time";echo "<br>";
-
- //    for ($i=1; $i <= 8; $i++) { 
- //      echo$t.':00:00';echo "<br>";
- //      echo$t.':30:00';echo "<br>";
- //      $t++;
- //    } 
-	// 	// $rooms = $this->main_model->checkTimeStart('07:'.$time.':00');
-	// 	// echo "<pre>";print_r(var_dump($rooms[0]['time_end']));die;
-
-	// 	// foreach ($rooms as $row) {
-	// 	// 	echo "<br>";
-	// 	// 	// echo $row['room_number'];
-	// 	// 	echo $row['room_id'];
-	// 	// }
-	// }
 
 	public function faculty_schedule($id){
 		$data = $this->getAllDetails();
@@ -100,8 +80,6 @@ class Head extends CI_Controller {
 		return $data;
 	}
 
-
-
 	// --------------------------------------- MISC -------------------------------------- //
 
 	// ----------------------------------------------------------------------------------- //	
@@ -109,17 +87,20 @@ class Head extends CI_Controller {
 	// ------------------------------------- CALLBACK ------------------------------------ //
 
 	public function schedule_check($str){
-		$conflictStart = $this->main_model->checkTimeConflict($_POST['time_start']);
-		$conflictEnd = $this->main_model->checkTimeConflict2($_POST['time_end']);
+		$conflictStart = $this->main_model->checkTimeConflict($_POST['time_start'], $_POST['day'], $_POST['room_id'], $_POST['sy_id'], $_POST['semester_id']);
+		$conflictEnd = $this->main_model->checkTimeConflict2($_POST['time_end'], $_POST['day'], $_POST['room_id'], $_POST['sy_id'], $_POST['semester_id']);
 
   	if($conflictStart||$conflictEnd){
-  		$this->form_validation->set_message('schedule_check', 'This schedule is not available.');
+  		$_SESSION['available_rooms']['faculty_id'] = $_POST['faculty_id'];
   		$_SESSION['available_rooms']['room_id'] = $_POST['room_id'];
   		$_SESSION['available_rooms']['day'] = $_POST['day'];
   		$_SESSION['available_rooms']['sy_id'] = $_POST['sy_id'];
   		$_SESSION['available_rooms']['semester_id'] = $_POST['semester_id'];
   		$_SESSION['available_rooms']['time_start'] = $_POST['time_start'];
   		$_SESSION['available_rooms']['time_end'] = $_POST['time_end'];
+
+  		$action = 'The room is currently not available in the said time frame. These are the rooms available in the same building.';
+	  	$this->session->set_flashdata('toast', $action);
 
   		redirect('/head/available_rooms', 'refresh');
       return false;
@@ -143,7 +124,7 @@ class Head extends CI_Controller {
 
 	// -------------------------------------- INSERT-------------------------------------- //
 
-	public function addSchedule($route = "", $id = ""){
+	public function addSchedule($route="", $id=""){
 		if ($route == null) {
 			$route = 'schedule';
 		} else {

@@ -116,6 +116,30 @@
 				pageLength: 10
 			});
 
+			$('.assign').click(function(){
+				$.alert({
+					title: 'Confirmation',
+					content: 'Are you sure do you want to assign this room?',
+					type: 'blue',
+					icon: 'fa fa-question-circle',
+					draggable: true,
+					autoClose: 'cancel|5000',
+					backgroundDismiss: true,
+					escapekey: true,
+					buttons: {
+						confirm: {
+							text: 'Confirm',
+							btnClass: 'btn-blue',
+							keys: ['enter'],
+							action: function(){
+								window.location.replace(link);
+							}
+		 				},
+						cancel: {}
+					}
+				});	
+			});// $('.assign').click()
+
 			$('.delete').click(function(){
 				link = this.id
 				$.alert({
