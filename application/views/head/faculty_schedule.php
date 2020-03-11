@@ -65,7 +65,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <?=form_open('head/addSchedule', 'id="frm_schedule_add"');?>
+        <?=form_open('head/addSchedule/faculty_schedule/'.$faculties[0]['faculty_id'], 'id="frm_schedule_add"');?>
           <div class="row">
             <div class="form-group col-md-6">
               <label>School Year</label>

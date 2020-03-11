@@ -13,12 +13,9 @@ class Head extends CI_Controller {
 	}
 
 	public function schedule(){
+		$data = $this->getAllDetails();
 		$data['title'] = "Schedule";
-		$data['sy'] = $this->main_model->getSchoolYear();
-		$data['semesters'] = $this->main_model->getSemesters();
 		$data['faculties'] = $this->main_model->getFaculties();
-		$data['subjects'] = $this->main_model->getSubjects();
-		$data['rooms'] = $this->main_model->getRooms();
 		$data['schedules'] = $this->main_model->getSchedules();
 		$this->load->view('templates/header', $data);
 		$this->load->view('head/schedule');
@@ -34,11 +31,8 @@ class Head extends CI_Controller {
 	}
 
 	public function faculty_schedule($id){
+		$data = $this->getAllDetails();
 		$data['title'] = "Faculties";
-		$data['sy'] = $this->main_model->getSchoolYear();
-		$data['semesters'] = $this->main_model->getSemesters();
-		$data['subjects'] = $this->main_model->getSubjects();
-		$data['rooms'] = $this->main_model->getRooms();
 		$data['schedules'] = $this->main_model->getSchedulesByFacultyId($id);
 		$data['faculties'] = $this->main_model->getFaculty($id);
 		$this->load->view('templates/header', $data);
@@ -47,6 +41,22 @@ class Head extends CI_Controller {
 	}
 
 	// -------------------------------------- VIEWS -------------------------------------- //
+
+	// ----------------------------------------------------------------------------------- //	
+
+	// --------------------------------------- MISC -------------------------------------- //
+
+	private function getAllDetails() {
+		$data['sy'] = $this->main_model->getSchoolYear();
+		$data['semesters'] = $this->main_model->getSemesters();
+		$data['subjects'] = $this->main_model->getSubjects();
+		$data['rooms'] = $this->main_model->getRooms();
+		return $data;
+	}
+
+
+
+	// --------------------------------------- MISC -------------------------------------- //
 
 	// ----------------------------------------------------------------------------------- //	
 
@@ -79,22 +89,27 @@ class Head extends CI_Controller {
 
 	// -------------------------------------- INSERT-------------------------------------- //
 
-	public function addSchedule(){
+	public function addSchedule($route = "", $id = ""){
+		if ($route == null) {
+			$route = 'schedule';
+		} else {
+			$route = "$route/$id";
+		}
 		$this->load->library('form_validation');
 
-    $this->form_validation->set_rules('sy_id', 'School Year', 'trim|required');
-    $this->form_validation->set_rules('time_start', 'Start Time', 'trim|required|callback_schedule_check|callback_time_check');
+	    $this->form_validation->set_rules('sy_id', 'School Year', 'trim|required');
+	    $this->form_validation->set_rules('time_start', 'Start Time', 'trim|required|callback_schedule_check|callback_time_check');
 
-    if ($this->form_validation->run() == FALSE){
-    	$this->session->set_flashdata('toast', validation_errors());
-    } else {
-    	$faculty = $this->main_model->addSchedule();
-    	$action = 'New schedule successfully added to: '.$faculty[0]['f_name'].' '.$faculty[0]['m_name'].' '.$faculty[0]['l_name'];
-    	$this->session->set_flashdata('toast', $action);
-    	$this->main_model->addLog($action);
-    }
+	    if ($this->form_validation->run() == FALSE){
+	    	$this->session->set_flashdata('toast', validation_errors());
+	    } else {
+	    	$faculty = $this->main_model->addSchedule();
+	    	$action = 'New schedule successfully added to: '.$faculty[0]['f_name'].' '.$faculty[0]['m_name'].' '.$faculty[0]['l_name'];
+	    	$this->session->set_flashdata('toast', $action);
+	    	$this->main_model->addLog($action);
+	    }
 
-    header('location:'.base_url('head/schedule'));
+	    header('location:'.base_url('head/'.$route));
 	}	
 
 	// -------------------------------------- INSERT-------------------------------------- //
