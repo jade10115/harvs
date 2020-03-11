@@ -78,6 +78,31 @@ input::placeholder {
 }
 
 
-
-
 /******************************* LOGIN FORM *******************************/
+
+
+/******************************* Schedule Layout *******************************/
+.sched-layout table, th, td {
+	text-align: center;
+}
+
+.sched-layout th, td {
+	height: 20px;
+	min-width: 50px;
+	max-width: 50px;
+	letter-spacing: .1em
+}
+
+.sched-layout th {
+	font-size: 80%
+}
+
+.sched-layout td {
+	font-size: 70%
+}
+
+.sched-layout span.stretch {
+	letter-spacing: 1.2em;
+}
+
+/******************************* Schedule Layout *******************************/
