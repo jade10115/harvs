@@ -116,6 +116,30 @@
 				pageLength: 10
 			});
 
+			$('.assign').click(function(){
+				$.alert({
+					title: 'Confirmation',
+					content: 'Are you sure do you want to assign this room?',
+					type: 'blue',
+					icon: 'fa fa-question-circle',
+					draggable: true,
+					autoClose: 'cancel|5000',
+					backgroundDismiss: true,
+					escapekey: true,
+					buttons: {
+						confirm: {
+							text: 'Confirm',
+							btnClass: 'btn-blue',
+							keys: ['enter'],
+							action: function(){
+								window.location.replace(link);
+							}
+		 				},
+						cancel: {}
+					}
+				});	
+			});// $('.assign').click()
+
 			$('.delete').click(function(){
 				link = this.id
 				$.alert({
@@ -282,7 +306,12 @@
 				$('.selectpicker').selectpicker('refresh');
 			}); // $('.updateSchedule').click()
 
-			// not done yet
+			$('.modal').on('hidden.bs.modal', function (e) {
+			  $('.selectpicker').selectpicker('deselectAll');
+			  $('.selectpicker').selectpicker('val', '');
+			  $('.selectpicker').selectpicker('refresh');
+			})
+
 			$(document).on('submit', '.frm_course_submit', function(event){
 				if(this.id=='frm_course_add'){
 					college_id = $('#college_id_add').val();
@@ -316,8 +345,9 @@
 					event.preventDefault();
 					return false;
 				}
+
+				$('.selectpicker').selectpicker('refresh')
 			})
-			// not done yet
 
 			function populateDepartments(college_id, department_id){
 				$.ajax({
