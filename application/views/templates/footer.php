@@ -23,6 +23,15 @@
 		$(document).ready(function(){
 			base_url = '<?=base_url()?>';
 
+
+			$(document).bind("DOMNodeInserted", function() {
+			   $(this).find('.dt-buttons').addClass('btn-group');
+			   $(this).find('.buttons-print').addClass('btn btn-sm btn-outline-primary');
+			   $(this).find('.buttons-excel').addClass('btn btn-sm btn-outline-danger');
+			   $(this).find('.buttons-csv').addClass('btn btn-sm btn-outline-info');
+			   $(this).find('.buttons-pdf').addClass('btn btn-sm btn-outline-success');
+			});
+
 			$('.formEdit').attr('disabled', true);
 
 			$('.selectpicker').selectpicker();
