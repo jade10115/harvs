@@ -15,7 +15,6 @@
         </h5>
 			  <div class="card-body faculty">
           <?=form_open_multipart('admin/addFaculty', 'id="frm_faculty_add"');?>
-          <!--row start-->
           <div class="row">
               <div class="col-md-7 mt-4">
                   <div class="row">
@@ -82,7 +81,6 @@
           <hr>
 
           <div class="row">
-
             <div class="col-md-12">
               <div class="row">
                 <div class="col-md-4">
@@ -107,7 +105,6 @@
                 </div>
               </div>
               
-              <!--row start-->
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group field-wrapper">
@@ -128,9 +125,7 @@
                   </div>
                 </div>
               </div>
-              <!--row end-->
 
-              <!--row start-->
               <div class="row">
                 <div class="col-md-8">
                   <div class="form-group field-wrapper">
@@ -146,11 +141,7 @@
                   </div>
                 </div>
               </div>
-              <!--row end-->
-            </div>
-
-            <!--faculty picture-->
-            
+            </div>            
           </div>
           <!--row end-->
 
@@ -164,14 +155,7 @@
             </div>
           </div>
 
-          
-
-            <!--row start-->
           <div class="row">
-
-
-
-
             <div class="col-md-4">
               <div class="form-group field-wrapper">
                 <label for="department_id">Select Department</label>

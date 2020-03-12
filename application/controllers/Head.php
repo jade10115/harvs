@@ -44,7 +44,7 @@ class Head extends CI_Controller {
 			$conflictStart = $this->main_model->checkTimeConflict($_SESSION['available_rooms']['time_start'], $_SESSION['available_rooms']['day'], $row['room_id'], $_SESSION['available_rooms']['sy_id'], $_SESSION['available_rooms']['semester_id']);
 			$conflictEnd = $this->main_model->checkTimeConflict2($_SESSION['available_rooms']['time_end'], $_SESSION['available_rooms']['day'], $row['room_id'], $_SESSION['available_rooms']['sy_id'], $_SESSION['available_rooms']['semester_id']);
 			if($conflictStart||$conflictEnd){
-
+				// blank
 	  	} else {
 	  		array_push($available_rooms, $row);
 	  	}
