@@ -32,7 +32,7 @@
 								<i class="user" data-feather="user"></i>
 							</div>
 						</div>
-						<input type="text" name="username" class="form-control" placeholder="Enter Username" autofocus value="admin">
+						<input type="text" name="username" class="form-control" placeholder="Enter Username" autofocus>
 					</div>
 				</div>
 				<div class="form-group">
@@ -42,7 +42,7 @@
 								<i data-feather="lock"></i>
 							</div>
 						</div>
-						<input type="password" name="password" class="form-control" placeholder="Enter Password" value="admin">
+						<input type="password" name="password" class="form-control" placeholder="Enter Password">
 					</div>
 				</div>
 				<div class="forgot-link d-flex align-items-center justify-content-between mb-4">

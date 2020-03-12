@@ -15,8 +15,14 @@
       </li>
       <li class="nav-item">
         <a class="nav-link <?=($title=='Faculties')?'active':'';?>" href="<?=base_url('head/faculty')?>">
-          <span data-feather="check"></span>
-          Faculty
+          <span data-feather="x"></span>
+          Faculty*
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link <?=($title=='Buildings')?'active':'';?>" href="<?=base_url('head/building')?>">
+          <span data-feather="x"></span>
+          Buildings*
         </a>
       </li>
     </ul>

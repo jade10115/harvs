@@ -315,6 +315,15 @@ Class Main_model extends CI_Model{
 		return $this->db->where($name.'_id', $id)->get('tbl_'.$name)->row_array()[$columnName];
 	}
 
+		public function getBuildingname($building_id)
+		{
+			return $this->db->where('building_id',$building_id)->get('tbl_building')->result_array();
+		}
+		public function getRoomsbuilding($room_id){
+		return $this->db->join('tbl_building', 'tbl_building.building_id = tbl_room.building_id')
+										->join('tbl_room_type', 'tbl_room_type.room_type_id = tbl_room.room_type_id')->where('tbl_building.building_id',$room_id)
+										->get('tbl_room')->result_array();
+	}
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
 
 	// ------------------------------------------------------------------------------------------------------ //
