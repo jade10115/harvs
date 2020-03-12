@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark fixed-top flex-md-nowrap p-0" style="background:#800000">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Room Utilization System</a>
-
+  <span class="badge badge-light"><h6><?=$_SESSION['semester'][0]['semester_type']?> - School Year: <?=$_SESSION['schoolyear'][0]['school_year']?></h6></span>
   <?php if (isset($_SESSION['toast'])) { ?>
   <div class="alert alert-primary p-1 m-0" role="alert">
 	  <span data-feather="bell" class="mr-1"></span> <?=$this->session->flashdata('toast')?>

@@ -21,24 +21,25 @@
 		<div class="bg-white login-wrapper">
 			<?=form_open('auth/redirectUser', 'class="login-form"'); ?>
 				<div class="form-group">
-		           <label>School Year</label>
-		              <select class="selectpicker" data-width="100%" title="Select School Year" name="sy" id="sy">
-		              <?php foreach ($schoolYears as $row) {?>
-		              	<option value="<?=$row['sy_id']?>"><?=$row['school_year']?></option>
-		              <?php } ?>
-		           </select>
-		        </div>
+          <label>School Year</label>
+          <select class="selectpicker" data-width="100%" title="Select School Year" name="sy" id="sy">
+            <?php foreach ($schoolYears as $row) {?>
+            	<option value="<?=$row['sy_id']?>"><?=$row['school_year']?></option>
+             <?php } ?>
+          </select>
+        </div>
 
-		        <div class="form-group">
-		           <label>Semester</label>
-		              <select class="selectpicker" data-width="100%" title="Select Semeter" name="sem" id="sem">
-		              <?php foreach ($semesters as $row) {?>
-		              	<option value="<?=$row['semester_id']?>"><?=$row['semester_type']?></option>
-		              <?php } ?>
-		           </select>
-		        </div>
-		       <button type="submit" name="cancel" class="btn btn-primary btn-sm" id="btnCancel">Cancel</button>
-				<button type="submit" name="proceed" class="btn btn-secondary btn-sm" id="btnProceed">Proceed</button>
+        <div class="form-group">
+           <label>Semester</label>
+              <select class="selectpicker" data-width="100%" title="Select Semeter" name="sem" id="sem">
+              <?php foreach ($semesters as $row) {?>
+              	<option value="<?=$row['semester_id']?>"><?=$row['semester_type']?></option>
+              <?php } ?>
+           </select>
+        </div>
+
+				<button type="submit" name="proceed" class="btn btn-primary btn-sm" id="btnProceed">Proceed</button>
+        <button type="submit" name="cancel" class="btn btn-secondary btn-sm" id="btnCancel">Cancel</button>
 			<?=form_close()?>
 		</div>
 	</div>
@@ -61,15 +62,6 @@
 	<script type="text/javascript" src="<?=base_url('assets/js/jquery-3.4.1.min.js')?>"></script>
 	<script type="text/javascript" src="<?=base_url('assets/js/bootstrap.bundle.min.js')?>"></script>
 	<script type="text/javascript" src="<?=base_url('assets/js/bootstrap-select.min.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('assets/js/feather.min.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('assets/js/dashboard.js')?>"></script>
-	<!-- DataTables -->
-	<script type="text/javascript" src="<?=base_url('assets/js/jquery.dataTables.min.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('assets/js/dataTables.bootstrap4.min.js')?>"></script>
-	<!-- jQuery Confirm -->
-	<script type="text/javascript" src="<?=base_url('assets/js/jquery-confirm.min.js')?>"></script>
-	<!-- floating labels -->
-	<script type="text/javascript" src="<?=base_url('assets/js/floating-labels.js')?>"></script>
 	<!-- scripts -->
 	<script>
 	  feather.replace()
