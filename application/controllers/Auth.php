@@ -26,13 +26,31 @@ class Auth extends CI_Controller {
       $this->session->set_flashdata('toast', validation_errors());
       redirect('auth');
     } else {
-        if ($this->main_model->userAuthentication()) {
-        // User role based redirect here
-        redirect('Admin');
+      if ($this->main_model->userAuthentication()) {
+        $data['schoolYears'] = $this->main_model->getSchoolYear();
+        $data['semesters'] = $this->main_model->getSemesters();
+        $this->load->view('admin/select_sy_sem', $data);
       } else {
         $this->session->set_flashdata('toast', "Login failed! Incorrect username or password");
         redirect('auth');
       }    
     }
   }
+
+  public function redirectUser() {
+    if (isset($_POST['proceed'])) {
+      $_SESSION['sy'] = $_POST['sy'];
+      $_SESSION['sem'] = $_POST['sem'];
+      // User redirection
+      redirect('admin');
+    } else {
+      $_SESSION['user'] = "";
+      redirect('auth');
+    }
+  }
+
+  function ee($data){
+    echo "<pre>";print_r(var_dump($data));die;
+  }
+
 }

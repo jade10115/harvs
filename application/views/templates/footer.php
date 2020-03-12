@@ -347,6 +347,7 @@
 				}
 
 				$('.selectpicker').selectpicker('refresh')
+
 			})
 
 			function populateDepartments(college_id, department_id){
