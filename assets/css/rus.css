@@ -29,6 +29,7 @@ body.sign-in {
 	font-family: 'Poppins', sans-serif;
 	font-size: 14px;
 	color: #666;
+	overflow: hidden;
 }
 
 .login-container {
@@ -118,4 +119,8 @@ input::placeholder {
 
 .dataTables_length, .dt-buttons {
 	position: absolute;
+}
+
+.btn-group-vertical>.btn, .btn-group>.btn {
+	flex: 0
 }
