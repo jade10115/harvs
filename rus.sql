@@ -3,6 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+
 -- Generation Time: Mar 10, 2020 at 09:49 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
@@ -98,6 +99,7 @@ CREATE TABLE `tbl_building` (
 --
 
 INSERT INTO `tbl_building` (`building_id`, `building_name`, `no_of_rooms`, `no_of_floors`, `building_added`, `building_modified`) VALUES
+
 (3, 'INFORMATION TECHNOLOGY BUILDING (IT)', 8, 3, '2020-02-26 16:37:50', '2020-03-06 12:58:49'),
 (5, 'ACADEMIC BUILDING (CAS)', 17, 3, '2020-03-06 12:53:24', '0000-00-00 00:00:00'),
 (6, 'HOME TECHNOLOGY BUILDING (HTB)', 23, 3, '2020-03-06 12:54:20', '0000-00-00 00:00:00'),
@@ -244,7 +246,7 @@ CREATE TABLE `tbl_faculty` (
 --
 
 INSERT INTO `tbl_faculty` (`faculty_id`, `identification`, `f_name`, `m_name`, `l_name`, `suffix_name`, `ext_name`, `contact_no`, `email`, `birth_date`, `address`, `image_src`, `department_id`, `rank_id`, `designation_id`, `faculty_added`, `faculty_modified`) VALUES
-(1, '', 'Francisco', 'Osdon', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Tacloban City', 'avatar.png', 5, 2, 1, '2020-02-24 15:01:15', '2020-03-03 14:10:21');
+(1, '', 'Francisco', '', 'Ibañez', 'III', '', '09150125942', 'foibanez@gmail.com', '2020-02-24', 'Tacloban City', 'avatar.png', 5, 2, 1, '2020-02-24 15:01:15', '2020-03-10 15:06:26');
 
 -- --------------------------------------------------------
 
@@ -593,8 +595,9 @@ CREATE TABLE `tbl_schedule` (
 --
 
 INSERT INTO `tbl_schedule` (`schedule_id`, `room_id`, `subject_id`, `faculty_id`, `day`, `time_start`, `time_end`, `sy_id`, `semester_id`, `schedule_added`, `schedule_modified`) VALUES
-(2, 5, 3, 1, 'Wednesday', '07:00:00', '13:00:00', 1, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 5, 3, 1, 'Monday', '09:00:00', '10:00:00', 1, 1, '2020-03-10 13:11:57', NULL),
+
+(2, 5, 3, 1, 'Wednesday', '07:00:00', '13:00:00', 1, 3, '2020-03-11 15:32:34', '0000-00-00 00:00:00'),
+(7, 5, 3, 1, 'Monday', '09:00:00', '10:00:00', 1, 1, '2020-03-12 13:11:57', NULL),
 (12, 5, 3, 1, 'Monday', '19:30:00', '20:30:00', 2, 5, '2020-03-10 13:21:21', NULL),
 (13, 5, 3, 1, 'Monday', '07:00:00', '09:00:00', 1, 1, '2020-03-10 13:21:45', NULL);
 
@@ -837,7 +840,8 @@ ALTER TABLE `tbl_adjacent`
 -- AUTO_INCREMENT for table `tbl_building`
 --
 ALTER TABLE `tbl_building`
-  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `tbl_college`
 --
