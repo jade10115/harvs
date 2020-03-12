@@ -6,8 +6,14 @@
 	<script type="text/javascript" src="<?=base_url('assets/js/feather.min.js')?>"></script>
 	<script type="text/javascript" src="<?=base_url('assets/js/dashboard.js')?>"></script>
 	<!-- DataTables -->
-	<script type="text/javascript" src="<?=base_url('assets/js/jquery.dataTables.min.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('assets/js/dataTables.bootstrap4.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/jquery.dataTables.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/dataTables.bootstrap4.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/dataTables.buttons.min.js')?>"></script> <!-- buttons -->
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/jszip.min.js')?>"></script> <!-- excel -->
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/pdfmake.min.js')?>"></script> <!-- pdf -->
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/vfs_fonts.js')?>"></script> <!-- pdf -->
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/buttons.html5.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/buttons.print.min.js')?>"></script>
 	<!-- jQuery Confirm -->
 	<script type="text/javascript" src="<?=base_url('assets/js/jquery-confirm.min.js')?>"></script>
 	<!-- floating labels -->
@@ -113,10 +119,33 @@
 		  $('.table').dataTable({
 				responsive: true,
 				stateSave: true,
-				pageLength: 10
+				pageLength: 10,
+				dom: 'Blfrtip',
+				buttons: [{
+          extend: 'print',
+          exportOptions: {
+            columns: [':visible :not(:last-child)']
+          }
+        },{
+          extend: 'excel',
+          exportOptions: {
+            columns: [':visible :not(:last-child)']
+          }
+        },{
+          extend: 'csv',
+          exportOptions: {
+            columns: [':visible :not(:last-child)']
+          }
+        },{
+          extend: 'pdf',
+          exportOptions: {
+            columns: [':visible :not(:last-child)']
+          }
+        }]
 			});
 
 			$('.assign').click(function(){
+				room_id = this.id;
 				$.alert({
 					title: 'Confirmation',
 					content: 'Are you sure do you want to assign this room?',
@@ -132,7 +161,8 @@
 							btnClass: 'btn-blue',
 							keys: ['enter'],
 							action: function(){
-								window.location.replace(link);
+								$('input[name="room_id"]').val(room_id);
+								$('#frm_schedule_available').submit();
 							}
 		 				},
 						cancel: {}
