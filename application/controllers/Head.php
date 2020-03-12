@@ -98,6 +98,7 @@ class Head extends CI_Controller {
   		$_SESSION['available_rooms']['semester_id'] = $_POST['semester_id'];
   		$_SESSION['available_rooms']['time_start'] = $_POST['time_start'];
   		$_SESSION['available_rooms']['time_end'] = $_POST['time_end'];
+  		$_SESSION['available_rooms']['subject_id'] = $_POST['subject_id'];
 
   		$action = 'The room is currently not available in the said time frame. These are the rooms available in the same building.';
 	  	$this->session->set_flashdata('toast', $action);

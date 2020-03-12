@@ -106,3 +106,16 @@ input::placeholder {
 }
 
 /******************************* Schedule Layout *******************************/
+
+
+/* print buttons */
+.dt-buttons {
+	left: 0;
+	right: 0;
+	display: flex!important;
+	justify-content: center!important;
+}
+
+.dataTables_length, .dt-buttons {
+	position: absolute;
+}
