@@ -160,8 +160,9 @@ class Admin extends CI_Controller {
 
 	public function sched_layout(){
 		$data['title'] = "Sample Schedule Layout";
+		$data['schedules'] = $this->main_model->getSchedulesByFacultyId(1);
 		$this->load->view('templates/header', $data);
-		$this->load->view('admin/schedule_layout');
+		$this->load->view('admin/demo_sched');
 		$this->load->view('templates/footer');
 	}
 

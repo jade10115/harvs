@@ -14,14 +14,12 @@
           <table class="table table-striped table-hover table-sm">
             <thead>
               <tr>
-<<<<<<< HEAD
                 <th>College</th>
                 <th>Department</th>
                 <th>Course Name</th>
                 <th>Acronym</th>
                 <th>Date Added</th>
                 <th>Date Updated</th>
-=======
                 <th>Building</th>
                 <th>Room</th>
                 <th>Course</th>
@@ -29,12 +27,10 @@
                 <th>Employee</th>
                 <th>Time</th>
                 <th>School Year / Semester</th>
->>>>>>> 23f6d908bcffe2b0e06bd7e907ace93b02f62061
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
               <?php foreach ($schedule as $row) {?>
               <tr>
                 <td><?=$row['college_name']?></td>
@@ -49,7 +45,6 @@
                       <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('admin/delete/course/'.$row['course_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Course">
-=======
               <?php foreach ($schedules as $row) {?>
               <tr>
                 <td><?=$row['building_name']?></td>
@@ -65,7 +60,6 @@
                       <span class="fa fa-pencil"></span>
                     </a>
                     <a href="#" id="<?=base_url('head/delete/schedule/'.$row['schedule_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Schedule">
->>>>>>> 23f6d908bcffe2b0e06bd7e907ace93b02f62061
                       <span class="fa fa-trash"></span>
                     </a>
                   </div>

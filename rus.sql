@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2020 at 09:49 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- Generation Time: Mar 11, 2020 at 08:14 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -678,9 +678,9 @@ CREATE TABLE `tbl_user` (
   `user_type_id` int(11) NOT NULL,
   `faculty_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `user_added` datetime NOT NULL DEFAULT current_timestamp(),
-  `user_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+  `password` text NOT NULL,
+  `user_added` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_modified` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -688,7 +688,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`user_id`, `user_type_id`, `faculty_id`, `username`, `password`, `user_added`, `user_modified`) VALUES
-(1, 5, 1, 'admin', 'admin', '2020-02-26 01:06:56', '2020-02-28 14:51:38');
+(1, 5, 1, 'admin', '$2y$10$HMjcXPgM006ooqyk4c26/.pEtmjHhyjxuEiDiP0KLx8PHP0qQ/.Nq', '2020-02-25 17:06:56', '2020-03-11 07:08:57');
 
 -- --------------------------------------------------------
 
@@ -838,6 +838,7 @@ ALTER TABLE `tbl_adjacent`
 --
 ALTER TABLE `tbl_building`
   MODIFY `building_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
 --
 -- AUTO_INCREMENT for table `tbl_college`
 --
