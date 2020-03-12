@@ -83,11 +83,11 @@ input::placeholder {
 
 
 /******************************* Schedule Layout *******************************/
-.sched-layout table, .sched-layout th, .sched-layout td {
+.sched-layout table, th, td {
 	text-align: center;
 }
 
-.sched-layout th, .sched-layout td {
+.sched-layout th, td {
 	height: 20px;
 	min-width: 50px;
 	max-width: 50px;
@@ -107,7 +107,6 @@ input::placeholder {
 }
 
 /******************************* Schedule Layout *******************************/
-
 
 /* print buttons */
 .dt-buttons {

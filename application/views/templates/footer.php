@@ -6,14 +6,8 @@
 	<script type="text/javascript" src="<?=base_url('assets/js/feather.min.js')?>"></script>
 	<script type="text/javascript" src="<?=base_url('assets/js/dashboard.js')?>"></script>
 	<!-- DataTables -->
-	<script type="text/javascript" src="<?=base_url('assets/js/datatables/jquery.dataTables.min.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('assets/js/datatables/dataTables.bootstrap4.min.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('assets/js/datatables/dataTables.buttons.min.js')?>"></script> <!-- buttons -->
-	<script type="text/javascript" src="<?=base_url('assets/js/datatables/jszip.min.js')?>"></script> <!-- excel -->
-	<script type="text/javascript" src="<?=base_url('assets/js/datatables/pdfmake.min.js')?>"></script> <!-- pdf -->
-	<script type="text/javascript" src="<?=base_url('assets/js/datatables/vfs_fonts.js')?>"></script> <!-- pdf -->
-	<script type="text/javascript" src="<?=base_url('assets/js/datatables/buttons.html5.min.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('assets/js/datatables/buttons.print.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/jquery.dataTables.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/dataTables.bootstrap4.min.js')?>"></script>
 	<!-- jQuery Confirm -->
 	<script type="text/javascript" src="<?=base_url('assets/js/jquery-confirm.min.js')?>"></script>
 	<!-- floating labels -->
@@ -128,56 +122,8 @@
 		  $('.table').dataTable({
 				responsive: true,
 				stateSave: true,
-				pageLength: 10,
-				dom: 'Blfrtip',
-				buttons: [{
-          extend: 'print',
-          exportOptions: {
-            columns: [':visible :not(:last-child)']
-          }
-        },{
-          extend: 'excel',
-          exportOptions: {
-            columns: [':visible :not(:last-child)']
-          }
-        },{
-          extend: 'csv',
-          exportOptions: {
-            columns: [':visible :not(:last-child)']
-          }
-        },{
-          extend: 'pdf',
-          exportOptions: {
-            columns: [':visible :not(:last-child)']
-          }
-        }]
+				pageLength: 10
 			});
-
-			$('.assign').click(function(){
-				room_id = this.id;
-				$.alert({
-					title: 'Confirmation',
-					content: 'Are you sure do you want to assign this room?',
-					type: 'blue',
-					icon: 'fa fa-question-circle',
-					draggable: true,
-					autoClose: 'cancel|5000',
-					backgroundDismiss: true,
-					escapekey: true,
-					buttons: {
-						confirm: {
-							text: 'Confirm',
-							btnClass: 'btn-blue',
-							keys: ['enter'],
-							action: function(){
-								$('input[name="room_id"]').val(room_id);
-								$('#frm_schedule_available').submit();
-							}
-		 				},
-						cancel: {}
-					}
-				});	
-			});// $('.assign').click()
 
 			$('.delete').click(function(){
 				link = this.id
@@ -345,12 +291,7 @@
 				$('.selectpicker').selectpicker('refresh');
 			}); // $('.updateSchedule').click()
 
-			$('.modal').on('hidden.bs.modal', function (e) {
-			  $('.selectpicker').selectpicker('deselectAll');
-			  $('.selectpicker').selectpicker('val', '');
-			  $('.selectpicker').selectpicker('refresh');
-			})
-
+			// not done yet
 			$(document).on('submit', '.frm_course_submit', function(event){
 				if(this.id=='frm_course_add'){
 					college_id = $('#college_id_add').val();
@@ -384,10 +325,8 @@
 					event.preventDefault();
 					return false;
 				}
-
-				$('.selectpicker').selectpicker('refresh')
-
 			})
+			// not done yet
 
 			function populateDepartments(college_id, department_id){
 				$.ajax({

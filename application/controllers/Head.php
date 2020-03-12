@@ -66,6 +66,33 @@ class Head extends CI_Controller {
 		$this->load->view('head/faculty_schedule');
 		$this->load->view('templates/footer');
 	}
+
+		public function building(){
+		$data['title'] = "Buildings";
+		$data['buildings'] = $this->main_model->getBuildings();
+		$this->load->view('templates/header', $data);
+		$this->load->view('head/building');
+		$this->load->view('templates/footer');
+	}
+	public function building_rooms($building_id,$room_id){
+		$data['title'] = "Rooms";
+		$data['buildings'] = $this->main_model->getBuildings();
+		$data['rooms'] = $this->main_model->getRoomsbuilding($room_id);
+		$data['room_types'] = $this->main_model->getRoomTypes();
+		$data['header'] = $this->main_model->getBuildingname($building_id);
+		$this->load->view('templates/header', $data);
+		$this->load->view('head/building_rooms');
+		$this->load->view('templates/footer');
+	}
+	public function room_schedule($building_id,$room_id){
+		$data['title'] = "Schedule";
+		$data['schedules'] = $this->main_model->getSchedules();
+		$data['header'] = $this->main_model->getBuildingname($room_id);
+		$this->load->view('templates/header', $data);
+		$this->load->view('head/room_schedule');
+		$this->load->view('templates/footer');
+	}
+
 	// -------------------------------------- VIEWS -------------------------------------- //
 
 	// ----------------------------------------------------------------------------------- //	

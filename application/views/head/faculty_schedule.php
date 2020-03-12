@@ -8,7 +8,7 @@
       <div class="card shadow-sm">
 			  <h5 class="card-header d-flex justify-content-between align-items-center">
           <?=$faculties[0]['f_name']." ".$faculties[0]['m_name']." ".$faculties[0]['l_name']." ".$faculties[0]['suffix_name']?>
-          <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#modal_schedule_add">Add Schedule</a>
+          <a href="#" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#modal_schedule_add">Add Schedule</a>  
         </h5>
 			  <div class="card-body">
           <table class="table table-striped table-hover table-sm">
@@ -18,6 +18,7 @@
                 <th>Room</th>
                 <th>Course</th>
                 <th>Subject</th>
+                <!-- <th>Employee</th> -->
                 <th>Time</th>
                 <th>School Year / Semester</th>
                 <th>Action</th>
@@ -30,12 +31,18 @@
                 <td><?=$row['room_number']?></td>
                 <td><?=$row['course_abbr']?></td>
                 <td><?=$row['subject_code']?></td>
+                <!-- <td><?=$row['l_name']?> <?=$row['suffix_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></td> -->
                 <td><?=date('D', strtotime($row['day']))?> <?=date("g:i A", strtotime($row['time_start']))?> - <?=date("g:i A", strtotime($row['time_end']))?></td>
                 <td><?=$row['school_year']?> <?=$row['semester_type']?></td>
                 <td>
-                  <a href="#" id="<?=base_url('head/delete/schedule/'.$row['schedule_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Schedule">
-                    <span class="fa fa-trash"></span>
-                  </a>
+                  <div class="btn-group" role="group">
+                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateSchedule" id="<?=$row['schedule_id']?>//<?=$row['sy_id']?>//<?=$row['semester_id']?>//<?=$row['faculty_id']?>//<?=$row['subject_id']?>//<?=$row['room_id']?>//<?=$row['day']?>//<?=$row['time_start']?>//<?=$row['time_end']?>" data-toggle="modal" data-target="#modal_schedule_update" data-toggle="tooltip" data-placement="top" title="Update Schedule">
+                      <span class="fa fa-pencil"></span>
+                    </a>
+                    <a href="#" id="<?=base_url('head/delete/schedule/'.$row['schedule_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Schedule">
+                      <span class="fa fa-trash"></span>
+                    </a>
+                  </div>
                 </td>
               </tr>
               <?php } ?>
@@ -52,7 +59,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title">Add Schedule to <?=$faculties[0]['f_name']." ".$faculties[0]['m_name']." ".$faculties[0]['l_name']." ".$faculties[0]['suffix_name']?></h6>
+        <h6 class="modal-title">Add Schedule</h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -75,6 +82,19 @@
                 <option value="<?=$row['semester_id']?>"><?=$row['semester_type']?></option>
                 <?php } ?>
               </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Employee</label>
+                <select class="selectpicker" title="Select Employee" data-width="100%" name="faculty_id" required>
+                  <?php foreach ($faculties as $row) {?>
+                   <option value="<?=$row['faculty_id']?>" selected><?=$row['l_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></option>
+                  <?php } ?>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -224,6 +244,19 @@
                 <option value="<?=$row['semester_id']?>"><?=$row['semester_type']?></option>
                 <?php } ?>
               </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Employee</label>
+                <select class="selectpicker" title="Select Employee" data-width="100%" data-live-search="true" name="faculty_id" required>
+                  <?php foreach ($faculties as $row) {?>
+                  <option value="<?=$row['faculty_id']?>" data-subtext="<?=$row['department_name']?> Department" data-tokens="<?=$row['l_name']?>,<?=$row['f_name']?>,<?=$row['m_name']?>,<?=$row['department_name']?>"><?=$row['l_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></option>
+                  <?php } ?>
+                </select>
+              </div>
             </div>
           </div>
 
