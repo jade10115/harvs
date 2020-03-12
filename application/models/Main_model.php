@@ -183,7 +183,7 @@ Class Main_model extends CI_Model{
 		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
 										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
 										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')
-										->where('tbl_faculty.department_id = '.$_SESSION['user']['department_id'])
+										->where('tbl_faculty.department_id = 5')//.$_SESSION['user']['department_id'])
 										->get('tbl_faculty')->result_array();
 	}
 
