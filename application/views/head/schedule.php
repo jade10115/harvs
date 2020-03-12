@@ -92,24 +92,8 @@
       </div>
       <div class="modal-body">
         <?=form_open('head/addSchedule', 'id="frm_schedule_add"');?>
-          <div class="row">
-            <div class="form-group col-md-6">
-              <label>School Year</label>
-              <select class="selectpicker" title="Select School Year" data-width="100%" name="sy_id" required>
-                <?php foreach ($sy as $row) {?>
-                <option value="<?=$row['sy_id']?>"><?=$row['school_year']?></option>
-                <?php } ?>
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label>Semester</label>
-              <select class="selectpicker" title="Select Semester" data-width="100%" name="semester_id" required>
-                <?php foreach ($semesters as $row) {?>
-                <option value="<?=$row['semester_id']?>"><?=$row['semester_type']?></option>
-                <?php } ?>
-              </select>
-            </div>
-          </div>
+          <input type="hidden" name="sy_id" value="<?=$_SESSION['sy_id']?>">
+          <input type="hidden" name="semester_id" value="<?=$_SESSION['sem_id']?>">
 
           <div class="row">
             <div class="col-md-12">

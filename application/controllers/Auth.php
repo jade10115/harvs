@@ -22,6 +22,7 @@ class Auth extends CI_Controller {
     $this->load->library('form_validation');
 	  $this->form_validation->set_rules('username', 'Username', 'required');
     $this->form_validation->set_rules('password', 'Password', 'required');
+
     if ($this->form_validation->run() == FALSE){
       $this->session->set_flashdata('toast', validation_errors());
       redirect('auth');
@@ -30,7 +31,7 @@ class Auth extends CI_Controller {
         if ($_SESSION['user']['user_type'] == 'Administrator') {
           redirect('admin');
         } else {
-          $this->selectSySem();
+          redirect('auth/selectSySem');
         }
       } else {
         $this->session->set_flashdata('toast', "Login failed! Incorrect username or password");
@@ -43,7 +44,7 @@ class Auth extends CI_Controller {
     $data['schoolYears'] = $this->main_model->getSchoolYear();
     $data['semesters'] = $this->main_model->getSemesters();
 
-    $this->load->view('admin/select_sy_sem', $data);
+    $this->load->view('head/select_sy_sem', $data);
   }
 
   public function redirectUser() {
@@ -54,10 +55,12 @@ class Auth extends CI_Controller {
 
       if ($this->form_validation->run() == FALSE){
         $this->session->set_flashdata('toast', validation_errors());
-        $this->selectSySem();
+        redirect('auth/selectSySem');
       } else {
-        $_SESSION['sy'] = $_POST['sy'];
-        $_SESSION['sem'] = $_POST['sem'];
+        $_SESSION['sy_id'] = $_POST['sy'];
+        $_SESSION['sem_id'] = $_POST['sem'];
+        $_SESSION['schoolyear'] = $this->main_model->getSchoolYearName($_POST['sy']);
+        $_SESSION['semester'] = $this->main_model->getSemester($_POST['sem']);
         // User redirection
         if ($_SESSION['user']['user_type'] == 'Head') {
           redirect('head');
@@ -72,5 +75,4 @@ class Auth extends CI_Controller {
   function ee($data){
     echo "<pre>";print_r(var_dump($data));die;
   }
-
 }
