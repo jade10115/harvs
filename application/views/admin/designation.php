@@ -66,7 +66,7 @@
           </div>
           <div class="form-group">
             <label>Regular Unit</label>
-            <input type="number" min="0" step="1" class="form-control" name="regular_unit" required>
+            <input type="number" min="0" step="1" class="form-control" name="regular_unit" placeholder="Enter Regular Unit" required>
           </div>
         <?=form_close();?>
       </div>
@@ -97,7 +97,7 @@
           </div>
           <div class="form-group">
             <label>Regular Unit</label>
-            <input type="number" min="0" step="1" class="form-control" name="regular_unit" required id="regular_unit">
+            <input type="number" min="0" step="1" class="form-control" name="regular_unit" placeholder="Enter Regular Unit" required id="regular_unit">
           </div>
         <?=form_close();?>
       </div>

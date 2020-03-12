@@ -15,6 +15,10 @@ Class Main_model extends CI_Model{
 		return $this->db->where($where, $data)->count_all_results($table);
 	}
 
+	public function dd($data){
+    echo "<pre>";print_r(var_dump($data));die;
+  }
+
 	// -------------------------------------- MISC FUNCTIONS ------------------------------------------------ //
 
 	// ------------------------------------------------------------------------------------------------------ //
@@ -179,11 +183,11 @@ Class Main_model extends CI_Model{
 										->get('tbl_faculty')->result_array();
 	}
 
-	public function getFacultiesByDeptId() {
+	public function getFacultiesByDeptId(){
 		return $this->db->join('tbl_department', 'tbl_department.department_id=tbl_faculty.department_id')
 										->join('tbl_rank', 'tbl_rank.rank_id=tbl_faculty.rank_id')
 										->join('tbl_designation', 'tbl_designation.designation_id=tbl_faculty.designation_id')
-										->where('tbl_faculty.department_id = 5')//.$_SESSION['user']['department_id'])
+										->where('tbl_faculty.department_id = '.$_SESSION['user']['department_id'])
 										->get('tbl_faculty')->result_array();
 	}
 
@@ -264,6 +268,7 @@ Class Main_model extends CI_Model{
 										->join('tbl_faculty', 'tbl_faculty.faculty_id=tbl_schedule.faculty_id')
 										->join('tbl_semester', 'tbl_semester.semester_id=tbl_schedule.semester_id')
 										->join('tbl_sy', 'tbl_sy.sy_id=tbl_schedule.sy_id')
+										->where('tbl_schedule.faculty_id', $id)
 										->get('tbl_schedule')->result_array();
 	}
 	
@@ -324,6 +329,7 @@ Class Main_model extends CI_Model{
 										->join('tbl_room_type', 'tbl_room_type.room_type_id = tbl_room.room_type_id')->where('tbl_building.building_id',$room_id)
 										->get('tbl_room')->result_array();
 	}
+
 	// -------------------------------------- GET FUNCTIONS ------------------------------------------------- //
 
 	// ------------------------------------------------------------------------------------------------------ //
@@ -332,15 +338,18 @@ Class Main_model extends CI_Model{
 
 	public function userAuthentication(){
 		$username = $this->input->post('username');
-    	$password = $this->input->post('password');//sha1($this->input->post('password'));
-    	$res = $this->db->join('tbl_user', 'tbl_user_type.user_type_id = tbl_user.user_type_id')->
-						join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')->
-						join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')->
-						join('tbl_designation', 'tbl_faculty.designation_id = tbl_designation.designation_id')->
-						where('tbl_user.username', $username)->
-						get('tbl_user_type')->result_array();
+  	$password = $this->input->post('password'); //sha1($this->input->post('password'));
+
+  	$res = $this->db->join('tbl_user', 'tbl_user_type.user_type_id = tbl_user.user_type_id')
+  									->join('tbl_faculty', 'tbl_user.faculty_id = tbl_faculty.faculty_id')
+  									->join('tbl_department', 'tbl_faculty.department_id = tbl_department.department_id')
+  									->join('tbl_designation', 'tbl_faculty.designation_id = tbl_designation.designation_id')
+  									->where('tbl_user.username', $username)
+  									->get('tbl_user_type')->result_array();
+
 		if (count($res) > 0) {
-			if (password_verify($password, $res[0]['password'])) {
+			// if (password_verify($password, $res[0]['password'])) {
+			if($password==$res[0]['password']){ // unhashed password
 				$this->session->set_userdata('user', $res[0]);
 				return true;
 			}

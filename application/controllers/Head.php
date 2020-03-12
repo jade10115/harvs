@@ -158,6 +158,7 @@ class Head extends CI_Controller {
 		} else {
 			$route = "$route/$id";
 		}
+
 		$this->load->library('form_validation');
 
     $this->form_validation->set_rules('sy_id', 'School Year', 'trim|required');

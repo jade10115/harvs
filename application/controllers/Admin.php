@@ -64,7 +64,6 @@ class Admin extends CI_Controller {
 
 	public function faculty_add(){
 		$data['title'] = "Faculties";
-		$data['title2'] = "Add Faculty";
 		$data['user_types'] = $this->main_model->getUserTypes();
 		$data['departments'] = $this->main_model->getDepartments();
 		$data['ranks'] = $this->main_model->getRanks();
@@ -79,7 +78,7 @@ class Admin extends CI_Controller {
 		$data['faculty'] = $this->main_model->getFaculty($id);
 
 		if($data['faculty']){
-			$data['title2'] = $data['faculty'][0]['f_name'] . ' '. $data['faculty'][0]['m_name'] . ' ' . $data['faculty'][0]['l_name'];
+			$data['name'] = $data['faculty'][0]['f_name'] . ' '. $data['faculty'][0]['m_name'] . ' ' . $data['faculty'][0]['l_name'];
 			$data['departments'] = $this->main_model->getDepartments();
 			$data['ranks'] = $this->main_model->getRanks();
 			$data['designations'] = $this->main_model->getDesignations();
@@ -217,6 +216,7 @@ class Admin extends CI_Controller {
 	public function addDepartment(){
     $this->load->library('form_validation');
 
+    $this->form_validation->set_rules('college_id', 'College', 'trim|required|integer');
     $this->form_validation->set_rules('department_name', 'Department Name', 'trim|required|is_unique[tbl_department.department_name]');
 
     if($this->form_validation->run() == FALSE){
@@ -274,6 +274,8 @@ class Admin extends CI_Controller {
 	public function addCourse(){
     $this->load->library('form_validation');
 
+    $this->form_validation->set_rules('college_id', 'College', 'trim|required|integer');
+    $this->form_validation->set_rules('department_id', 'Department', 'trim|required|integer');
     $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required|is_unique[tbl_course.course_name]');
     $this->form_validation->set_rules('course_abbr', 'Abbreviation', 'trim|required|is_unique[tbl_course.course_abbr]');
 
@@ -316,12 +318,15 @@ class Admin extends CI_Controller {
     $this->form_validation->set_rules('password', 'Password', 'trim|required');
     $this->form_validation->set_rules('f_name', 'First Name ', 'trim|required');
     $this->form_validation->set_rules('l_name', 'Last Name', 'trim|required');
+    $this->form_validation->set_rules('m_name', 'Middle Name ', 'trim');
+    $this->form_validation->set_rules('suffix_name', 'Suffix Name ', 'trim');
+    $this->form_validation->set_rules('ext_name', 'Extension Name ', 'trim');
     $this->form_validation->set_rules('email', 'Email Address', 'trim|required|is_unique[tbl_faculty.email]');
     $this->form_validation->set_rules('contact_no', 'Contact Number', 'trim|required|integer|is_unique[tbl_faculty.contact_no]');
-    $this->form_validation->set_rules('address', 'Address', 'trim|required');
-    $this->form_validation->set_rules('department_id', 'Select Department', 'trim|required');
-    $this->form_validation->set_rules('rank_id', 'Select Rank', 'trim|required');
-    $this->form_validation->set_rules('designation_id', 'Select Designation', 'trim|required');
+    $this->form_validation->set_rules('address', 'Address', 'trim');
+    $this->form_validation->set_rules('department_id', 'Select Department', 'trim|required|integer');
+    $this->form_validation->set_rules('rank_id', 'Select Rank', 'trim|required|integer');
+    $this->form_validation->set_rules('designation_id', 'Select Designation', 'trim|required|integer');
     
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -329,7 +334,7 @@ class Admin extends CI_Controller {
     	$this->main_model->addFaculty($_FILES['image_src']['name']);
     	move_uploaded_file($_FILES['image_src']['tmp_name'], 'assets/img/users/'.$_FILES['image_src']['name']);
 
-    	$action = 'New faculty successfully added: '.$_POST['identification'];
+    	$action = 'Faculty successfully added: '.$_POST['f_name'].' '.$_POST['l_name'];
     	$this->session->set_flashdata('toast', $action);
     	$this->main_model->addLog($action);
     }
@@ -340,7 +345,7 @@ class Admin extends CI_Controller {
 	public function id_check($str){
 		$birth_date = explode('-', $_POST['birth_date']);
   	$birth_date = implode('', $birth_date);
-  	$identification = substr($_POST['l_name'],0,1).substr($_POST['f_name'],0,1).$birth_date;
+  	$identification = substr($_POST['f_name'],0,1).substr($_POST['l_name'],0,1).$birth_date;
 
   	if($str==$identification){
   		return true;
@@ -434,12 +439,13 @@ class Admin extends CI_Controller {
     $this->load->library('form_validation');
 
     $this->form_validation->set_rules('room_type', 'Room Type', 'trim|required|is_unique[tbl_room_type.room_type]');
+    $this->form_validation->set_rules('room_description', 'Room Description', 'trim|required');
 
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->addRoomType();	
-    	$action = 'New room type successfully added: '.$_POST['room_number'];
+    	$action = 'New room type successfully added: '.$_POST['room_type'];
     	$this->session->set_flashdata('toast', $action);
     	$this->main_model->addLog($action);
     }
@@ -450,10 +456,11 @@ class Admin extends CI_Controller {
 	public function addSubject(){
     $this->load->library('form_validation');
 
+    $this->form_validation->set_rules('course_id', 'Course', 'trim|required|integer');
     $this->form_validation->set_rules('subject_code', 'Subject Code', 'trim|required|is_unique[tbl_subject.subject_code]');
     $this->form_validation->set_rules('subject_description', 'Subject Description', 'trim|required');
-    $this->form_validation->set_rules('subject_type', 'Subject Type', 'trim|required');
-    $this->form_validation->set_rules('subject_unit', 'Unit', 'trim|required');
+    $this->form_validation->set_rules('subject_type', 'Subject Type', 'trim|required|integer');
+    $this->form_validation->set_rules('subject_unit', 'Unit', 'trim|required|integer');
 
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -494,6 +501,8 @@ class Admin extends CI_Controller {
 		$this->load->library('form_validation');
 
     $this->form_validation->set_rules('building_name', 'Building Name', 'trim|required');
+    $this->form_validation->set_rules('no_of_rooms', 'No. of Rooms', 'trim|required|integer');
+    $this->form_validation->set_rules('no_of_floors', 'No. of Floors', 'trim|required|integer');
 
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -511,6 +520,7 @@ class Admin extends CI_Controller {
 		$this->load->library('form_validation');
 
     $this->form_validation->set_rules('college_name', 'College Name', 'trim|required');
+    $this->form_validation->set_rules('college_abbr', 'Abbreviation', 'trim|required');
 
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -527,6 +537,7 @@ class Admin extends CI_Controller {
 	public function updateDepartment(){
 		$this->load->library('form_validation');
 
+    $this->form_validation->set_rules('college_id', 'College', 'trim|required|integer');
     $this->form_validation->set_rules('department_name', 'Department Name', 'trim|required');
 
     if($this->form_validation->run() == FALSE){
@@ -544,7 +555,8 @@ class Admin extends CI_Controller {
 	public function updateCourse(){
 		$this->load->library('form_validation');
 
-    $this->form_validation->set_rules('college_id', 'College', 'trim|required');
+    $this->form_validation->set_rules('college_id', 'College', 'trim|required|integer');
+    $this->form_validation->set_rules('department_id', 'Department', 'trim|required|integer');
     $this->form_validation->set_rules('course_name', 'Course Name', 'trim|required');
     $this->form_validation->set_rules('course_abbr', 'Abbreviation', 'trim|required');
 
@@ -563,6 +575,7 @@ class Admin extends CI_Controller {
 	public function updateDesignation(){
 		$this->load->library('form_validation');
 
+    $this->form_validation->set_rules('regular_unit', 'Regular Unit', 'trim|required|integer');
     $this->form_validation->set_rules('designation_name', 'Designation Name', 'trim|required');
 
     if($this->form_validation->run() == FALSE){
@@ -580,10 +593,10 @@ class Admin extends CI_Controller {
 	public function updateRoom(){
 		$this->load->library('form_validation');
 
-    $this->form_validation->set_rules('building_id', 'Building Name', 'trim|required');
-    $this->form_validation->set_rules('room_type_id', 'Room Type', 'trim|required');
+    $this->form_validation->set_rules('building_id', 'Building Name', 'trim|required|integer');
+    $this->form_validation->set_rules('room_type_id', 'Room Type', 'trim|required|integer');
     $this->form_validation->set_rules('room_number', 'Floor Number', 'trim|required');
-    $this->form_validation->set_rules('room_floor', 'Room Number', 'trim|required');
+    $this->form_validation->set_rules('room_floor', 'Room Number', 'trim|required|integer');
 
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -630,6 +643,23 @@ class Admin extends CI_Controller {
     header('location:'.base_url('admin/semester'));
 	}
 
+	public function updateSY(){
+    $this->load->library('form_validation');
+
+    $this->form_validation->set_rules('sy_from', 'School Year', 'trim|required|callback_sy_check');
+
+    if($this->form_validation->run() == FALSE){
+    	$this->session->set_flashdata('toast', validation_errors());
+    } else {
+    	$this->main_model->addSY();	
+    	$action = 'New school year successfully updated: '.$_POST['sy_from'].'-'.$_POST['sy_to'];
+    	$this->session->set_flashdata('toast', $action);
+    	$this->main_model->addLog($action);
+    }
+
+    header('location:'.base_url('admin/sy'));
+	}
+
 	public function updateUserType(){
 		$this->load->library('form_validation');
 
@@ -650,7 +680,8 @@ class Admin extends CI_Controller {
 	public function updateRoomType(){
 		$this->load->library('form_validation');
 
-    $this->form_validation->set_rules('room_type', 'Room Type', 'trim|required|is_unique[tbl_room_type.room_type]');
+    $this->form_validation->set_rules('room_type', 'Room Type', 'trim|required');
+    $this->form_validation->set_rules('room_description', 'Room Description', 'trim|required');
 
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -667,10 +698,11 @@ class Admin extends CI_Controller {
 	public function updateSubject(){
 	  $this->load->library('form_validation');
 
+    $this->form_validation->set_rules('course_id', 'Course', 'trim|required|integer');
     $this->form_validation->set_rules('subject_code', 'Subject Code', 'trim|required');
     $this->form_validation->set_rules('subject_description', 'Subject Description', 'trim|required');
-    $this->form_validation->set_rules('subject_type', 'Subject Type', 'trim|required');
-    $this->form_validation->set_rules('subject_unit', 'Unit', 'trim|required');
+    $this->form_validation->set_rules('subject_type', 'Subject Type', 'trim|required|integer');
+    $this->form_validation->set_rules('subject_unit', 'Unit', 'trim|required|integer');
 
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
@@ -687,19 +719,23 @@ class Admin extends CI_Controller {
 	public function updateFaculty(){
     $this->load->library('form_validation');
 
-    $this->form_validation->set_rules('l_name', 'Last Name', 'trim|required');     
+    $this->form_validation->set_rules('f_name', 'First Name ', 'trim|required');
+    $this->form_validation->set_rules('l_name', 'Last Name', 'trim|required');
+    $this->form_validation->set_rules('m_name', 'Middle Name ', 'trim');
+    $this->form_validation->set_rules('suffix_name', 'Suffix Name ', 'trim');
+    $this->form_validation->set_rules('ext_name', 'Extension Name ', 'trim');
 	  $this->form_validation->set_rules('email', 'Email Address', 'trim|required');
 	  $this->form_validation->set_rules('contact_no', 'Contact Number', 'trim|required|integer');
-	  $this->form_validation->set_rules('address', 'Address', 'trim|required');
-	  $this->form_validation->set_rules('department_id', 'Select Department', 'trim|required');
-	  $this->form_validation->set_rules('rank_id', 'Select Rank', 'trim|required');
-	  $this->form_validation->set_rules('designation_id', 'Select Designation', 'trim|required');
+	  $this->form_validation->set_rules('address', 'Address', 'trim');
+	  $this->form_validation->set_rules('department_id', 'Select Department', 'trim|required|integer');
+	  $this->form_validation->set_rules('rank_id', 'Select Rank', 'trim|required|integer');
+	  $this->form_validation->set_rules('designation_id', 'Select Designation', 'trim|required|integer');
 
     if($this->form_validation->run() == FALSE){
     	$this->session->set_flashdata('toast', validation_errors());
     } else {
     	$this->main_model->updateFaculty();	
-    	$action = 'Faculty successfully updated: '.$_POST['identification'];
+    	$action = 'Faculty successfully updated: '.$_POST['f_name'].' '.$_POST['l_name'];
     	$this->session->set_flashdata('toast', $action);
     	$this->main_model->addLog($action);
     }

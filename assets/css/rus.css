@@ -22,7 +22,7 @@ nav {
 	cursor:pointer;
 }
 
-/******************************* LOGIN FORM *******************************/
+/******************************* LOGIN FORM ************************************/
 
 body.sign-in {
 	background: radial-gradient(ellipse at center, #f5f0f0 0%, #afa67c 100%);
@@ -78,16 +78,16 @@ input::placeholder {
 	font-size: 14px !important;
 }
 
+/******************************* LOGIN FORM ************************************/
 
-/******************************* LOGIN FORM *******************************/
 
+/******************************* SCHEDULE LAYOUT *******************************/
 
-/******************************* Schedule Layout *******************************/
-.sched-layout table, th, td {
+.sched-layout table, .sched-layout th, .sched-layout td {
 	text-align: center;
 }
 
-.sched-layout th, td {
+.sched-layout th, .sched-layout td {
 	height: 20px;
 	min-width: 50px;
 	max-width: 50px;
@@ -106,9 +106,10 @@ input::placeholder {
 	letter-spacing: 1.2em;
 }
 
-/******************************* Schedule Layout *******************************/
+/******************************* SCHEDULE LAYOUT *******************************/
 
-/* print buttons */
+/******************************* PRINT BUTTONS *********************************/
+
 .dt-buttons {
 	left: 0;
 	right: 0;
@@ -119,7 +120,8 @@ input::placeholder {
 .dataTables_length, .dt-buttons {
 	position: absolute;
 }
-
-.btn-group-vertical>.btn, .btn-group>.btn {
+ .btn-group-vertical>.btn, .btn-group>.btn {
 	flex: 0
 }
+
+/******************************* PRINT BUTTONS *********************************/

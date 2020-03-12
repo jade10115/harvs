@@ -83,8 +83,8 @@
             <input type="text" class="form-control focus" placeholder="Enter Course Name" name="course_name" required>
           </div>
           <div class="form-group">
-            <label>Abbreviation</label>
-            <input type="text" class="form-control" placeholder="Enter Course Abbreviation" name="course_abbr" required>
+            <label>Acronym</label>
+            <input type="text" class="form-control" placeholder="Enter Course Acronym" name="course_abbr" required>
           </div>
         <?=form_close();?>
       </div>
@@ -120,7 +120,7 @@
           <div class="form-group">
             <label>Department</label>
             <select class="custom-select department_id" name="department_id" id="department_id">
-              <option value="0">-- select college first --</option>
+              <option value="0">Select College First</option>
             </select>
           </div>
           <div class="form-group">
@@ -128,8 +128,8 @@
             <input type="text" class="form-control focus" placeholder="Enter Course Name" name="course_name" id="course_name" required>
           </div>
           <div class="form-group">
-            <label>Abbreviation</label>
-            <input type="text" class="form-control" placeholder="Enter Course Abbreviation" name="course_abbr" id="course_abbr" required>
+            <label>Acronym</label>
+            <input type="text" class="form-control" placeholder="Enter Course Acronym" name="course_abbr" id="course_abbr" required>
           </div>
         <?=form_close();?>
       </div>

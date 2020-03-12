@@ -22,7 +22,7 @@
 			<?=form_open('auth/redirectUser', 'class="login-form"'); ?>
 				<div class="form-group">
           <label>School Year</label>
-          <select class="selectpicker" data-width="100%" title="Select School Year" name="sy" id="sy">
+          <select class="selectpicker" data-width="100%" title="Select School Year" name="sy_id">
             <?php foreach ($schoolYears as $row) {?>
             	<option value="<?=$row['sy_id']?>"><?=$row['school_year']?></option>
              <?php } ?>
@@ -31,15 +31,15 @@
 
         <div class="form-group">
            <label>Semester</label>
-              <select class="selectpicker" data-width="100%" title="Select Semeter" name="sem" id="sem">
+              <select class="selectpicker" data-width="100%" title="Select Semeter" name="semester_id">
               <?php foreach ($semesters as $row) {?>
               	<option value="<?=$row['semester_id']?>"><?=$row['semester_type']?></option>
               <?php } ?>
            </select>
         </div>
 
-				<button type="submit" name="proceed" class="btn btn-primary btn-sm" id="btnProceed">Proceed</button>
-        <button type="submit" name="cancel" class="btn btn-secondary btn-sm" id="btnCancel">Cancel</button>
+				<button type="submit" name="proceed" class="btn btn-primary btn-sm">Proceed</button>
+        <button type="submit" name="cancel" class="btn btn-secondary btn-sm">Cancel</button>
 			<?=form_close()?>
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 		<div class="col-md-4 offset-md-4 mt-3">
 			<?php if (isset($_SESSION['toast'])) { ?>
 				<div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
-				  <?=$this->session->flashData('toast');?>.
+				  <?=$this->session->flashData('toast');?>
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				    <span aria-hidden="true">&times;</span>
 				  </button>

@@ -14,14 +14,6 @@
           <table class="table table-striped table-hover table-sm">
             <thead>
               <tr>
-<<<<<<< HEAD
-                <th>College</th>
-                <th>Department</th>
-                <th>Course Name</th>
-                <th>Acronym</th>
-                <th>Date Added</th>
-                <th>Date Updated</th>
-=======
                 <th>Building</th>
                 <th>Room</th>
                 <th>Course</th>
@@ -29,27 +21,10 @@
                 <th>Employee</th>
                 <th>Time</th>
                 <th>School Year / Semester</th>
->>>>>>> 23f6d908bcffe2b0e06bd7e907ace93b02f62061
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
-              <?php foreach ($schedule as $row) {?>
-              <tr>
-                <td><?=$row['college_name']?></td>
-                <td><?=$row['department_name']?></td>
-                <td><?=$row['course_name']?></td>
-                <td><?=$row['course_abbr']?></td>
-                <td><?=$row['course_added']?></td>
-                <td><?=$row['course_modified']?></td>
-                <td>
-                  <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateCourse" id="<?=$row['course_id']?>//<?=$row['course_name']?>//<?=$row['college_id']?>//<?=$row['department_id']?>//<?=$row['course_abbr']?>" data-toggle="modal" data-target="#modal_course_update" data-toggle="tooltip" data-placement="top" title="Update Course">
-                      <span class="fa fa-pencil"></span>
-                    </a>
-                    <a href="#" id="<?=base_url('admin/delete/course/'.$row['course_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Course">
-=======
               <?php foreach ($schedules as $row) {?>
               <tr>
                 <td><?=$row['building_name']?></td>
@@ -61,11 +36,10 @@
                 <td><?=$row['school_year']?> <?=$row['semester_type']?></td>
                 <td>
                   <div class="btn-group" role="group">
-                    <a href="#" class="btn btn-sm btn-outline-success action-btn updateSchedule" id="<?=$row['schedule_id']?>//<?=$row['sy_id']?>//<?=$row['semester_id']?>//<?=$row['faculty_id']?>//<?=$row['subject_id']?>//<?=$row['room_id']?>//<?=$row['day']?>//<?=$row['time_start']?>//<?=$row['time_end']?>" data-toggle="modal" data-target="#modal_schedule_update" data-toggle="tooltip" data-placement="top" title="Update Schedule">
+                   <!--  <a href="#" class="btn btn-sm btn-outline-success action-btn updateSchedule" id="<?=$row['schedule_id']?>//<?=$row['sy_id']?>//<?=$row['semester_id']?>//<?=$row['faculty_id']?>//<?=$row['subject_id']?>//<?=$row['room_id']?>//<?=$row['day']?>//<?=$row['time_start']?>//<?=$row['time_end']?>" data-toggle="modal" data-target="#modal_schedule_update" data-toggle="tooltip" data-placement="top" title="Update Schedule">
                       <span class="fa fa-pencil"></span>
-                    </a>
+                    </a> -->
                     <a href="#" id="<?=base_url('head/delete/schedule/'.$row['schedule_id'])?>" class="btn btn-sm btn-outline-danger action-btn delete" data-toggle="tooltip" data-placement="top" title="Delete Schedule">
->>>>>>> 23f6d908bcffe2b0e06bd7e907ace93b02f62061
                       <span class="fa fa-trash"></span>
                     </a>
                   </div>
@@ -92,8 +66,8 @@
       </div>
       <div class="modal-body">
         <?=form_open('head/addSchedule', 'id="frm_schedule_add"');?>
-          <input type="hidden" name="sy_id" value="<?=$_SESSION['sy_id']?>">
-          <input type="hidden" name="semester_id" value="<?=$_SESSION['sem_id']?>">
+          <input type="hidden" name="sy_id" value="<?=$_SESSION['sy'][0]['sy_id']?>">
+          <input type="hidden" name="semester_id" value="<?=$_SESSION['semester'][0]['semester_id']?>">
 
           <div class="row">
             <div class="col-md-12">

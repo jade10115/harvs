@@ -5,9 +5,7 @@ class Auth extends CI_Controller {
 
 	public function index()	{
 		$data['title'] = "Authentication";
-		// $this->load->view('templates/header', $data);   
-		$this->load->view('admin/index', $data);
-		// $this->load->view('templates/footer');
+		$this->load->view('templates/login', $data);
 	}
 
 	public function login(){ 
@@ -15,6 +13,8 @@ class Auth extends CI_Controller {
 	}
 
 	public function logout(){
+    $_SESSION = [];
+    session_destroy();
 		header('location:'.base_url('/'));
 	}
 
@@ -50,17 +50,15 @@ class Auth extends CI_Controller {
   public function redirectUser() {
     $this->load->library('form_validation');
     if (isset($_POST['proceed'])) {
-      $this->form_validation->set_rules('sy', 'School Year', 'trim|required');
-      $this->form_validation->set_rules('sem', 'Semester', 'trim|required');
+      $this->form_validation->set_rules('sy_id', 'School Year', 'trim|required');
+      $this->form_validation->set_rules('semester_id', 'Semester', 'trim|required');
 
       if ($this->form_validation->run() == FALSE){
         $this->session->set_flashdata('toast', validation_errors());
         redirect('auth/selectSySem');
       } else {
-        $_SESSION['sy_id'] = $_POST['sy'];
-        $_SESSION['sem_id'] = $_POST['sem'];
-        $_SESSION['schoolyear'] = $this->main_model->getSchoolYearName($_POST['sy']);
-        $_SESSION['semester'] = $this->main_model->getSemester($_POST['sem']);
+        $_SESSION['sy'] = $this->main_model->getSchoolYearName($_POST['sy_id']);
+        $_SESSION['semester'] = $this->main_model->getSemester($_POST['semester_id']);
         // User redirection
         if ($_SESSION['user']['user_type'] == 'Head') {
           redirect('head');
@@ -72,7 +70,4 @@ class Auth extends CI_Controller {
     }
   }
 
-  function ee($data){
-    echo "<pre>";print_r(var_dump($data));die;
-  }
 }

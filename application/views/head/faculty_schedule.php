@@ -18,7 +18,6 @@
                 <th>Room</th>
                 <th>Course</th>
                 <th>Subject</th>
-                <!-- <th>Employee</th> -->
                 <th>Time</th>
                 <th>School Year / Semester</th>
                 <th>Action</th>
@@ -31,7 +30,6 @@
                 <td><?=$row['room_number']?></td>
                 <td><?=$row['course_abbr']?></td>
                 <td><?=$row['subject_code']?></td>
-                <!-- <td><?=$row['l_name']?> <?=$row['suffix_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></td> -->
                 <td><?=date('D', strtotime($row['day']))?> <?=date("g:i A", strtotime($row['time_start']))?> - <?=date("g:i A", strtotime($row['time_end']))?></td>
                 <td><?=$row['school_year']?> <?=$row['semester_type']?></td>
                 <td>

@@ -10,7 +10,7 @@
       <li class="nav-item">
         <a class="nav-link <?=($title=='Faculties')?'active':'';?>" href="<?=base_url('admin/faculty')?>">
           <span data-feather="check"></span>
-          Faculties*
+          Faculties
         </a>
       </li>
       <li class="nav-item">

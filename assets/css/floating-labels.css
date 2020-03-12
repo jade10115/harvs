@@ -18,48 +18,45 @@
     padding: 2px 4px;
   }
 
+  .field-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+  }
 
-  .field-wrapper 
-    {
-      position: relative;
-      margin-bottom: 20px;
-    }
-    #frm_faculty_add label 
-    {
-      position: absolute;
-      top: -20px;
-      left: 0;
-      font-size: 13px;
-      color: #aaa;
-      transition: all 0.1s linear;
-      opacity: 0;
-      font-weight:b old;
-      padding-left: 4px;
-      padding-right: 4px;
-    }
-    #frm_faculty_add label.on 
-    {
-      color: #4481C4;
-      background: #fff;
-      padding-left: 4px;
-      padding-right: 4px;
-    }
-    #frm_faculty_add label.show 
-    {
-      left: 9px;
-      top: -12px;
-      opacity: 1;
-      background: #fff;
+  #frm_faculty_add label, #frm_faculty_update label {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-size: 13px;
+    color: #aaa;
+    transition: all 0.1s linear;
+    opacity: 0;
+    font-weight:b old;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
 
-    }
-    option
-    {
-      color: black;
-    }
-    .watermark
-    {
-      color: #aaa;
-    }
+  #frm_faculty_add label.on, #frm_faculty_update label.on  {
+    color: #4481C4;
+    background: #fff;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  #frm_faculty_add label.show, #frm_faculty_update label.show {
+    left: 9px;
+    top: -12px;
+    opacity: 1;
+    background: #fff;
+  }
+
+  option {
+    color: black;
+  }
+  
+  .watermark {
+    color: #aaa;
+  }
 
 /********************    FLOATING LABELS 1   *******************/
 

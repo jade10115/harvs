@@ -7,144 +7,118 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-4 px-4 mb-3">
       <div class="card shadow-sm">
 			  <h5 class="card-header d-flex justify-content-between align-items-center">
-          <?=$title2?>
+          <?=$name?>
           <div class="btn-group">
             <a href="<?=base_url('admin/faculty')?>" class="btn btn-outline-dark btn-sm">Back</a>
             <button class="btn btn-outline-dark btn-sm" id="btnEditFaculty" value="edit">Edit Faculty</button>
             <button class="btn btn-outline-dark btn-sm formEdit" form="frm_faculty_update" disabled>Save</button>
           </div>
         </h5>
-			  <div class="card-body">
+			  <div class="card-body faculty">
           <?=form_open('admin/updateFaculty', 'id="frm_faculty_update"');?>
           <input type="hidden" name="faculty_id" value="<?=$faculty[0]['faculty_id']?>">
-          <!--row start-->
           <div class="row">
-
-            <div class="col-md-8">
-
+            <div class="col-md-12">
               <div class="row">
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <label>First Name*</label>
-                    <input type="text" class="form-control focus formEdit" placeholder="Enter First Name" name="f_name" required value="<?=$faculty[0]['f_name']?>">
+                  <div class="form-group field-wrapper">
+                    <label for="f_name">First Name</label>
+                    <input type="text" class="form-control formEdit focus" id="f_name" name="f_name" placeholder="First Name" required value="<?=$faculty[0]['f_name']?>">
                   </div>
                 </div>
 
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Middle Name <small>(optional)</small></label>
-                    <input type="text" class="form-control formEdit" placeholder="Enter Middle Name" name="m_name" value="<?=$faculty[0]['m_name']?>">
+                  <div class="form-group field-wrapper">
+                    <label for="m_name">Middle Name <small>(Optional)</small></label>
+                    <input type="text" class="form-control formEdit" name="m_name" placeholder="Middle Name (Optional)" value="<?=$faculty[0]['m_name']?>">
                   </div>
                 </div>
 
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Last Name*</label>
-                    <input type="text" class="form-control formEdit" placeholder="Enter Last Name" name="l_name" required value="<?=$faculty[0]['l_name']?>">
+                  <div class="form-group field-wrapper">
+                    <label for="l_name">Last Name</label>
+                    <input type="text" class="form-control formEdit" name="l_name" placeholder="Last Name" required value="<?=$faculty[0]['l_name']?>">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group field-wrapper">
+                    <label for="suffix_name">Suffix Name <small>(Optional)</small></label>
+                    <input type="text" class="form-control formEdit" name="suffix_name" placeholder="Suffix Name (Optional)" value="<?=$faculty[0]['suffix_name']?>">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group field-wrapper">
+                    <label for="ext_name">Extension Name <small>(Optional)</small></label>
+                    <input type="text" class="form-control formEdit" name="ext_name" placeholder="Extension Name (Optional)" value="<?=$faculty[0]['ext_name']?>">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group fixlabel">
+                    <input type="date" class="form-control formEdit identification" id="birth_date" placeholder="Enter Suffix Name" name="birth_date" required value="<?=$faculty[0]['birth_date']?>">
+                    <span>Birthdate</span>
                   </div>
                 </div>
               </div>
 
-              <!--row start-->
               <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Suffix Name <small>(optional)</small></label>
-                    <input type="text" class="form-control formEdit" placeholder="Enter Suffix Name" name="suffix_name" value="<?=$faculty[0]['suffix_name']?>">
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Extension Name <small>(optional)</small></label>
-                    <input type="text" class="form-control formEdit" placeholder="Enter Extension Name" name="ext_name" value="<?=$faculty[0]['ext_name']?>">
+                <div class="col-md-8">
+                  <div class="form-group field-wrapper">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control formEdit" name="email" placeholder="Email" required value="<?=$faculty[0]['email']?>">
                   </div>
                 </div>
 
                 <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Birthdate*</label>
-                    <input type="date" class="form-control formEdit" name="birth_date" required value="<?=$faculty[0]['birth_date']?>">
+                  <div class="form-group field-wrapper">
+                    <label for="contact_no">Contact Number</label>
+                    <input type="text" class="form-control formEdit" name="contact_no" placeholder="Contact Number" required value="<?=$faculty[0]['contact_no']?>">
                   </div>
                 </div>
               </div>
-              <!--row end-->
-
-              <!--row start-->
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Email*</label>
-                    <input type="text" class="form-control formEdit" placeholder="Enter Last Name" name="email" required value="<?=$faculty[0]['email']?>">
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Contact Number*</label>
-                    <input type="text" class="form-control formEdit" placeholder="Enter Contact Number" name="contact_no" required value="<?=$faculty[0]['contact_no']?>">
-                  </div>
-                </div>
-              </div>
-              <!--row end-->
-            </div>
-
-            <!--faculty picture-->
-            <div class="col-md-4">
-               <label>Faculty Picture <small>(optional)</small></label>
-               <div class="row">
-                 <div class="card profile col-md-10 p-0" style="height: 200px;">
-                   <img src="<?=base_url('assets/img/users/'.$faculty[0]['image_src'])?>" height="100%" width="100%" class="" id="image_src">
-                   <input type="file" id="imgFile" class="invisible position-absolute" name="image_src">
-                 </div>
-                 <div class="col-md-1">
-                   <a href="#" tabindex="-1" class="btn btn-sm btn-outline-primary mt-1 mb-1  btnEdit invisible imgClick" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Select Picture"><span data-feather="image"></span></a>
-                   <a href="#" tabindex="-1" class="btn btn-sm btn-outline-success mt-1 mb-1 btnEdit invisible" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Reset Picture"><span data-feather="refresh-ccw"></span></a>
-                   <a href="#" tabindex="-1" class="btn btn-sm btn-outline-danger mt-1 mb-1 btnEdit invisible" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Remove Picture" id="removePicture"><span data-feather="x"></span></a>
-                 </div>
-               </div>
-            </div>
+            </div>            
           </div>
-          <!--row end-->
 
-          <!--row start-->
           <div class="row">
-            <div class="form-group col-md-12">
-              <label>Address <small>(optional)</small></label>
-              <textarea class="form-control formEdit" placeholder="Enter Faculty Address" name="address"><?=$faculty[0]['address']?></textarea>
+            <div class="col-md-12 mt-2">
+              <div class="form-group field-wrapper ">
+                <label for="address">Address <small>(Optional)</small></label>
+                <textarea class="form-control formEdit" name="address" placeholder="Address (Optional)"><?=$faculty[0]['address']?></textarea>
+              </div>
             </div>
           </div>
 
-            <!--row start-->
           <div class="row">
             <div class="col-md-4">
-              <div class="form-group">
-                <label>Department</label>
-                <select class="custom-select formEdit" name="department_id">
-                  <option value="">-- select department --</option>
+              <div class="form-group field-wrapper">
+                <label for="department_id">Select Department</label>
+                <select class="custom-select formEdit" name="department_id" placeholder="Select Department" required>
+                  <option value="" selected="selected">Select Department </option>
                   <?php foreach ($departments as $row) { ?>
-                  <option value="<?=$row['department_id']?>" <?=($row['department_id']==$faculty[0]['department_id'])?'selected':'';?>><?=$row['department_name']?></option>
+                    <option value="<?=$row['department_id']?>" <?=($row['department_id']==$faculty[0]['department_id'])?'selected':'';?>><?=$row['department_name']?></option>
                   <?php } ?>
                 </select>
               </div>
             </div>
-
             <div class="col-md-4">
-              <div class="form-group">
-                <label>Rank</label>
-                <select class="custom-select formEdit" name="rank_id">
-                  <option value="">-- select rank --</option>
+              <div class="form-group field-wrapper">
+                <label for="rank_id">Select Rank</label>
+                <select class="custom-select formEdit" name="rank_id" placeholder="Select Rank" required>
+                  <option value="" selected="selected">Select Rank</option>
                   <?php foreach ($ranks as $row) { ?>
-                  <option value="<?=$row['rank_id']?>" <?=($row['rank_id']==$faculty[0]['rank_id'])?'selected':'';?>><?=$row['rank_type']?></option>
+                    <option value="<?=$row['rank_id']?>" <?=($row['rank_id']==$faculty[0]['rank_id'])?'selected':'';?>><?=$row['rank_type']?></option>
                   <?php } ?>
                 </select>
               </div>
             </div>
 
             <div class="col-md-4">
-              <div class="form-group">
-                <label>Designation</label>
-                <select class="custom-select formEdit" name="designation_id">
-                  <option value="">-- select designation --</option>
+              <div class="form-group field-wrapper">
+                <label for="designation_id">Select Designation</label>
+                <select class="custom-select formEdit" name="designation_id" placeholder="Select Designation" required>
+                  <option value="" selected="selected">Select Designation</option>
                   <?php foreach ($designations as $row) { ?>
                   <option value="<?=$row['designation_id']?>" <?=($row['designation_id']==$faculty[0]['designation_id'])?'selected':'';?>><?=$row['designation_name']?></option>
                   <?php } ?>
@@ -152,7 +126,6 @@
               </div>
             </div>
           </div>
-            <!--row end-->
           <?=form_close();?>
 			  </div>
 			</div>

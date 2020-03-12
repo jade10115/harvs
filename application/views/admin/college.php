@@ -65,8 +65,8 @@
             <input type="text" class="form-control focus" placeholder="Enter College Name" name="college_name" required>
           </div>
           <div class="form-group">
-            <label>Abbreviation</label>
-            <input type="text" class="form-control" placeholder="Enter College Abbreviation" name="college_abbr" required>
+            <label>Acronym</label>
+            <input type="text" class="form-control" placeholder="Enter College Acronym" name="college_abbr" required>
           </div>
         <?=form_close();?>
       </div>
@@ -96,8 +96,8 @@
             <input type="text" class="form-control focus" placeholder="Enter College Name" name="college_name" id="college_name" required>
           </div>
           <div class="form-group">
-            <label>Abbreviation</label>
-            <input type="text" class="form-control" placeholder="Enter College Abbreviation" name="college_abbr" id="college_abbr" required>
+            <label>Acronym</label>
+            <input type="text" class="form-control" placeholder="Enter College Acronym" name="college_abbr" id="college_abbr" required>
           </div>
         <?=form_close();?>
       </div>

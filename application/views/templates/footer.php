@@ -6,8 +6,14 @@
 	<script type="text/javascript" src="<?=base_url('assets/js/feather.min.js')?>"></script>
 	<script type="text/javascript" src="<?=base_url('assets/js/dashboard.js')?>"></script>
 	<!-- DataTables -->
-	<script type="text/javascript" src="<?=base_url('assets/js/jquery.dataTables.min.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('assets/js/dataTables.bootstrap4.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/jquery.dataTables.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/dataTables.bootstrap4.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/dataTables.buttons.min.js')?>"></script> <!-- buttons -->
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/jszip.min.js')?>"></script> <!-- excel -->
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/pdfmake.min.js')?>"></script> <!-- pdf -->
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/vfs_fonts.js')?>"></script> <!-- pdf -->
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/buttons.html5.min.js')?>"></script>
+	<script type="text/javascript" src="<?=base_url('assets/js/datatables/buttons.print.min.js')?>"></script>
 	<!-- jQuery Confirm -->
 	<script type="text/javascript" src="<?=base_url('assets/js/jquery-confirm.min.js')?>"></script>
 	<!-- floating labels -->
@@ -16,7 +22,6 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			base_url = '<?=base_url()?>';
-
 
 			$(document).bind("DOMNodeInserted", function() {
 			   $(this).find('.dt-buttons').addClass('btn-group');
@@ -119,11 +124,81 @@
 			  $('.focus').trigger('focus');
 			});
 
-		  $('.table').dataTable({
+			$('.table').dataTable({
 				responsive: true,
 				stateSave: true,
-				pageLength: 10
+				pageLength: 10,
+				dom: 'Blfrtip',
+				buttons: [{
+          extend: 'print',
+          exportOptions: {
+            columns: [':visible :not(:last-child)']
+          }
+        },{
+          extend: 'excel',
+          exportOptions: {
+            columns: [':visible :not(:last-child)']
+          }
+        },{
+          extend: 'csv',
+          exportOptions: {
+            columns: [':visible :not(:last-child)']
+          }
+        },{
+          extend: 'pdf',
+          exportOptions: {
+            columns: [':visible :not(:last-child)']
+          }
+        }]
 			});
+
+			$('.logout').confirm({
+			  title: 'Confirmation',
+			  content: 'Are you sure do you want to logout?',
+			  icon: 'fa fa-question-circle-o',
+			  theme: 'supervan',
+			  closeIcon: true,
+			  animation: 'scale',
+			  type: 'orange',
+			  escapeKey: 'No',
+			  autoClose: 'specialKey|10000',
+			  buttons: {
+			    specialKey: {
+			      text: 'Yes',
+			      keys: ['enter'],
+			      action: function(){
+			        location.href = this.$target.attr('id');
+			      }
+			    },
+			    No: function(){}
+			  }
+			});
+
+			$('.assign').click(function(){
+				room_id = this.id;
+				$.alert({
+					title: 'Confirmation',
+					content: 'Are you sure do you want to assign this room?',
+					type: 'blue',
+					icon: 'fa fa-question-circle',
+					draggable: true,
+					autoClose: 'cancel|5000',
+					backgroundDismiss: true,
+					escapekey: true,
+					buttons: {
+						confirm: {
+							text: 'Confirm',
+							btnClass: 'btn-blue',
+							keys: ['enter'],
+							action: function(){
+								$('input[name="room_id"]').val(room_id);
+								$('#frm_schedule_available').submit();
+							}
+		 				},
+						cancel: {}
+					}
+				});	
+			});// $('.assign').click()
 
 			$('.delete').click(function(){
 				link = this.id
@@ -167,6 +242,7 @@
 				$('#college_id').val(id[2]);
 				$('#course_abbr').val(id[4]);
 				populateDepartments(id[2], id[3]);
+				$('.selectpicker').selectpicker('refresh');
 			}); // $('.updateCourse').click()
 
 			$('.updateCollege').click(function(){
@@ -201,7 +277,7 @@
 				$('#room_type_id').val(id[2]);
 				$('#room_number').val(id[3]);
 				$('#room_floor').val(id[4]);
-				$('.selectpicker').selectpicker('refresh')
+				$('.selectpicker').selectpicker('refresh');
 			}); // $('.updateRoom').click()
 
 			$('.updateInstructor').click(function(){
@@ -262,10 +338,7 @@
 			}); // $('.updateUserType').click()	
 
 			$('.college_id').change(function(){
-				if($(this).val()==0){
-					option = '<option value="0">-- select college first --</option>';
-					$('.department_id').empty().append(option);
-				} else {
+				if($(this).val()!=0){
 					populateDepartments($(this).val());	
 				}
 			});
@@ -291,7 +364,6 @@
 				$('.selectpicker').selectpicker('refresh');
 			}); // $('.updateSchedule').click()
 
-			// not done yet
 			$(document).on('submit', '.frm_course_submit', function(event){
 				if(this.id=='frm_course_add'){
 					college_id = $('#college_id_add').val();
@@ -303,10 +375,8 @@
 				
 				if(college_id==0){
 					if(this.id=='frm_course_add'){
-						alert('add');
 						$('#college_id_add').focus();
 					} else {
-						alert('update');
 						$('#college_id').focus();
 					}
 
@@ -316,7 +386,6 @@
 				
 				if(department_id==0){
 					if(this.id=='frm_course_add'){
-						alert('add');
 						$('#department_id_add').focus();
 					} else {
 						alert('update');
@@ -326,7 +395,6 @@
 					return false;
 				}
 			})
-			// not done yet
 
 			function populateDepartments(college_id, department_id){
 				$.ajax({
@@ -335,7 +403,7 @@
 						$('.department_id').empty();
 						result = $.parseJSON(result);
 						if(result==0){
-							option = '<option value="0">-- select college first --</option>';
+							option = '<option value="0">No department under this college</option>';
 							$('.department_id').append(option);
 						} else {
 							$.each(result, function(i,o){
