@@ -8,6 +8,7 @@
 	<link rel="icon" href="<?=base_url('assets/img/system/room.png')?>">
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/bootstrap.min.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/bootstrap-select.min.css')?>">
 	<!-- Custom CSS Styling -->
 	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/rus.css')?>">
 	
@@ -18,45 +19,31 @@
 <body class="sign-in">
 	<div class="login-container d-flex align-items-center justify-content-center" id="container">
 		<div class="bg-white login-wrapper">
-			<?=form_open('auth/validate', 'class="login-form"'); ?>
-				<div>
-					<div class="mb-5 text-center"> 	
-						<img src="<?= base_url('assets/img/system/login.png') ?>" alt="loading..." height="130" width="155"><br>
-						<label class="login-label">Scheduling System Login</label>
-					</div>
-				</div>	
+			<?=form_open('auth/redirectUser', 'class="login-form"'); ?>
 				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<i class="user" data-feather="user"></i>
-							</div>
-						</div>
-						<input type="text" name="username" class="form-control" placeholder="Enter Username" autofocus value="admin">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<i data-feather="lock"></i>
-							</div>
-						</div>
-						<input type="password" name="password" class="form-control" placeholder="Enter Password" value="admin">
-					</div>
-				</div>
-				<div class="forgot-link d-flex align-items-center justify-content-between mb-4">
-					<div class="form-check">
-						<input type="checkbox" class="form-check-input" id="remember">
-						<label class="remember" for="remember">Remember Password</label>
-					</div>
-					<a href="#">Forgot Password?</a>
-				</div>
-				<button type="submit" class="btn btn-login btn-block text-white my-4">Login</button>
+		           <label>School Year</label>
+		              <select class="selectpicker" data-width="100%" title="Select School Year" name="sy" id="sy">
+		              <?php foreach ($schoolYears as $row) {?>
+		              	<option value="<?=$row['sy_id']?>"><?=$row['school_year']?></option>
+		              <?php } ?>
+		           </select>
+		        </div>
+
+		        <div class="form-group">
+		           <label>Semester</label>
+		              <select class="selectpicker" data-width="100%" title="Select Semeter" name="sem" id="sem">
+		              <?php foreach ($semesters as $row) {?>
+		              	<option value="<?=$row['semester_id']?>"><?=$row['semester_type']?></option>
+		              <?php } ?>
+		           </select>
+		        </div>
+		       <button type="submit" name="cancel" class="btn btn-primary btn-sm" id="btnCancel">Cancel</button>
+				<button type="submit" name="proceed" class="btn btn-secondary btn-sm" id="btnProceed">Proceed</button>
 			<?=form_close()?>
-			<!-- </form> -->
 		</div>
 	</div>
+
+	<!-- alert -->
 	<div class="row">
 		<div class="col-md-4 offset-md-4 mt-3">
 			<?php if (isset($_SESSION['toast'])) { ?>

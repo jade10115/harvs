@@ -334,12 +334,9 @@ Class Main_model extends CI_Model{
 			if (password_verify($password, $res[0]['password'])) {
 				$this->session->set_userdata('user', $res[0]);
 				return true;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	// -------------------------------------- LOGIN AUTHENTICATION ------------------------------------------ //
