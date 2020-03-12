@@ -21,7 +21,7 @@
                 <th>Employee</th>
                 <th>Time</th>
                 <th>School Year / Semester</th>
-                <th>Action</th>
+                <th class="action">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -34,7 +34,7 @@
                 <td><?=$row['l_name']?> <?=$row['suffix_name']?>, <?=$row['f_name']?> <?=$row['m_name']?></td>
                 <td><?=date('D', strtotime($row['day']))?> <?=date("g:i A", strtotime($row['time_start']))?> - <?=date("g:i A", strtotime($row['time_end']))?></td>
                 <td><?=$row['school_year']?> <?=$row['semester_type']?></td>
-                <td>
+                <td class="action">
                   <div class="btn-group" role="group">
                     <!-- <a href="#" class="btn btn-sm btn-outline-success action-btn updateSchedule" id="<?=$row['schedule_id']?>//<?=$row['sy_id']?>//<?=$row['semester_id']?>//<?=$row['faculty_id']?>//<?=$row['subject_id']?>//<?=$row['room_id']?>//<?=$row['day']?>//<?=$row['time_start']?>//<?=$row['time_end']?>" data-toggle="modal" data-target="#modal_schedule_update" data-toggle="tooltip" data-placement="top" title="Update Schedule">
                       <span class="fa fa-pencil"></span>
